@@ -1,0 +1,80 @@
+body{
+    font-family: 'Lato', sans-serif;
+    background: #fff;
+}
+header.cabeceraPrincipal{
+    background-color: rgb(47, 214, 116);
+    display: flex;
+    text-align: center;
+    border-bottom: 5px solid #000000;
+}
+header.cabeceraPrincipal div{
+    display: block;
+    width: 50%;
+}
+header.cabeceraPrincipal div img{
+    display: block;
+    width: 15%;
+    display: inline-block;
+}
+header.cabeceraPrincipal div h1{
+    font-size: 40px;
+    color: #fff;
+}
+header.cabeceraPrincipal nav{
+    display: flex;
+    width: 50%;
+}
+header.cabeceraPrincipal nav a{
+    display: block;
+    text-decoration: none;
+    color: #0b1c39;
+    padding: 50px 40px 0px;
+}
+header.cabeceraPrincipal nav a img{
+    width: 50px;
+}
+header.cabeceraPrincipal nav a p{
+    font-size: 20px;
+    color: #fff;
+}
+header.cabeceraPrincipal nav a:hover{
+    color: #007bff;
+}
+section.slider{
+    padding: 1em 0em;
+}
+
+
+
+
+section.ingresar{
+    width: 30%;
+    padding: 3em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer{
+    text-align: center;
+}
