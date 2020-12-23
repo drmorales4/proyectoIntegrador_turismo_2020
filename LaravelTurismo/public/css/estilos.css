@@ -47,7 +47,35 @@ section.slider{
 
 
 
+section.infoHoteles{
+    width: 90%;
+    display: block;
+    padding: 100px 100px;
 
+}
+section.infoHoteles div{
+    display: flex;
+    justify-content: center;
+
+}
+section.infoHoteles div article{
+    padding: 1em 2em;
+    width: 30%;
+    display: inline-block;
+    justify-content: center;
+    
+}
+section.infoHoteles div article img{
+    width: 100%;
+    padding: 1em;
+
+}
+section.infoHoteles div article h3{
+    text-align: center;
+}
+section.infoHoteles div article p{
+    text-align: justify;
+}
 
 
 
