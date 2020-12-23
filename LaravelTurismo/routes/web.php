@@ -13,9 +13,9 @@
 
 
 Route::view('/', 'home')->name('home');
-Route::view('hoteles', 'hoteles')->name('hoteles');
-Route::view('visualizaciones', 'visualizaciones')->name('visualizaciones');
-Route::view('lugares', 'lugares')->name('lugares');
+Route::view('hotels', 'hotels')->name('hotels');
+Route::view('visualizations', 'visualizations')->name('visualizations');
+Route::view('tourism', 'tourism')->name('tourism');
 Route::view('login', 'login')->name('login');
 
 
