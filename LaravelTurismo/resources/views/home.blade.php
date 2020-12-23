@@ -13,10 +13,10 @@
                     <img class="d-block w-100" src="{{ asset('images/parqueEolico.jpg') }}" alt="First slide" width="100%" height="800px">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('images/puertacuidad.jpg') }}" alt="Second slide" width="100%" height="800px">
+                    <img class="d-block w-100" src="" alt="Second slide" width="100%" height="800px">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('images/puertacuidad2.jpg') }}" alt="Third slide" width="100%" height="800px">
+                    <img class="d-block w-100" src="" alt="Third slide" width="100%" height="800px">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
