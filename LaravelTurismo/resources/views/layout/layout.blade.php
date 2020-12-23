@@ -28,7 +28,7 @@
                 <p>HOTELES</p>
             </a>
             <a href="{{ route('visualizations') }}">
-                <img src="">
+                <img src="{{ asset('images/history.svg') }}">
                 <p>HISTORIAL</p>
             </a>
             <a href="{{ route('tourism') }}">
@@ -46,8 +46,24 @@
         @yield('content')
     </div>
     
-    <footer>
-        <h3>Pie de pagina</h3>
+    <footer class="piePagina">
+        <div class="copyright">
+            <h4>@Copyright 2020. Universidad Técnica Particular de Loja</h4>
+        </div>
+        <div class="redesSociales">
+            <a href="">
+                <img src="{{ asset('images/facebook.svg') }}">
+            </a>
+            <a href="">
+                <img src="{{ asset('images/instagram.svg') }}">
+            </a>
+            <a href="">
+                <img src="{{ asset('images/twitter.svg') }}">
+            </a>
+            <a href="">
+                <img src="{{ asset('images/youtube.svg') }}">
+            </a>
+        </div>
     </footer>
 
 </body>

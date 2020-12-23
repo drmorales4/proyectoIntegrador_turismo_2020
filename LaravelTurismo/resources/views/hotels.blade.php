@@ -1,11 +1,11 @@
 @extends('layout/layout')
 
 @section('content')
-<section>
+<section class="tituloHoteles">
     <div>
-        <img src="{{ asset('images/sliderHoteles.jpg') }}" alt="Responsive image">
-    <h2>Hoteles</h2>
+        <img src="{{ asset('images/sliderHoteles.jpg') }}" alt="Responsive image" width="100%" height="800px">
     </div>
+    <h2>Hoteles</h2>
 </section>
 
     
