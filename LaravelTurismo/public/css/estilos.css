@@ -42,8 +42,27 @@ header.cabeceraPrincipal nav a:hover{
     color: #007bff;
 }
 section.slider{
-    padding: 1em 0em;
+    padding: 0em 0em;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -52,27 +71,6 @@ section.ingresar{
     width: 30%;
     padding: 3em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 footer{
