@@ -44,7 +44,7 @@
             <img src="{{ asset('images/plazaCultura.jpg') }}" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">Plaza de la Cultura</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">En el marco del Primer Festival Internacional de Artes Vivas de Loja 2016, el gobierno ecuatoriano inauguraró en la ciudad de Loja el Teatro Benjamín Carrión una de las obras más destacadas en favor de la cultura ecuatoriana con capacidad para 900 espectadores. Este espacio no solo albergará eventos  de ópera, teatro, danza o ballet sino que además será escenario de uno de los pilares más fuerte de la actividad cultural de Loja: la música. El teatro también es la sede de la orquesta sinfónica de Loja.  Además, cuenta con tecnología de punta y con todos los requerimientos de un teatro de talla mundial, por lo que ha sido catalogado como el escenario cultural más grande y mejor equipado del Ecuador.</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
