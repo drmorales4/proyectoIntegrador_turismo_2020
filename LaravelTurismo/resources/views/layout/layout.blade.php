@@ -14,7 +14,7 @@
     <header class="cabeceraPrincipal">
         <div>
             <img src="{{ asset('images/logo.png') }}">
-            <h1>TOURISM UTPL</h1>
+            <h1>Turismo UTPL</h1>
         </div>
         <nav>
             <a href="{{ route('home') }}">
