@@ -37,9 +37,6 @@ header.cabeceraPrincipal nav a{
     justify-content: center;
     align-items: center;
 }
-header.cabeceraPrincipal nav a img{
-    width: 30px;
-}
 header.cabeceraPrincipal nav a p{
     font-size: 20px;
     color: rgb(0, 0, 0);
@@ -49,6 +46,7 @@ header.cabeceraPrincipal nav a p{
 header.cabeceraPrincipal nav a p:hover{
     color: #ffffff;
 }
+
 section.slider{
     width: 100%;
 }

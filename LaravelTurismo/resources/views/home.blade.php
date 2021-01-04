@@ -30,6 +30,7 @@
         </div>
     </section>
 
+
     <section class="graficasHome">
         <h2>TARIFA PROMEDIO</h2>
         <div class="porHabitacion">

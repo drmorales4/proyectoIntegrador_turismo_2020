@@ -18,24 +18,19 @@
         </div>
         <nav>
             <a href="{{ route('home') }}">
-                <img src="{{ asset('images/home.svg') }}">
-                <p>INICIO</p>
+                <p>Inicio</p>
             </a>
             <a href="{{ route('hotels') }}">
-                <img src="{{ asset('images/hotel.svg') }}">
-                <p>HOTELES</p>
+                <p>Hoteles</p>
             </a>
             <a href="{{ route('visualizations') }}">
-                <img src="{{ asset('images/industry.svg') }}">
-                <p>HISTORIAL</p>
+                <p>Visualizaciones</p>
             </a>
             <a href="{{ route('tourism') }}">
-                <img src="{{ asset('images/mountain.svg') }}">
-                <p>LUGARES<br>TURISTICOS</p>
+                <p>Lugares<br>Turisticos</p>
             </a>
             <a href="{{ route('login') }}">
-                <img src="{{ asset('images/sign-in.svg') }}">
-                <p>INGRESAR</p>
+                <p>Ingresar</p>
             </a>
         </nav>
     </header>
