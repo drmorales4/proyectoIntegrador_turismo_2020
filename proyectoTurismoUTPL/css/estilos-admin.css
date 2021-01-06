@@ -9,11 +9,14 @@
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 .navbar{
-    background: #16292F;
+    background: #3a859c;
 }
 .nav {
     margin-left: 20px;
     
+}
+img{
+    width: 50px;
 }
 li{
     margin-top: 25px;
@@ -41,13 +44,14 @@ li{
     color: #fff;
 }*/
 .nav-link{
-    background: hsla(0,0%,100%,.23);
+    background: rgba(18, 138, 118, 0.23);
+    text-decoration: none;
 }
 .nav-link a{
-    color: #007bff;
+    color: #18c273;
 }
 a{
-    color: grey;
+    color: rgb(0, 0, 0);
 }
 .sidebar-sticky {
     position: relative;
