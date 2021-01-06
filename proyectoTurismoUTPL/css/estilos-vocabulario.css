@@ -1,0 +1,31 @@
+.cabezabar{
+    display: block;
+    align-content: center;
+    align-items: center;
+    margin-left: 20%;
+    padding-top: 3%;
+}
+
+.cabezabar a{
+    font-size: 30px;
+}
+meter{
+    width: 70%;
+    height: 35px;
+}
+
+.content{
+    margin-top: 6%;
+}
+
+.formulario{
+    margin-top: 3%;
+}
+
+.conteimagen{
+    margin-top: 2%;
+}
+
+.container{
+    margin-top:10%;
+}

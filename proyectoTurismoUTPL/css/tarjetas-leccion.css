@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.cabezabar{
+    display: block;
+    align-content: center;
+    align-items: center;
+    margin-left: 20%;
+    padding-top: 3%;
+}
+.cabezabar a{
+    font-size: 30px;
+}
+.container{
+    margin-top: 20%;
+}
+meter{
+    width: 70%;
+    height: 35px;
+}
+
+.wrap{
+    width: 310px;
+    margin: 50px auto;
+    justify-content: center;
+    
+}
+
+.tarjetas-wrap{
+    margin: 10px;
+    -webkit-perspective: 500;
+    
+}
+
+.tarjeta{
+    width: 300px;
+    height: 350px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 0.7s ease;
+    -wenkit-box-shadow: opx 10px 15px -5px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+    box-shadow: 10px 10px 15px -5px rgba(0,0,0,0.65);
+
+}
+
+
+
+.front, .back{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden; 
+}
+
+
+
+.back{
+    transform: rotateX(180deg);
+    display: flex;
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #000;
+    font-family: "open sans";
+    font-size: 40px;
+    background: rgb(9, 224, 9);
+
+    
+}
+
+p{
+    text-align: center;
+    color: #000;
+    font-family: "open sans";
+    font-size: 20px;
+
+
+}
+.tarjetas-wrap:hover .tarjeta{
+    transform: rotateX(180deg);
+}
+
+.tarjeta .front img{
+    width: 100%;
+    background-size: cover;
+}
+
+.controles{
+    width: 55%;
+    margin-left: 25%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
