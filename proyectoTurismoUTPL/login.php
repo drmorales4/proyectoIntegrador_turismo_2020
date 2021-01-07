@@ -91,16 +91,21 @@
                     <a href="internas/hoteles.html" id="enlace-hoteles" class="btn-header">Hoteles</a>
                     <a href="internas/visualizaciones.html" id="enlace-visualizaciones" class="btn-header">Visualizaciones</a>
                     <a href="internas/lugaresTuristicos.html" id="enlace-lugaresTuristicos" class="btn-header">Lugares Turisticos</a>
-                    <a href="login.php" id="enlace-inicio-sesion" class="btn-header">Ingresar</a>
+                    <div class="dropdown">
+                        <button class="dropbtn">Sesión
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="login.php" id="enlace-inicio-sesion" class="btn-header">Ingresar</a>
+                          <a href="register.php" id="enlace-inicio-sesion" class="btn-header">Registarse</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="icono" id="open">
                     <span>&#9776;</span>
                 </div>
             </div>
         </nav>
-        <div class="textos">
-            <h2>Iniciar Sesión</h1>
-        </div>
 
     </header>
 		<section class="login first grey">

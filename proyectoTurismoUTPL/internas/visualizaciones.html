@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Visualizaciones</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/estilos-visualizaciones.css">
-    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/estilos-index.css">
     <script type="text/javascript" src="../js/app.js"></script>
 </head>
 
@@ -26,7 +22,15 @@
                     <a href="hoteles.html" id="enlace-hoteles" class="btn-header">Hoteles</a>
                     <a href="visualizaciones.html" id="enlace-visualizaciones" class="btn-header">Visualizaciones</a>
                     <a href="lugaresTuristicos.html" id="enlace-lugaresTuristicos" class="btn-header">Lugares Turisticos</a>
-                    <a href="../login.php" id="enlace-inicio-sesion" class="btn-header">Ingresar</a>
+                    <div class="dropdown">
+                        <button class="dropbtn">Sesión
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="../login.php" id="enlace-inicio-sesion" class="btn-header">Ingresar</a>
+                          <a href="../register.php" id="enlace-inicio-sesion" class="btn-header">Registarse</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="icono" id="open">
                     <span>&#9776;</span>
@@ -39,9 +43,9 @@
 
     </header>
 
-    <section class="graficasHome">
+    <section class="sectionHome">
         <h2>TARIFA PROMEDIO</h2>
-        <div class="porHabitacion">
+        <div class="graficas1">
             <h3>Por Habitación</h3>
             <div>
                 <img src="../images/1.png">
@@ -49,7 +53,7 @@
                 <img src="../images/3.png">
             </div>
         </div>
-        <div class="porPersona">
+        <div class="graficas1">
             <h3>Por Persona</h3>
             <div>
                 <img src="../images/4.png">
@@ -59,21 +63,25 @@
         </div>
     </section>
 
-    <section class="graficasHome2">
+    <section class="sectionHome">
         <h2>DISPONIBILIDAD</h2>
-        <div>
-            <img src="../images/7.png">
-            <img src="../images/8.png">
-            <img src="../images/9.png">
+        <div class="graficas1" >
+            <div>
+                <img src="../images/7.png">
+                <img src="../images/8.png">
+                <img src="../images/9.png">
+            </div>
         </div>
     </section>
 
-    <section class="graficasHome2">
+    <section class="sectionHome">
         <h2>REVPAR</h2>
-        <div>
-            <img src="../images/10.png">
-            <img src="../images/11.png">
-            <img src="../images/12.png">
+        <div class="graficas1" >
+            <div>
+                <img src="../images/10.png">
+                <img src="../images/11.png">
+                <img src="../images/12.png">
+            </div>
         </div>
     </section>
         

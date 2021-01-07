@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lugares Turisticos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/estilos-lugaresTuristicos.css">
-    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/estilos-index.css">
     <script type="text/javascript" src="../js/app.js"></script>
 </head>
 
@@ -26,20 +22,26 @@
                     <a href="hoteles.html" id="enlace-hoteles" class="btn-header">Hoteles</a>
                     <a href="visualizaciones.html" id="enlace-visualizaciones" class="btn-header">Visualizaciones</a>
                     <a href="lugaresTuristicos.html" id="enlace-lugaresTuristicos" class="btn-header">Lugares Turisticos</a>
-                    <a href="../login.php" id="enlace-inicio-sesion" class="btn-header">Ingresar</a>
+                    <div class="dropdown">
+                        <button class="dropbtn">Sesión
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="../login.php" id="enlace-inicio-sesion" class="btn-header">Ingresar</a>
+                          <a href="../register.php" id="enlace-inicio-sesion" class="btn-header">Registarse</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="icono" id="open">
                     <span>&#9776;</span>
                 </div>
             </div>
         </nav>
-        <div class="textos">
-            <h2>Lugares Turisticos</h2>
-        </div>
 
     </header>
 
     <section class="infoLugaresTuristicos">
+        <h2>Lugares Turisticos</h2>
         <div class="card-group">
             <div class="card">
                 <img src="../images/parqueNacionalPodocarpus.jpg" class="card-img-top" alt="...">

@@ -47,52 +47,31 @@ section.slider{
     width: 100%;
 }
 
-section.graficasHome{
+section.sectionHome{
     width: 100%;
-    padding: 2em;
     display: block;
 }
-section.graficasHome h2{
+section.sectionHome h2{
+    text-align:center;
     padding: 1em;
-    background-color: #2979b1;
+    background-color: #00ADFF;
     border-bottom: 5px solid #000000;
     color: #fff;
-    font-size: 3em;
+    font-size: 2em;
 }
-section.graficasHome div.porHabitacion, div.porPersona{
-    display: block;
-}
-section.graficasHome div.porHabitacion h3, div.porPersona h3{
-    padding: 1em;
-    color: #fff;
-}
-section.graficasHome div.porHabitacion div, div.porPersona div{
+section.sectionHome div.graficas1, div.graficas2{
     display: flex;
     justify-content: center;
 }
-section.graficasHome div.porHabitacion div img, div.porPersona div img{
+section.sectionHome div.graficas1 h3, div.graficas2 h3{
+    padding: 1em;
+    color: #fff;
+}
+
+section.sectionHome div.graficas1 div img, div.graficas2 div img{
     padding: 0em 3em;
 }
 
-section.graficasHome2{
-    width: 100%;
-    padding: 2em;
-    display: block;
-}
-section.graficasHome2 h2{
-    padding: 1em;
-    background-color: #2979b1;
-    border-bottom: 5px solid #000000;
-    color: #fff;
-    font-size: 3em;
-}
-section.graficasHome2 div{
-    display: flex;
-    justify-content: center;
-}
-section.graficasHome2 div img{
-    padding: 0em 3em;
-}
 
 section.tituloHoteles h2{
     padding: 1em;
@@ -162,45 +141,8 @@ section.tituloLogin h2{
     font-size: 3em;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 section.ingresar{
     width: 30%;
     padding: 3em;
 }
 
-
-footer.piePagina{
-    width: 100%;
-    display: flex;
-    padding: 100px 0px;
-    background-color: #376780;
-}
-footer.piePagina div.copyright{
-    text-align: center;
-    width: 50%;
-}
-footer.piePagina div.copyright h4{
-    color: #fff;
-}
-footer.piePagina div.redesSociales{
-    display: flex;
-    width: 50%;
-    justify-content: center;
-}
-footer.piePagina div.redesSociales a{
-    padding: 1em 3em;
-    display: block;
-}
-footer.piePagina div.redesSociales a img{
-    width: 40px;
-}

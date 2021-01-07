@@ -101,7 +101,7 @@
                         <div class="panel">
                                 <table class="table">
                                 <thead class="thead">
-                                <tr style="background: #F5C6CB">
+                                <tr style="background: #FFFFFF">
                                     <th><b>Nombre</b></th>
                                     <th><b>Apellido</b></th>
                                     <th><b>Correo</b></th>
@@ -119,7 +119,7 @@
                             $rol = $row['rol'];
                             
                             echo '
-                                <tr style="background: #FFEEBA">
+                                <tr style="background: #FFFFFF">
                                     <th>'.$name.'</th>
                                     <th>'.$apellido.'</th>
                                     <th>'.$email.'</th>
@@ -311,7 +311,7 @@
                             <div class="panel">
                                     <table class="table">
                                     <thead class="thead">
-                                    <tr style="background: #F5C6CB">
+                                    <tr style="background: #FFFFFF">
                                         <th><b>NOMBRE DE ARCHIVO</b></th>
                                         <th><b>DESCRIPCION O MOTIVO</b></th>
                                         <th><b>ACCIONES</b></th>
@@ -324,7 +324,7 @@
                                 $name = $row[1];
                                 $descripcion = $row[2];
                                 echo '
-                                    <tr style="background: #FFEEBA">
+                                    <tr style="background: #FFFFFF">
                                         <th>'.$name.'</th>
                                         <th>'.$descripcion.'</th>
                                         <td>

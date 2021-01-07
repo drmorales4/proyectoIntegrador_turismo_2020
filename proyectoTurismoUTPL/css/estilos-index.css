@@ -1,0 +1,375 @@
+:root{
+    --color1: rgb(219, 144, .5);
+    --color2: rgba(23, 180, 83,.0788);
+    --color3: rgba(11,194,211, 0.623);
+    --fondo: #f2f2f2;
+    --titulos: 33px;
+    --margenes: 60px;
+    --espacios: 10px;
+    --espacios-contenido: 45px;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: Nunito,sans-serif;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #212529;
+    text-align: left;
+    background-color: #f8fafc;
+}
+
+}
+img{
+    vertical-align: top;
+}
+
+
+/* Header */
+header{
+    width: 100%; 
+    
+}  
+
+nav{
+  width: 100%;
+  background: linear-gradient(to bottom, #3BE200, #00ADFF 68%);
+}
+
+.dropdown {
+  float: right;
+}
+
+.dropdown .dropbtn {
+  border: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; 
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1498a4;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+.nav1{
+  height: 85px;
+  color: #fff;
+}
+
+
+.contenedor-nav{
+  display: flex;
+  margin: auto;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  height: inherit;
+  overflow: hidden;
+}
+
+nav .enlaces a{
+  display: inline-block;
+  padding: 5px 0;
+  margin-right: 17px;
+  font-size: 20px;
+  font-weight: 300;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  color: inherit;
+}
+
+
+nav .enlaces a:hover{
+  border-bottom: 1px solid #1498a4;
+  transition: 0.6s;
+}
+
+.logo, .logo img{ 
+  height:80px;
+}
+
+.icono{
+  display:none;
+  font-size: 24px;
+  padding: 23.5px 20px;
+}
+
+.textos{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  overflow: hidden;
+  text-align: center;
+}
+
+.textos h1{
+  font-size: 80px;
+}
+
+.textos h2{
+  font-size: 80px;
+  font-weight: 300;
+}
+
+.marca-logo{
+  width: 5%;
+  margin: auto;
+}
+
+.marca-logo img{
+  width: 100%;
+}
+
+
+
+section.slider{
+    width: 100%;
+}
+
+section.sectionHome{
+    width: 100%;
+    display: block;
+}
+section.sectionHome h2{
+    text-align:center;
+    padding: 1em;
+    background-color: #00ADFF;
+    border-bottom: 5px solid #000000;
+    color: #fff;
+    font-size: 2em;
+
+}
+section.sectionHome div.graficas1, div.graficas2{
+    display: flex;
+    justify-content: center;
+}
+section.sectionHome div.graficas1 h3, div.graficas2 h3{
+    padding: 1em;
+    color: #fff;
+}
+
+section.sectionHome div.graficas1 div img, div.graficas2 div img{
+    padding: 0em 3em;
+}
+
+
+section.tituloHoteles h2{
+    padding: 1em;
+    text-align: center;
+    background-color: #2979b1;
+    border-bottom: 5px solid #000000;
+    color: #fff;
+    font-size: 3em;
+}
+section.infoHoteles{
+    width: 100%;
+    display: block;
+}
+section.infoHoteles h2{
+    text-align:center;
+    padding: 1em;
+    background-color: #00ADFF;
+    border-bottom: 5px solid #000000;
+    color: #fff;
+    font-size: 2em;
+}
+
+section.infoHoteles div{
+    display: flex;
+    justify-content: center;
+
+}
+section.infoHoteles div article{
+    padding: 1em 2em;
+    width: 30%;
+    display: inline-block;
+    justify-content: center;
+    
+}
+section.infoHoteles div article img{
+    width: 100%;
+    padding: 1em;
+}
+section.infoHoteles div article h3{
+    text-align: center;
+    color: #212529;
+    font-weight: bold;
+}
+section.infoHoteles div article p{
+    text-align: justify;
+    color: #212529;
+    font-size: 20px;
+}
+
+section.tituloVisualizaciones h2{
+    padding: 1em;
+    background-color: #2979b1;
+    border-bottom: 5px solid #000000;
+    color: #fff;
+    font-size: 3em;
+}
+
+section.tituloTurismo h2{
+    padding: 1em;
+    background-color: #2979b1;
+    border-bottom: 5px solid #000000;
+    color: #fff;
+    font-size: 3em;
+}
+section.infoLugaresTuristicos{
+    width: 100%;
+    display: block;
+}
+
+section.infoLugaresTuristicos h2{
+    text-align:center;
+    padding: 1em;
+    background-color: #00ADFF;
+    border-bottom: 5px solid #000000;
+    color: #fff;
+    font-size: 2em;
+
+}
+section.infoLugaresTuristicos div.card-group{
+  text-align:center;
+}
+
+section.infoLugaresTuristicos div.card{
+  padding: 1em 3em;
+  display: flex;
+  width: 37%;
+  display: inline-block;
+
+}
+
+
+section.tituloLogin h2{
+    padding: 1em;
+    background-color: #2979b1;
+    border-bottom: 5px solid #000000;
+    color: #fff;
+    font-size: 3em;
+}
+
+section.ingresar{
+    width: 30%;
+    padding: 3em;
+}
+
+
+
+
+footer.piePagina{
+    width: 100%;
+    display: flex;
+    padding: 10px 0px;
+    background-color: #00ADFF;
+    align-items: center;
+}
+footer.piePagina div.copyright{
+    text-align: center;
+    width: 50%;
+}
+footer.piePagina div.copyright h4{
+    color: #fff;
+}
+footer.piePagina div.redesSociales{
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+footer.piePagina div.redesSociales a{
+    padding: 0em 3em;
+    display: block;
+}
+footer.piePagina div.redesSociales a img{
+    width: 18px;
+}
+
+
+
+
+@media screen and (max-height: 820px){
+  header{
+    width: 100%;
+    height: 750px;     
+  } 
+}
+
+@media screen and (max-width: 720px){
+  .icono{
+    display: block;
+    cursor: pointer;
+  }
+
+  .enlaces{
+    position: fixed;
+    top: 85px;
+    background: #2C3E50;
+    right: 0;
+    height: 100%;
+    transition: 1s;
+    width: 0;
+    overflow: hidden;
+  }
+
+  .enlaces a{
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    text-align: center;
+    background: #34495E;
+    color: #fff;
+  }
+
+  .textos h1{
+    font-size: 60px;}
+  .textos h2{
+    font-size: 30px;}
+
+  .marca-logo{
+    width: 18%;
+    margin: auto;
+  }
+    
+}
