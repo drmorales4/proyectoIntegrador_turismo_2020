@@ -37,7 +37,7 @@ table td{ padding:5px;}
         echo "El archivo es válido y se cargó correctamente.<br><br>";
         $nombre = $_FILES['subir_archivo']['name'];
         if ($nombre!=null || $descripcion!=null) {
-         	$miconexion->consulta("insert into archivos values('','$nombre','$descripcion','subida/$nombre', 28)");
+         	$miconexion->consulta("insert into archivos values('','$nombre','$descripcion','subida/$nombre')");
             # Aqui agrega los datos a la tabla "registros" como tabla temporal para ser revisados y despues subir a "general"
             
             # Indicar que usaremos el IOFactory
@@ -89,7 +89,7 @@ table td{ padding:5px;}
                         $in21 = (string) $hojaActual->getCellByColumnAndRow(22, $indiceFila)->getValue(); // opciones
                         $in22 = $hojaActualNombre[$indiceHoja]; // nombre de hoja
                         $in23 = $nombre; // nombre de archivo
-                        $miconexion->consulta ("insert into registros values('$in0','$in1','$in2',$in3,$in4,STR_TO_DATE('$in5', '%d/%m/%Y'),'$in6',$in7,$in8,$in9,$in10,$in11,$in12,'$in13',$in14,$in15,$in16,$in17,$in18,$in19,'$in20','$in21','$hojaActualNombre[$indiceHoja]','$nombre', 28)"); 
+                        $miconexion->consulta ("insert into registros values('$in0','$in1','$in2',$in3,$in4,STR_TO_DATE('$in5', '%d/%m/%Y'),'$in6',$in7,$in8,$in9,$in10,$in11,$in12,'$in13',$in14,$in15,$in16,$in17,$in18,$in19,'$in20','$in21','$hojaActualNombre[$indiceHoja]','$nombre')"); 
                         $totalDeFilas[$indiceHoja]++;
                         $numeroFila++;
                     }
@@ -104,7 +104,7 @@ table td{ padding:5px;}
 ?>
 <br>
 <div style="border:1px solid #000000; text-transform:uppercase">  
-<h3 align="center"><div align="center"><a href="administrador.php?q=4">Volver </a></div></h3></div>
+<h3 align="center"><div align="center"><a href="subida.php">Volver </a></div></h3></div>
 
  
 </div>
