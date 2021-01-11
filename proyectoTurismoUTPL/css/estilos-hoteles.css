@@ -101,51 +101,36 @@ nav .enlaces a:hover{
   font-weight: 300;
 }
 
-section.graficasHome{
-  width: 100%;
-  padding: 2em;
-  display: block;
-}
-section.graficasHome h2{
-  padding: 1em;
-  background-color: #2979b1;
-  border-bottom: 5px solid #000000;
-  color: #fff;
-  font-size: 3em;
-}
-section.graficasHome div.porHabitacion, div.porPersona{
-  display: block;
-}
-section.graficasHome div.porHabitacion h3, div.porPersona h3{
-  padding: 1em;
-  color: rgb(0, 0, 0);
-}
-section.graficasHome div.porHabitacion div, div.porPersona div{
-  display: flex;
-  justify-content: center;
-}
-section.graficasHome div.porHabitacion div img, div.porPersona div img{
-  padding: 0em 3em;
-}
+section.infoHoteles{
+    width: 100%;
+    display: block;
 
-section.graficasHome2{
-  width: 100%;
-  padding: 2em;
-  display: block;
 }
-section.graficasHome2 h2{
-  padding: 1em;
-  background-color: #2979b1;
-  border-bottom: 5px solid #000000;
-  color: #fff;
-  font-size: 3em;
+section.infoHoteles div{
+    display: flex;
+    justify-content: center;
+
 }
-section.graficasHome2 div{
-  display: flex;
-  justify-content: center;
+section.infoHoteles div article{
+    padding: 1em 2em;
+    width: 30%;
+    display: inline-block;
+    justify-content: center;
+    
 }
-section.graficasHome2 div img{
-  padding: 0em 3em;
+section.infoHoteles div article img{
+    width: 100%;
+    padding: 1em;
+}
+section.infoHoteles div article h3{
+    text-align: center;
+    color: rgb(151, 25, 25);
+    font-weight: bold;
+}
+section.infoHoteles div article p{
+    text-align: justify;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
 }
 
 footer {

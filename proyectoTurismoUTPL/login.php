@@ -73,7 +73,6 @@
 		<link rel="stylesheet" href="css/form.css">
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="css/styles.css">
 		<link  rel="stylesheet" href="css/login-estilos.css"/>
 		<link rel="stylesheet" href="css/app.css">
         
@@ -127,25 +126,31 @@
 			</div>
 		</section>
 
-		<footer class="piePagina">
-			<div class="copyright">
-				<h4>@Copyright 2020. Universidad Técnica Particular de Loja</h4>
+		<footer>
+			<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<h6 class="text-muted lead">CONTACTO:</h6>
+					<h6 class="text-muted">
+					Carrera 8h No. 166-71 Local 2<br>
+					Santa Cruz de la Ronda.<br>
+					Teléfonos: 3115988953 – 3112641818.<br>
+					</h6>
+				</div>
+				<div class="col-xs-12 col-md-6">
+				<div class="pull-right">
+				<h6 class="text-muted lead">ENCUENTRANOS EN LAS REDES</h6>
+						<div class="redes-footer">
+							<a href="https://www.facebook.com/"><img src="imagenes/facebook-2.png"></a>
+							<a href="https://twitter.com/"><img src="imagenes/twitter-2.png"></a>
+							<a href="https://www.youtube.com/"><img src="imagenes/youtube-2.png"></a>
+						</div>
+				</div>
+				<div class="row"> <p class="text-muted small text-right">José Miguel, arte y belleza @2016.<br> Todos los derechos reservados.</p></div>
 			</div>
-			<div class="redesSociales">
-				<a href="">
-					<img src="images/facebook.svg">
-				</a>
-				<a href="">
-					<img src="images/instagram.svg">
-				</a>
-				<a href="">
-					<img src="images/twitter.svg">
-				</a>
-				<a href="">
-					<img src="images/youtube.svg">
-				</a>
+			</div>  
 			</div>
-   		</footer>
+    	</footer>
 		<script src="js/jquery.js"></script>
 	</body>
 
