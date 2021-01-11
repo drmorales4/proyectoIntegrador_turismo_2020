@@ -26,10 +26,20 @@
 			echo '<center><div class="alert alert-danger alert-dismissable">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong>Error: </strong> ¡Correo o Contraseña incorrectos!
-		  </div></center>';
+		  	</div></center>';
 		}
 		else{		
-			}elseif($extraido['rol']=='Usuario'){
+			if($extraido['rol']=='Estudiante'){
+				$_SESSION['logged']=$email;
+				$_SESSION['id']=$extraido[0];
+				$_SESSION['nombres']=$extraido[1];
+				$_SESSION['apellidos']=$extraido[2];
+				$_SESSION['email']=$extraido[3];
+				$_SESSION['password']=$extraido[4];
+				$_SESSION['rol']=$extraido[5];
+				$_SESSION['idclase']=$extraido[6];
+				header('location: welcome.php?q=1');
+			}elseif($extraido['rol']=='Docente'){
 				$_SESSION['logged']=$email;
 				$_SESSION['id']=$extraido[0];
 				$_SESSION['nombres']=$extraido[1];
@@ -63,6 +73,7 @@
 		<link rel="stylesheet" href="css/form.css">
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
 		<link  rel="stylesheet" href="css/login-estilos.css"/>
 		<link rel="stylesheet" href="css/app.css">
         
@@ -80,7 +91,7 @@
                     <a href="internas/hoteles.html" id="enlace-hoteles" class="btn-header">Hoteles</a>
                     <a href="internas/visualizaciones.html" id="enlace-visualizaciones" class="btn-header">Visualizaciones</a>
                     <a href="internas/lugaresTuristicos.html" id="enlace-lugaresTuristicos" class="btn-header">Lugares Turisticos</a>
-                    <a href="../login.php" id="enlace-login" class="btn-header">Ingreso</a>
+                    <a href="login.php" id="enlace-inicio-sesion" class="btn-header">Ingresar</a>
                 </div>
                 <div class="icono" id="open">
                     <span>&#9776;</span>
@@ -116,31 +127,7 @@
 			</div>
 		</section>
 
-		<footer>
-			<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<h6 class="text-muted lead">CONTACTO:</h6>
-					<h6 class="text-muted">
-					Carrera 8h No. 166-71 Local 2<br>
-					Santa Cruz de la Ronda.<br>
-					Teléfonos: 3115988953 – 3112641818.<br>
-					</h6>
-				</div>
-				<div class="col-xs-12 col-md-6">
-				<div class="pull-right">
-				<h6 class="text-muted lead">ENCUENTRANOS EN LAS REDES</h6>
-						<div class="redes-footer">
-							<a href="https://www.facebook.com/"><img src="imagenes/facebook-2.png"></a>
-							<a href="https://twitter.com/"><img src="imagenes/twitter-2.png"></a>
-							<a href="https://www.youtube.com/"><img src="imagenes/youtube-2.png"></a>
-						</div>
-				</div>
-				<div class="row"> <p class="text-muted small text-right">José Miguel, arte y belleza @2016.<br> Todos los derechos reservados.</p></div>
-			</div>
-			</div>  
-			</div>
-    	</footer>
+		
 		<script src="js/jquery.js"></script>
 	</body>
 
