@@ -29,7 +29,7 @@
 		  	</div></center>';
 		}
 		else{		
-			if($extraido['rol']=='Estudiante'){
+			if($extraido['rol']=='Invitado'){
 				$_SESSION['logged']=$email;
 				$_SESSION['id']=$extraido[0];
 				$_SESSION['nombres']=$extraido[1];
@@ -37,9 +37,8 @@
 				$_SESSION['email']=$extraido[3];
 				$_SESSION['password']=$extraido[4];
 				$_SESSION['rol']=$extraido[5];
-				$_SESSION['idclase']=$extraido[6];
 				header('location: welcome.php?q=1');
-			}elseif($extraido['rol']=='Docente'){
+			}elseif($extraido['rol']=='Usuario'){
 				$_SESSION['logged']=$email;
 				$_SESSION['id']=$extraido[0];
 				$_SESSION['nombres']=$extraido[1];
@@ -47,7 +46,6 @@
 				$_SESSION['email']=$extraido[3];
 				$_SESSION['password']=$extraido[4];
 				$_SESSION['rol']=$extraido[5];
-				$_SESSION['idclase']=$extraido[6];
 				header('location: dashboard.php?q=0');
 			}elseif($extraido['rol']=='Admin'){
 				$_SESSION['logged']=$email;

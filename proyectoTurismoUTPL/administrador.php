@@ -84,7 +84,7 @@
                         </svg>  Revision Archivos</a>
                     </li>
 
-                    <li><a href="" style="font-family: 'Roboto', sans-serif; font-size: 20px;">  Crear Metricas</a>
+                    <li <?php if(@$_GET['q']==6) echo'class="nav-link"'; ?>><a href="administrador.php?q=6" style="font-family: 'Roboto', sans-serif; font-size: 20px;">  Crear Metricas</a>
                     </li>
 
                     <li <?php if(@$_GET['q']==7) echo'class="nav-link"'; ?>><a href="administrador.php?q=7" style="font-family: 'Roboto', sans-serif; font-size: 20px;">
@@ -323,8 +323,36 @@
                     ?>
                     <?php
                         if(@$_GET['q']==6){
+                            echo '
 
+                            <div class="row">
+                            <div class="col-md-3"></div><div class="col-md-6" style="margin-top:10px;">
+                            <center><h4 style="font-family: Poppins;  margin-bottom: 20px;">CONFIGURACION DE METRICAS</h4></center><br> ';
 
+                            echo '
+                                <form class="form-horizontal title1" name="form" action="#"  method="POST" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                    <label for="exampleInputEmail1">Nombre Metrica</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="exampleInputPassword1">Descripcion Metrica</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="exampleInputPassword1">Formula</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="seleccionarGrafica"></label>
+                                        <select class="form-control" id="seleccionarGrafica" name="seleccionarGrafica" action="#"  method="POST" enctype="multipart/form-data">
+                                            <option>Seleccionar una opcion</option>
+                                        </select>
+                                    </div>
+                                    <button type="" name="generarGrafica" class="btn btn-primary">Crear</button>
+                                </form>
+                            
+                            ';
                         }
                     ?>
                     <?php
