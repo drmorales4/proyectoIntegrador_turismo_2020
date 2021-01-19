@@ -20,14 +20,14 @@
     if((@$_GET['archivo']) && ($rol == 'Admin') && ($_GET['action'] == 'deletearchivo')){
       $archivo=@$_GET['archivo'];
       $result = mysqli_query($con,"DELETE FROM archivos WHERE nombre='$archivo'") or die('Error');
-      header("location:administrador.php?q=4");
+      header("location:administrador.php?q=5");
     }
 
     if((@$_GET['nombre']) && ($rol == 'Usuario') && ($_GET['action'] == 'deletearchivo')){
       $archivo=@$_GET['archivo'];
       $result = mysqli_query($con,"DELETE FROM archivos WHERE nombre='$archivo'") or die('Error');
       $result = mysqli_query($con,"DELETE FROM registros WHERE archivo='$archivo'") or die('Error');
-      header("location:administrador.php?q=4");
+      header("location:administrador.php?q=5");
     }
 
 ?>

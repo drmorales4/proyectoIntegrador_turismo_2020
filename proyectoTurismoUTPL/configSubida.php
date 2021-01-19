@@ -20,6 +20,9 @@ table td{ padding:5px;}
 <body bgcolor="#E1E1E1">
 <div class="main">
 <h1>Subir archivo con PHP:</h1>
+<div style="border:1px solid #000000; text-transform:uppercase">  
+<h3 align="center"><div align="center"><a href="administrador.php?q=4">Volver </a></div></h3></div>
+</div>
 
 <?php
     require_once "exelLibreria/vendor/autoload.php";
@@ -37,7 +40,7 @@ table td{ padding:5px;}
         echo "El archivo es válido y se cargó correctamente.<br><br>";
         $nombre = $_FILES['subir_archivo']['name'];
         if ($nombre!=null || $descripcion!=null) {
-         	$miconexion->consulta("insert into archivos values('','$nombre','$descripcion','subida/$nombre')");
+         	$miconexion->consulta("insert into archivos values('','$nombre','$descripcion','subida/$nombre','$idUser')");
             # Aqui agrega los datos a la tabla "registros" como tabla temporal para ser revisados y despues subir a "general"
             
             # Indicar que usaremos el IOFactory
@@ -64,7 +67,14 @@ table td{ padding:5px;}
                         $in2 = (string) $hojaActual->getCellByColumnAndRow(3, $indiceFila)->getValue(); // categoria
                         $in3 = (string) $hojaActual->getCellByColumnAndRow(4, $indiceFila)->getValue(); // habitaciones	
                         $in4 = (string) $hojaActual->getCellByColumnAndRow(5, $indiceFila)->getValue(); // plazas
-                        $in5 = $hojaActual->getCellByColumnAndRow(6, $indiceFila)->getFormattedValue();
+                        $in5 = (string) $hojaActual->getCellByColumnAndRow(6, $indiceFila)->getValue();
+                        $splitin5 = substr( $in5, 2,1);
+                        if ($splitin5 != "/") {
+                            $in5 = (string) $hojaActual->getCellByColumnAndRow(6, $indiceFila)->getFormattedValue();
+                            $datein5 = date_create("$in5");
+                            $in5 = date_format($datein5,"d/m/Y");
+                        }
+                         // fecha
                         $in6 = (string) $hojaActual->getCellByColumnAndRow(7, $indiceFila)->getValue(); // checkins
                         $in7 = (string) $hojaActual->getCellByColumnAndRow(8, $indiceFila)->getValue(); // checkouts
                         $in8 = (string) $hojaActual->getCellByColumnAndRow(9, $indiceFila)->getValue(); // pernoctaciones
@@ -89,7 +99,7 @@ table td{ padding:5px;}
                         $in21 = (string) $hojaActual->getCellByColumnAndRow(22, $indiceFila)->getValue(); // opciones
                         $in22 = $hojaActualNombre[$indiceHoja]; // nombre de hoja
                         $in23 = $nombre; // nombre de archivo
-                        $miconexion->consulta ("insert into registros values('$in0','$in1','$in2',$in3,$in4,STR_TO_DATE('$in5', '%d/%m/%Y'),'$in6',$in7,$in8,$in9,$in10,$in11,$in12,'$in13',$in14,$in15,$in16,$in17,$in18,$in19,'$in20','$in21','$hojaActualNombre[$indiceHoja]','$nombre')"); 
+                        $miconexion->consulta ("insert into registros values('$in0','$in1','$in2',$in3,$in4,STR_TO_DATE('$in5', '%d/%m/%Y'),'$in6',$in7,$in8,$in9,$in10,$in11,$in12,'$in13',$in14,$in15,$in16,$in17,$in18,$in19,'$in20','$in21','$hojaActualNombre[$indiceHoja]','$nombre','$idUser')"); 
                         $totalDeFilas[$indiceHoja]++;
                         $numeroFila++;
                     }
@@ -102,11 +112,6 @@ table td{ padding:5px;}
         }
     echo "</div>";
 ?>
-<br>
-<div style="border:1px solid #000000; text-transform:uppercase">  
-<h3 align="center"><div align="center"><a href="subida.php">Volver </a></div></h3></div>
 
- 
-</div>
 	</body>
 </html>
