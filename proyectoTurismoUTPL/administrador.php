@@ -404,7 +404,7 @@
                             if(isset($_POST['generarGrafica'])){
                                 if($seleccionarGrafica=="barras"){
                                     echo '
-                                        <a href="graficas/barras.php">Ver Grafica</a>
+                                        <a href="graficas/barras.php">Ver Grafica</a> 
                                     ';
                                 }
                                 if($seleccionarGrafica=="area"){
