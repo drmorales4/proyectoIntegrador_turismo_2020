@@ -55,8 +55,21 @@ table td{ padding:5px;}
                 $numeroMayorDeFila = $hojaActual->getHighestRow(); // Numérico
                 $letraMayorDeColumna = $hojaActual->getHighestColumn(); // Letra
                 $numeroFila = 0;
-                $totalDeFilas[$indiceHoja] = 0;
+                $totalDeFilas[$indiceHoja] = 0; 
+                echo "$hojaActualNombre[$indiceHoja] <BR> ";
+                //ignorar si no tiene encabezado establecimiento
+                $inicioIndiceFila = 1;
                 for ($indiceFila = 1; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
+                    if ($hojaActual->getCellByColumnAndRow(1, $indiceFila)->getValue() == "establecimiento") {
+                        echo "<BR> Si hay establecimiento xd <br>";
+                        $inicioIndiceFila = $indiceFila;
+                        break;
+                    }else{
+                        echo "<br> No <br>";
+                        $inicioIndiceFila = $indiceFila + 1;
+                    }
+                }
+                for ($indiceFila = $inicioIndiceFila; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
                     if ($hojaActual->getCellByColumnAndRow(1, $indiceFila)->getValue() != "establecimiento" ) {
                         if ($hojaActual->getCellByColumnAndRow(1, $indiceFila)->getValue() == "TOTAL") {
                             break;
@@ -108,7 +121,7 @@ table td{ padding:5px;}
             }        
         }
     } else {
-        echo "La subida ha fallado o no hay descripcion";
+        echo "La subida ha fallado, Archivo sobrepasa el tamaño máximo";
         }
     echo "</div>";
 ?>

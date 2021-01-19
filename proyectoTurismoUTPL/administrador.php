@@ -264,10 +264,11 @@
                                 <center><h4 style="font-family: Poppins;  margin-bottom: 20px;">SUBIR ARCHIVOS</h4></center><br> 
                                 <form enctype="multipart/form-data" action="configSubida.php" method="POST">
                                     <input type="hidden" name="idUser" value= "'.$idUser.'" />
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
-                                    <p> Enviar mi archivo: <input name="subir_archivo" type="file" /></p>
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="480800" />
+                                    <p> Escoja un archivo (tamaño maximo:450kb) 
+                                    <input name="subir_archivo" type="file" accept=".xlsx, .csv, .xls" required/></p>
                                     <label>Descripcion de archivo</label>
-                                    <input type="text" name="descripcion"><hr>
+                                    <input type="text" name="descripcion" required><hr>
                                     <p> <input type="submit" value="Enviar Archivo" /></p>
                                 </form></div>
 
