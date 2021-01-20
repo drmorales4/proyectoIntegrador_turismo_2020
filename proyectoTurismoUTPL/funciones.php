@@ -19,7 +19,17 @@
 
     if((@$_GET['archivo']) && ($rol == 'Admin') && ($_GET['action'] == 'deletearchivo')){
       $archivo=@$_GET['archivo'];
+      $filename = '/subida/$archivo';
+      if (file_exists($filename)) {
+          $success = unlink($filename);
+          
+          if (!$success) {
+               throw new Exception("Cannot delete $filename");
+          }
+      }
       $result = mysqli_query($con,"DELETE FROM archivos WHERE nombre='$archivo'") or die('Error');
+      $result = mysqli_query($con,"DELETE FROM registros WHERE archivo='$archivo'") or die('Error');
+
       header("location:administrador.php?q=5");
     }
 

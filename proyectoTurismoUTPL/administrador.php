@@ -300,6 +300,8 @@
                                         <th><b>NOMBRE DE ARCHIVO</b></th>
                                         <th><b>DESCRIPCION O MOTIVO</b></th>
                                         <th><b>SUBIDO POR</b></th>
+                                        <th><b>Duplicados</b></th>
+                                        <th><b>Correctos</b></th>
                                         <th><b>ELIMINAR</b></th>
                                     </tr>
                                     </thead>
@@ -309,17 +311,22 @@
                             {
                                 $name = $row[1];
                                 $descripcion = $row[2];
-                                $usernames = $consultaUser->consulta("select nombres from user where idUser = $row[4]");
-
+                                $consultaUser->consulta("select concat(nombres, ' ',apellidos) from user where idUser =$row[4]");
+                                $usernames = $consultaUser->consulta_lista();
+                                $datosDuplicados = $row[5];
+                                $datosNoDuplicados = $row[6];
                                 echo '
                                     <tr style="background: #FFFFFF">
                                         <th>'.$name.'</th>
                                         <th>'.$descripcion.'</th>
-                                        <th> '.$apellidos.' </th>
+                                        <th> '.$usernames[0].' </th>
+                                        <th> '.$datosDuplicados.' </th>
+                                        <th> '.$datosNoDuplicados.' </th>
                                         <th><a title="Delete Archivo" href="funciones.php?action=deletearchivo&archivo='.$name.'"><b><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                </svg>Eliminar Archivo</b></a></th>
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>Eliminar</b></a>
+                                        </th>
                                     </tr>';
                             }
                             
