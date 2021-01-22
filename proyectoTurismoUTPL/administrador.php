@@ -29,16 +29,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Administración</title>
-    
+    <title>Usuario</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link  rel="stylesheet" href="css/estilos-admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
-    <link  rel="stylesheet" href="css/app.css"/>
-    <link  rel="stylesheet" href="css/estilos-admin.css"/>
-    <script type="text/javascript" src="js/app.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js"  type="text/javascript"></script>
     
@@ -47,15 +43,14 @@
 <body>
     <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href=""><h3>Bienvenido a la Administración</h3></a>
-        
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
+            <ul class="navbar-nav px-3">
+            <div class="nav-item text-nowrap">
                 <a class="nav-link" href="logout1.php?q=dashboard.php"><h5>Cerrar Sesión</h5></a>
-            </li>
+            </div>
 
-        </ul>                
-    </nav>                      
-             
+            </ul> 
+    </nav>
+    
     <div class="container-fluid">
         <div class="row"> 
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -76,23 +71,33 @@
                         <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
                         </svg>  Crear Usuario</a>
                     </li>
-
-                    <li <?php if(@$_GET['q']==4) echo'class="nav-link"'; ?>><a href="administrador.php?q=4" style="font-family: 'Roboto', sans-serif; font-size: 20px;">
-                    Subir Archivo</a>
+                   <li <?php if(@$_GET['q']==4) echo'class="nav-link"'; ?>><a href="administrador.php?q=4" style="font-family: 'Roboto', sans-serif; font-size: 20px;"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        </svg> Subir Archivo</a>
                     </li>
 
-                    <li <?php if(@$_GET['q']==5) echo'class="nav-link"'; ?>><a href="administrador.php?q=5" style="font-family: 'Roboto', sans-serif; font-size: 20px;">
-                        </svg>  Revision Archivos</a>
+                    <li <?php if(@$_GET['q']==5) echo'class="nav-link"'; ?>><a href="administrador.php?q=5" style="font-family: 'Roboto', sans-serif; font-size: 20px;"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+                        <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+                        </svg> Revision Archivos</a>
                     </li>
 
-                    <li <?php if(@$_GET['q']==6) echo'class="nav-link"'; ?>><a href="administrador.php?q=6" style="font-family: 'Roboto', sans-serif; font-size: 20px;">  Crear Metricas</a>
+                    <li <?php if(@$_GET['q']==6) echo'class="nav-link"'; ?>><a href="administrador.php?q=6" style="font-family: 'Roboto', sans-serif; font-size: 20px;"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        </svg> Crear Metricas</a>
                     </li>
 
-                    <li <?php if(@$_GET['q']==7) echo'class="nav-link"'; ?>><a href="administrador.php?q=7" style="font-family: 'Roboto', sans-serif; font-size: 20px;">
-                    Crear Visualizaciones</a>
+                    <li <?php if(@$_GET['q']==7) echo'class="nav-link"'; ?>><a href="administrador.php?q=7" style="font-family: 'Roboto', sans-serif; font-size: 20px;"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        </svg> Crear Visualizaciones</a>
                     </li>
-                            <!--<li class="dropdown <//?php if(@$_GET['q']==4 || @$_GET['q']==5) echo'active"'; ?>">-->
-
+                    
                     </ul>
                 </div>
             </nav>
@@ -102,9 +107,9 @@
                     
                     <?php if(@$_GET['q']==0){
                         echo '<h1 style="color: #FD7E14;">Bienvenido '.$name.' '.$apellidos.'</h1>';
-
                     }                
                     ?>
+
                     <?php 
                         if(@$_GET['q']==1){ 
 
@@ -411,27 +416,27 @@
                             if(isset($_POST['generarGrafica'])){
                                 if($seleccionarGrafica=="barras"){
                                     echo '
-                                        <a href="graficas/barras.php">Ver Grafica</a> 
+                                        <a href="graficas/barras.php"target="_blank">Ver Grafica</a> 
                                     ';
                                 }
                                 if($seleccionarGrafica=="area"){
                                     echo '
-                                        <a href="graficas/area.php">Ver Grafica</a>
+                                        <a href="graficas/area.php"target="_blank">Ver Grafica</a>
                                     ';
                                 }
                                 if($seleccionarGrafica=="columnas"){
                                     echo '
-                                        <a href="graficas/columnas.php">Ver Grafica</a>
+                                        <a href="graficas/columnas.php"target="_blank">Ver Grafica</a>
                                     ';
                                 }
                                 if($seleccionarGrafica=="linea"){
                                     echo '
-                                        <a href="graficas/lineas.php">Ver Grafica</a>
+                                        <a href="graficas/lineas.php"target="_blank">Ver Grafica</a>
                                     ';
                                 }
                                 if($seleccionarGrafica=="pastel"){
                                     echo '
-                                        <a href="graficas/pastel.php">Ver Grafica</a>
+                                        <a href="graficas/pastel.php"target="_blank">Ver Grafica</a>
                                     ';
                                 }
                                 
