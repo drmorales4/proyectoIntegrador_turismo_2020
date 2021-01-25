@@ -57,78 +57,78 @@
         <script src="../highcharts/code/modules/export-data.js"></script>
         <script src="../highcharts/code/modules/accessibility.js"></script>
 
-<figure class="highcharts-figure">
-    <div id="container"></div>
-    <p class="highcharts-description">
-        Demonstrating a basic area chart, also known as a mountain chart.
-        Area charts are similar to line charts, but commonly used to visualize
-        volumes.
-    </p>
-</figure>
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p class="highcharts-description">
+                    Demonstrating a basic area chart, also known as a mountain chart.
+                    Area charts are similar to line charts, but commonly used to visualize
+                    volumes.
+                </p>
+            </figure>
 
 
 
-		<script type="text/javascript">
-Highcharts.chart('container', {
-    chart: {
-        type: 'area'
-    },
-    accessibility: {
-        description: 'Image description: .'
-    },
-    title: {
-        text: 'NUMERO DE PLAZAS POR HOTELES'
-    },
-    subtitle: {
-        text: ''
-    },
-    xAxis: {
-        allowDecimals: false,
-        labels: {
-            formatter: function () {
-                return this.value; // clean, unformatted number for year
-            }
-        },
-        accessibility: {
-            rangeDescription: 'Range: 1940 to 2017.'
-        }
-    },
-    yAxis: {
-        title: {
-            text: 'Nuclear weapon states'
-        },
-        labels: {
-            formatter: function () {
-                return this.value / 1000 + 'k';
-            }
-        }
-    },
-    tooltip: {
-        pointFormat: '{series.name} had stockpiled <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
-    },
-    plotOptions: {
-        area: {
-            pointStart: 1940,
-            marker: {
-                enabled: false,
-                symbol: 'circle',
-                radius: 2,
-                states: {
-                    hover: {
-                        enabled: true
+                    <script type="text/javascript">
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'area'
+                },
+                accessibility: {
+                    description: 'Image description: .'
+                },
+                title: {
+                    text: 'NUMERO DE PLAZAS POR HOTELES'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    allowDecimals: false,
+                    labels: {
+                        formatter: function () {
+                            return this.value; // clean, unformatted number for year
+                        }
+                    },
+                    accessibility: {
+                        rangeDescription: 'Range: 1940 to 2017.'
                     }
-                }
-            }
-        }
-    },
-    series: [{
-        name: 'SONESTA HOTEL LOJA',
-        data: [117]
-    }, {
-        name: 'GRAND VICTORIA BOUTIQUE',
-        data: [58]
-    }]
-});
+                },
+                yAxis: {
+                    title: {
+                        text: 'Nuclear weapon states'
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value / 1000 + 'k';
+                        }
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name} had stockpiled <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+                },
+                plotOptions: {
+                    area: {
+                        pointStart: 1940,
+                        marker: {
+                            enabled: false,
+                            symbol: 'circle',
+                            radius: 2,
+                            states: {
+                                hover: {
+                                    enabled: true
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'SONESTA HOTEL LOJA',
+                    data: [117]
+                }, {
+                    name: 'GRAND VICTORIA BOUTIQUE',
+                    data: [58]
+                }]
+            });
         </script>
         <center><a href="../administrador.php?q=7" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Volver al Dashboard</a></center>
         

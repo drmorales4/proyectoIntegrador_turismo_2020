@@ -78,7 +78,7 @@
                 <div class="enlaces" id="enlaces">
                     <a href="index.html" id="enlace-inicio" class="btn-header">Inicio</a>
                     <a href="internas/hoteles.html" id="enlace-hoteles" class="btn-header">Hoteles</a>
-                    <a href="internas/visualizaciones.html" id="enlace-visualizaciones" class="btn-header">Visualizaciones</a>
+                    <a href="internas/visualizaciones.php" id="enlace-visualizaciones" class="btn-header">Visualizaciones</a>
                     <a href="internas/lugaresTuristicos.html" id="enlace-lugaresTuristicos" class="btn-header">Lugares Turisticos</a>
                     <a href="login.php" id="enlace-inicio-sesion" class="btn-header">Ingresar</a>
                 </div>
