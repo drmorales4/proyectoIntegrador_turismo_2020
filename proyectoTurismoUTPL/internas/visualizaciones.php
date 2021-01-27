@@ -82,11 +82,15 @@ include_once '../database.php';
         $sql = "SELECT DISTINCT(year(fecha)) as anio, (month(fecha)) as mes FROM registros ORDER BY 1 DESC,2 DESC";
         $result = mysqli_query($con, $sql);
         $cambioFecha = "Todos";
+        $cambioEstr1 = "5 Estrellas";
+        $cambioEstr2 = "4 Estrellas";
+        $cambioEstr3 = "3 Estrellas";
         $splitFecha = "";
         
         //echo $cambioFecha;
         ?>
         <form action="#"  method="POST" enctype="multipart/form-data">
+            <div>Seleccione año y mes
             <select name="anio-mes">
                 <option>Todos</option>
                 <?php
@@ -98,42 +102,49 @@ include_once '../database.php';
                 
                 ?>
             </select>
+            </div>
+            <div>
+                Seleccione las estrellas
+            <select name="estrella1">
+                <option selected>5 Estrellas</option>
+                <option>4 Estrellas</option>
+                <option>3 Estrellas</option>
+                <option>2 Estrellas</option>
+                <option>1 Estrella</option>
+            </select>
+
+            <select name="estrella2">
+                <option>5 Estrellas</option>
+                <option selected>4 Estrellas</option>
+                <option>3 Estrellas</option>
+                <option>2 Estrellas</option>
+                <option>1 Estrella</option>
+            </select>
+
+            <select name="estrella3">
+                <option>5 Estrellas</option>
+                <option>4 Estrellas</option>
+                <option selected>3 Estrellas</option>
+                <option>2 Estrellas</option>
+                <option>1 Estrella</option>
+            </select>
+            </div>
             <input  type="submit" name="submit"  value="Cambiar"/>
         </form>
         
         <?php
         if(isset($_POST['submit'])){
             $cambioFecha = $_POST['anio-mes'];
+            $cambioEstr1 = $_POST['estrella1'];
+            $cambioEstr2 = $_POST['estrella2'];
+            $cambioEstr3 = $_POST['estrella3'];
             obtenerDatos($cambioFecha);
         }
 
         function obtenerDatos($elemento){
             global $splitFecha;
             $splitFecha = explode("-",$elemento);
-            /*// echo $cambioFecha;
-            if ($cambioFecha == "Todos") {
-                 $consultaSQL = "SELECT * from registros";
-            }
-            else{
-                $splitFecha = explode("-",$cambioFecha);
-                //echo "<br>";
-                $consultaSQL = "SELECT * from registros where year(fecha) = $anio and month(fecha) = $mes";
-            }
-            
-            $contarDatos = 0; // cuenta datos pero se resta 1 para contar desde 0
-            
-            $resultsql = mysqli_query($con,$consultaSQL);
-            
-            while($rowsql = mysqli_fetch_array($resultsql))
-            {
-                $establecimiento[$contarDatos] = $rowsql['establecimiento'];
-                $contarDatos++;
-            }
-            //echo est 1: $establecimiento[0];
-            //echo contar datos: "<br>$contarDatos";*/
         }
-        //echo "fila 1: $establecimiento[0]";
-        //echo "<br>contar datos: $contarDatos";
 
         ?>
     </center>
@@ -150,19 +161,19 @@ include_once '../database.php';
                 <figure class="highcharts-figure">
                     <div id="pastel1"></div>
                     <p class="highcharts-description">
-                        5 Estrellas
+                        <?php echo $cambioEstr1; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
                     <div id="pastel2"></div>
                     <p class="highcharts-description">
-                        4 Estrellas
+                        <?php echo $cambioEstr2; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
                     <div id="pastel3"></div>
                     <p class="highcharts-description">
-                        3 Estrellas
+                        <?php echo $cambioEstr3; ?>
                     </p>
                 </figure>
             </div>
@@ -177,19 +188,19 @@ include_once '../database.php';
                 <figure class="highcharts-figure">
                     <div id="5"></div>
                     <p class="highcharts-description">
-                        5 Estrellas
+                       <?php echo $cambioEstr1; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
                     <div id="4"></div>
                     <p class="highcharts-description">
-                        4 Estrellas
+                        <?php echo $cambioEstr2; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
                     <div id="3"></div>
                     <p class="highcharts-description">
-                        3 Estrellas
+                        <?php echo $cambioEstr3; ?>
                     </p>
                 </figure>
             </div>
@@ -200,19 +211,19 @@ include_once '../database.php';
                 <figure class="highcharts-figure">
                     <div id="5"></div>
                     <p class="highcharts-description">
-                        5 Estrellas
+                        <?php echo $cambioEstr1; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
                     <div id="4"></div>
                     <p class="highcharts-description">
-                        4 Estrellas
+                        <?php echo $cambioEstr2; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
                     <div id="3"></div>
                     <p class="highcharts-description">
-                        3 Estrellas
+                        <?php echo $cambioEstr3; ?>
                     </p>
                 </figure>
             </div>
@@ -225,19 +236,19 @@ include_once '../database.php';
             <figure class="highcharts-figure">
                 <div id="5"></div>
                 <p class="highcharts-description">
-                    5 Estrellas
+                    <?php echo $cambioEstr1; ?>
                 </p>
             </figure>
                 <figure class="highcharts-figure">
                 <div id="4"></div>
                 <p class="highcharts-description">
-                    4 Estrellas
+                    <?php echo $cambioEstr2; ?>
                 </p>
             </figure>
                 <figure class="highcharts-figure">
                 <div id="3"></div>
                 <p class="highcharts-description">
-                    3 Estrellas
+                    <?php echo $cambioEstr3; ?>
                 </p>
             </figure>
         </div>
@@ -245,7 +256,7 @@ include_once '../database.php';
             <figure class="highcharts-figure">
                 <div id="ocupacion"></div>
                 <p class="highcharts-description">
-                    Ocupacion
+                    <?php echo "$cambioEstr1, $cambioEstr2 y $cambioEstr3"; ?> 
                 </p>
             </figure>
         </div>
@@ -257,19 +268,19 @@ include_once '../database.php';
             <figure class="highcharts-figure">
                 <div id="pastel1"></div>
                 <p class="highcharts-description">
-                    5 Estrellas
+                    <?php echo $cambioEstr1; ?>
                 </p>
             </figure>
                 <figure class="highcharts-figure">
                 <div id="pastel2"></div>
                 <p class="highcharts-description">
-                    4 Estrellas
+                    <?php echo $cambioEstr2; ?>
                 </p>
             </figure>
                 <figure class="highcharts-figure">
                 <div id="pastel3"></div>
                 <p class="highcharts-description">
-                    3 Estrellas
+                    <?php echo $cambioEstr3; ?>
                 </p>
             </figure>
         </div>
@@ -280,19 +291,19 @@ include_once '../database.php';
             <figure class="highcharts-figure">
                 <div id="pastel1"></div>
                 <p class="highcharts-description">
-                    5 Estrellas
+                    <?php echo $cambioEstr1; ?>
                 </p>
             </figure>
                 <figure class="highcharts-figure">
                 <div id="pastel2"></div>
                 <p class="highcharts-description">
-                    4 Estrellas
+                    <?php echo $cambioEstr2; ?>
                 </p>
             </figure>
                 <figure class="highcharts-figure">
                 <div id="pastel3"></div>
                 <p class="highcharts-description">
-                    3 Estrellas
+                    <?php echo $cambioEstr3; ?>
                 </p>
             </figure>
         </div>
@@ -300,9 +311,9 @@ include_once '../database.php';
     <!-- Graficos-->
         <?php
         if ($cambioFecha == "Todos") {
-            $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '5 Estrellas'";
+            $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr1'";
         }else{
-           $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '5 Estrellas'"; 
+           $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
         }
         
             $resultPastel1 = mysqli_query($con,$consPastel1);
@@ -320,7 +331,7 @@ include_once '../database.php';
                     type: 'pie'
                 },
                 title: {
-                    text: '...'
+                    text: '$cambioEstr1'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -356,9 +367,9 @@ include_once '../database.php';
             ";?>
         <?php
         if ($cambioFecha == "Todos") {
-            $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '4 Estrellas'";
+            $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr2'";
         }else{
-           $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '4 Estrellas'"; 
+           $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
         }
         
             $resultPastel2 = mysqli_query($con,$consPastel2);
@@ -376,7 +387,7 @@ include_once '../database.php';
                     type: 'pie'
                 },
                 title: {
-                    text: '...'
+                    text: '$cambioEstr2'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -413,9 +424,9 @@ include_once '../database.php';
             ;?>
             <?php
         if ($cambioFecha == "Todos") {
-            $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '3 Estrellas'";
+            $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr1'";
         }else{
-           $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '3 Estrellas'"; 
+           $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
         }
         
             $resultPastel3 = mysqli_query($con,$consPastel3);
@@ -433,7 +444,7 @@ include_once '../database.php';
                     type: 'pie'
                 },
                 title: {
-                    text: '...'
+                    text: '$cambioEstr3'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
