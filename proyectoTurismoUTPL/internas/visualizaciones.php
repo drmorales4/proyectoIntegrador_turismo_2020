@@ -361,7 +361,11 @@ include_once '../database.php';
                         name: 'Extranjeros',
                         y: $pastel1Ext
                     }]
-                }]
+                }],
+            credits: {
+                enabled: false
+            }
+
             });
             </script>
             ";?>
@@ -417,7 +421,10 @@ include_once '../database.php';
                         name: 'Extranjeros',
                         y: $pastel2Ext
                     }]
-                }]
+                }],
+            credits: {
+                enabled: false
+            }
             });
             </script>
             "
@@ -474,14 +481,170 @@ include_once '../database.php';
                         name: 'Extranjeros',
                         y: $pastel3Ext
                     }]
-                }]
+                }],
+            credits: {
+                enabled: false
+            }
             });
             </script>
             "
         ;?>
 
+        <!-- grafico lineas ocupasion-->
+        <?php
+        $ocup5estr = "";
+        $ocup4estr = "";
+        $ocup3estr = "";
+        $ocup2estr = "";
+        $ocup1estr = "";
+        if ($cambioFecha == "Todos") {
+            $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' GROUP by day(fecha) ORDER By 2";
+        }else{
+        $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+        }
+        $resultOcup5 = mysqli_query($con,$sqlOcup5);
+        $ocuTemp5 = mysqli_fetch_array($resultOcup5);
+        $ocup5estr = sprintf("%s",$ocuTemp5[0]);
+        while($rowOcup5 = mysqli_fetch_array($resultOcup5)) 
+        {
+            $ocup5estr= sprintf("%s, %s",$ocup5estr, $rowOcup5[0]);
+        }
+        echo "$ocup5estr";
+
+        if ($cambioFecha == "Todos") {
+            $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' GROUP by day(fecha) ORDER By 2";
+        }else{$sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+        }
+        $resultOcup4 = mysqli_query($con,$sqlOcup4);
+        $ocuTemp4 = mysqli_fetch_array($resultOcup4);
+        $ocup4estr = sprintf("%s",$ocuTemp4[0]);
+        while($rowOcup4 = mysqli_fetch_array($resultOcup4)) 
+        {
+            $ocup4estr= sprintf("%s, %s",$ocup4estr, $rowOcup4[0]);
+        }
+        echo "$ocup4estr";
+
+        if ($cambioFecha == "Todos") {
+            $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' GROUP by day(fecha) ORDER By 2";
+        }else{
+            $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+        }
+        $resultOcup3 = mysqli_query($con,$sqlOcup3);
+        $ocuTemp3 = mysqli_fetch_array($resultOcup3);
+        $ocup3estr = sprintf("%s",$ocuTemp3[0]);
+        while($rowOcup3 = mysqli_fetch_array($resultOcup3)) 
+        {
+            $ocup3estr= sprintf("%s, %s",$ocup3estr, $rowOcup3[0]);
+        }
+        echo "$ocup3estr";
+
+        if ($cambioFecha == "Todos") {
+            $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' GROUP by day(fecha) ORDER By 2";
+        }else{
+            $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+        }
+        $resultOcup2 = mysqli_query($con,$sqlOcup2);
+        $ocuTemp2 = mysqli_fetch_array($resultOcup2);
+        $ocup2estr = sprintf("%s",$ocuTemp2[0]);
+        while($rowOcup2 = mysqli_fetch_array($resultOcup2)) 
+        {
+            $ocup2estr= sprintf("%s, %s",$ocup2estr, $rowOcup2[0]);
+        }
+        echo "$ocup2estr";
+
+        if ($cambioFecha == "Todos") {
+            $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' GROUP by day(fecha) ORDER By 2";
+        }else{
+            $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+        }
+        $resultOcup1 = mysqli_query($con,$sqlOcup1);
+        $ocuTemp1 = mysqli_fetch_array($resultOcup1);
+        $ocup1estr = sprintf("%s",$ocuTemp1[0]);
+        while($rowOcup1 = mysqli_fetch_array($resultOcup1)) 
+        {
+            $ocup1estr= sprintf("%s, %s",$ocup1estr, $rowOcup1[0]);
+        }
+        echo "$ocup1estr";
+
+        echo "
+        <script type='text/javascript'>
+                    Highcharts.chart('ocupacion', {
+
+                        title: {
+                            text: 'Todas las categorías'
+                        },
+
+                        subtitle: {
+                            text: ''
+                        },
+
+                        yAxis: {
+                            title: {
+                                text: 'Ocupaciones'
+                            }
+                        },
+
+                        xAxis: {
+                            accessibility: {
+                                rangeDescription: 'Dia'
+                            }
+                        },
+
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle'
+                        },
+
+                        plotOptions: {
+                            series: {
+                                label: {
+                                    connectorAllowed: false
+                                },
+                                pointStart: 1
+                            }
+                        },
+
+                        series: [{
+                            name: '5 Estrellas',
+                            data: [$ocup5estr]
+                        }, {
+                            name: '4 Estrellas',
+                            data: [$ocup4estr]
+                        }, {
+                            name: '3 Estrellas',
+                            data: [$ocup3estr]
+                        }, {
+                            name: '2 Estrellas',
+                            data: [$ocup2estr]
+                        }, {
+                            name: '1 Estrella',
+                            data: [$ocup1estr]
+                        }],
+
+                        responsive: {
+                            rules: [{
+                                condition: {
+                                    maxWidth: 500
+                                },
+                                chartOptions: {
+                                    legend: {
+                                        layout: 'horizontal',
+                                        align: 'center',
+                                        verticalAlign: 'bottom'
+                                    }
+                                }
+                            }]
+                        }
+
+                    });
+                    </script>";
+
+
+        ?>
+
     <script type="text/javascript">
-            Highcharts.chart('grafic2', {
+            Highcharts.chart('grafic3x', {
                 chart: {
                     type: 'area'
                 },
@@ -520,7 +683,7 @@ include_once '../database.php';
                 },
                 plotOptions: {
                     area: {
-                        pointStart: 1940,
+                        pointStart: 1,
                         marker: {
                             enabled: false,
                             symbol: 'circle',
@@ -535,10 +698,10 @@ include_once '../database.php';
                 },
                 series: [{
                     name: 'SONESTA HOTEL LOJA',
-                    data: [117]
+                    data: [117, 111,3,4,5,6,7]
                 }, {
                     name: 'GRAND VICTORIA BOUTIQUE',
-                    data: [58]
+                    data: [58, 155,114,512,123,521]
                 }]
             });
         </script>
@@ -671,78 +834,7 @@ include_once '../database.php';
             });
         </script>
          
-        <script type="text/javascript">
-                    Highcharts.chart('grafic5', {
-
-                        title: {
-                            text: '...'
-                        },
-
-                        subtitle: {
-                            text: ''
-                        },
-
-                        yAxis: {
-                            title: {
-                                text: 'Number of Employees'
-                            }
-                        },
-
-                        xAxis: {
-                            accessibility: {
-                                rangeDescription: 'Range: 2010 to 2017'
-                            }
-                        },
-
-                        legend: {
-                            layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'middle'
-                        },
-
-                        plotOptions: {
-                            series: {
-                                label: {
-                                    connectorAllowed: false
-                                },
-                                pointStart: 2010
-                            }
-                        },
-
-                        series: [{
-                            name: 'Installation',
-                            data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-                        }, {
-                            name: 'Manufacturing',
-                            data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-                        }, {
-                            name: 'Sales & Distribution',
-                            data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-                        }, {
-                            name: 'Project Development',
-                            data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-                        }, {
-                            name: 'Other',
-                            data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-                        }],
-
-                        responsive: {
-                            rules: [{
-                                condition: {
-                                    maxWidth: 500
-                                },
-                                chartOptions: {
-                                    legend: {
-                                        layout: 'horizontal',
-                                        align: 'center',
-                                        verticalAlign: 'bottom'
-                                    }
-                                }
-                            }]
-                        }
-
-                    });
-                    </script>
+        
                     
     <footer>
         <div class="container">
