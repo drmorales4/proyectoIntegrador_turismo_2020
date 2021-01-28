@@ -98,6 +98,7 @@ include_once '../database.php';
         $sqlForm2 = "SELECT DISTINCT(year(fecha)) as anio, (month(fecha)) as mes FROM registros ORDER BY 1 DESC,2 DESC";
         $resultForm2 = mysqli_query($con, $sqlForm2);
         //valores por default
+        $cambioClasifi = "Todos";
         $cambioFecha = "Todos-Todos";
         $splitFecha[0] = "Todos";
         $splitFecha[1] = "Todos";
@@ -173,11 +174,12 @@ include_once '../database.php';
         
         <?php
         if(isset($_POST['submit'])){
+            $cambioClasifi = $_POST['clasificacion'];
             $cambioFecha = $_POST['anio-mes'];
             $cambioEstr1 = $_POST['estrella1'];
             $cambioEstr2 = $_POST['estrella2'];
             $cambioEstr3 = $_POST['estrella3'];
-            obtenerDatos($cambioFecha);
+            obtenerDatos($cambioFecha, $cambioClasifi);
         }
 
         function obtenerDatos($elemento){
@@ -219,18 +221,30 @@ include_once '../database.php';
         <h2>TARIFA PROMEDIO</h2>
         <div class="porHabitacion">
             <h3>Por Habitación</h3>
+            <?php
+            echo $cambioClasifi;?>
             <div>
                 <figure class="highcharts-figure">
                     <div>
                     <?php
-                    if ($splitFecha[0] == "Todos") {
-                        $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
-                    }elseif ($splitFecha[1] == "Todos") {
-                        $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+                        }else{
+                           $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+                        }
                     }else{
-                       $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'"; 
+                        }
                     }
-                    
+
                         $resultTarPro1 = mysqli_query($con,$consTarPro1);
                         $rowTarPro1 = mysqli_fetch_array($resultTarPro1);
                         $convTarPro1 =bcdiv($rowTarPro1[0], '1', 2); 
@@ -244,12 +258,24 @@ include_once '../database.php';
                     <figure class="highcharts-figure">
                     <div>
                     <?php
-                    if ($splitFecha[0] == "Todos") {
-                        $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
-                    }elseif ($splitFecha[1] == "Todos") {
-                        $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
-                    }else{
-                       $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
+                        }else{
+                           $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+                        }
+                    }
+                    else{
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'"; 
+                        }
+
                     }
                     
                         $resultTarPro2 = mysqli_query($con,$consTarPro2);
@@ -265,12 +291,22 @@ include_once '../database.php';
                     <figure class="highcharts-figure">
                     <div>
                     <?php
-                    if ($splitFecha[0] == "Todos") {
-                        $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
-                    }elseif ($splitFecha[1] == "Todos") {
-                        $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
+                        }else{
+                           $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+                        }
                     }else{
-                       $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'"; 
+                        }
                     }
                     
                         $resultTarPro3 = mysqli_query($con,$consTarPro3);
@@ -291,12 +327,22 @@ include_once '../database.php';
                 <figure class="highcharts-figure">
                     <div>
                     <?php
-                    if ($splitFecha[0] == "Todos") {
-                        $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
-                    }elseif ($splitFecha[1] == "Todos") {
-                        $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+                        }else{
+                           $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+                        }
                     }else{
-                       $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'"; 
+                        }
                     }
                     
                         $resultTarPro4 = mysqli_query($con,$consTarPro4);
@@ -312,12 +358,22 @@ include_once '../database.php';
                     <figure class="highcharts-figure">
                     <div>
                     <?php
-                    if ($splitFecha[0] == "Todos") {
-                        $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
-                    }elseif ($splitFecha[1] == "Todos") {
-                        $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
+                        }else{
+                           $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+                        }
                     }else{
-                       $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'"; 
+                        }
                     }
                     
                         $resultTarPro5 = mysqli_query($con,$consTarPro5);
@@ -333,14 +389,23 @@ include_once '../database.php';
                     <figure class="highcharts-figure">
                     <div>
                     <?php
-                    if ($splitFecha[0] == "Todos") {
-                        $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
-                    }elseif ($splitFecha[1] == "Todos") {
-                        $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
+                        }else{
+                           $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+                        }
                     }else{
-                       $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'"; 
+                        }
                     }
-                    
                         $resultTarPro6 = mysqli_query($con,$consTarPro6);
                         $rowTarPro6 = mysqli_fetch_array($resultTarPro6);
                         $convTarPro6 =bcdiv($rowTarPro6[0], '1', 2); 
@@ -454,14 +519,23 @@ include_once '../database.php';
     </section>
     <!-- Graficos-->
         <?php
-        if ($splitFecha[0] == "Todos") {
-            $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr1'";
-        }elseif ($splitFecha[1]== "Todos") {
-            $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+        if ($cambioClasifi == "Todos") {
+            if ($splitFecha[0] == "Todos") {
+                $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr1'";
+            }elseif ($splitFecha[1]== "Todos") {
+                $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+            }else{
+               $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+            }
         }else{
-           $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+            if ($splitFecha[0] == "Todos") {
+                $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
+            }elseif ($splitFecha[1]== "Todos") {
+                $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
+            }else{
+               $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'"; 
+            }
         }
-        
             $resultPastel1 = mysqli_query($con,$consPastel1);
             $rowPastel1 = mysqli_fetch_array($resultPastel1);
             $pastel1Suma = $rowPastel1['nacionales'] + $rowPastel1['extranjeros'];
@@ -516,14 +590,24 @@ include_once '../database.php';
             </script>
             ";?>
         <?php
-        if ($splitFecha[0] == "Todos") {
-            $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr2'";
-        }elseif ($splitFecha[1]== "Todos") {
-            $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] AND categoria = '$cambioEstr2'"; 
-        }else{
-           $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+        if ($cambioClasifi == "Todos") {
+            if ($splitFecha[0] == "Todos") {
+                $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr2'";
+            }elseif ($splitFecha[1]== "Todos") {
+                $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] AND categoria = '$cambioEstr2'"; 
+            }else{
+               $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+            }
         }
-        
+        else{
+            if ($splitFecha[0] == "Todos") {
+                $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+            }elseif ($splitFecha[1]== "Todos") {
+                $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'"; 
+            }else{
+               $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'"; 
+            }
+        }
             $resultPastel2 = mysqli_query($con,$consPastel2);
             $rowPastel2 = mysqli_fetch_array($resultPastel2);
             $pastel2Suma = $rowPastel2['nacionales'] + $rowPastel2['extranjeros'];
@@ -578,12 +662,22 @@ include_once '../database.php';
             "
             ;?>
             <?php
-        if ($splitFecha[0] == "Todos") {
-            $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr1'";
-        }elseif ($splitFecha[1]== "Todos") {
-            $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] AND categoria = '$cambioEstr1'"; 
+        if ($cambioClasifi == "Todos") {
+            if ($splitFecha[0] == "Todos") {
+                $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr3'";
+            }elseif ($splitFecha[1]== "Todos") {
+                $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] AND categoria = '$cambioEstr3'"; 
+            }else{
+               $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+            }
         }else{
-           $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+            if ($splitFecha[0] == "Todos") {
+                $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+            }elseif ($splitFecha[1]== "Todos") {
+                $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'"; 
+            }else{
+               $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'"; 
+            }
         }
         
             $resultPastel3 = mysqli_query($con,$consPastel3);
@@ -647,12 +741,22 @@ include_once '../database.php';
         $ocup3estr = "";
         $ocup2estr = "";
         $ocup1estr = "";
-        if ($splitFecha[0] == "Todos") {
-            $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' GROUP by day(fecha) ORDER By 2";
-        }elseif ($splitFecha[1]== "Todos") {
-            $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+        if ($cambioClasifi == "Todos") {
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            }
         }else{
-            $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }
         }
         $resultOcup5 = mysqli_query($con,$sqlOcup5);
         $ocuTemp5 = mysqli_fetch_array($resultOcup5);
@@ -661,13 +765,22 @@ include_once '../database.php';
         {
             $ocup5estr= sprintf("%s, %s",$ocup5estr, $rowOcup5[0]);
         }
-
-        if ($splitFecha[0] == "Todos") {
-            $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' GROUP by day(fecha) ORDER By 2";
-        }elseif ($splitFecha[1]== "Todos") {
-            $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+        if ($cambioClasifi == "Todos") {
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            }
         }else{
-            $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas'  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi'  GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }
         }
         $resultOcup4 = mysqli_query($con,$sqlOcup4);
         $ocuTemp4 = mysqli_fetch_array($resultOcup4);
@@ -677,12 +790,22 @@ include_once '../database.php';
             $ocup4estr= sprintf("%s, %s",$ocup4estr, $rowOcup4[0]);
         }
 
-        if ($splitFecha[0] == "Todos") {
-            $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' GROUP by day(fecha) ORDER By 2";
-        }elseif ($splitFecha[1]== "Todos") {
-            $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+        if ($cambioClasifi == "Todos") {
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            }
         }else{
-            $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas'  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }
         }
         $resultOcup3 = mysqli_query($con,$sqlOcup3);
         $ocuTemp3 = mysqli_fetch_array($resultOcup3);
@@ -691,13 +814,22 @@ include_once '../database.php';
         {
             $ocup3estr= sprintf("%s, %s",$ocup3estr, $rowOcup3[0]);
         }
-
-        if ($splitFecha[0] == "Todos") {
-            $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' GROUP by day(fecha) ORDER By 2";
-        }elseif ($splitFecha[1]== "Todos") {
-            $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+        if ($cambioClasifi == "Todos") {
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            }
         }else{
-            $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }
         }
         $resultOcup2 = mysqli_query($con,$sqlOcup2);
         $ocuTemp2 = mysqli_fetch_array($resultOcup2);
@@ -707,12 +839,22 @@ include_once '../database.php';
             $ocup2estr= sprintf("%s, %s",$ocup2estr, $rowOcup2[0]);
         }
 
-        if ($splitFecha[0] == "Todos") {
-            $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' GROUP by day(fecha) ORDER By 2";
-        }elseif ($splitFecha[1]== "Todos") {
-            $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+        if ($cambioClasifi == "Todos") {
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            }
         }else{
-            $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            if ($splitFecha[0] == "Todos") {
+                $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }elseif ($splitFecha[1]== "Todos") {
+                $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }else{
+                $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
+            }
         }
         $resultOcup1 = mysqli_query($con,$sqlOcup1);
         $ocuTemp1 = mysqli_fetch_array($resultOcup1);

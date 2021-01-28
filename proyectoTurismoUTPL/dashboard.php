@@ -43,7 +43,7 @@
 
 <body>
     <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0">
-	    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href=""><h3>Bienvenido a la Administración</h3></a>
+	    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href=""><h3>Bienvenido al panel</h3></a>
 	    	<ul class="navbar-nav px-3">
             <div class="nav-item text-nowrap">
          		<a class="nav-link" href="logout1.php?q=dashboard.php"><h5>Cerrar Sesión</h5></a>
