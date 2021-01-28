@@ -15,9 +15,14 @@ include_once '../database.php';
     <!-- Hichcharts css -->
     <style type="text/css">
             .highcharts-figure, .highcharts-data-table table {
-                min-width: 320px; 
+                width:100%; 
                 max-width: 800px;
-                margin: 1em auto;
+                margin: 1em ;
+            }
+            .highcharts-figure-big, .highcharts-data-table table {
+                width:100%; 
+                max-width: 1500px;
+                margin: 1em;
             }
 
             #container {
@@ -53,6 +58,10 @@ include_once '../database.php';
             }
 
         </style>
+        <script src="../highcharts/code/highcharts.js"></script>
+        <script src="../highcharts/code/modules/exporting.js"></script>
+        <script src="../highcharts/code/modules/export-data.js"></script>
+        <script src="../highcharts/code/modules/accessibility.js"></script>
 </head>
 
 <body>
@@ -77,34 +86,49 @@ include_once '../database.php';
         </nav>
 
     </header>
-    <center>
+    <section class="graficasHome">
+        <h2>VISUALIZACIONES POR CATEGORÍA</h2>
+        <center>
+            <H3>Seleccione los siguientes ajustes</H3>
         <?php
-        $sql = "SELECT DISTINCT(year(fecha)) as anio, (month(fecha)) as mes FROM registros ORDER BY 1 DESC,2 DESC";
-        $result = mysqli_query($con, $sql);
-        $cambioFecha = "Todos";
+        $sqlForm = "SELECT DISTINCT(year(fecha)) as anio FROM registros ORDER BY 1 DESC";
+        $resultForm = mysqli_query($con, $sqlForm);
+        $sqlForm2 = "SELECT DISTINCT(year(fecha)) as anio, (month(fecha)) as mes FROM registros ORDER BY 1 DESC,2 DESC";
+        $resultForm2 = mysqli_query($con, $sqlForm2);
+        //valores por default
+        $cambioFecha = "Todos-Todos";
+        $splitFecha[0] = "Todos";
+        $splitFecha[1] = "Todos";
         $cambioEstr1 = "5 Estrellas";
         $cambioEstr2 = "4 Estrellas";
         $cambioEstr3 = "3 Estrellas";
-        $splitFecha = "";
-        
-        //echo $cambioFecha;
+
+
         ?>
         <form action="#"  method="POST" enctype="multipart/form-data">
             <div>Seleccione año y mes
             <select name="anio-mes">
-                <option>Todos</option>
+                <option>Todos-Todos</option>
                 <?php
-                while($row = mysqli_fetch_array($result)) 
+                while($rowForm = mysqli_fetch_array($resultForm)) 
                 {
-                    $rows[] = $row;
-                    echo "<option>$row[0]-$row[1]</option>";
+                    $rowsForm[] = $rowForm;
+                    echo "<option>$rowForm[0]-Todos</option>";
+                }
+                
+                ?>
+                <?php
+                while($rowForm2 = mysqli_fetch_array($resultForm2)) 
+                {
+                    $rowsForm2[] = $rowForm2;
+                    echo "<option>$rowForm2[0]-$rowForm2[1]</option>";
                 }
                 
                 ?>
             </select>
             </div>
             <div>
-                Seleccione las estrellas
+                Seleccione las categorias
             <select name="estrella1">
                 <option selected>5 Estrellas</option>
                 <option>4 Estrellas</option>
@@ -145,15 +169,11 @@ include_once '../database.php';
             global $splitFecha;
             $splitFecha = explode("-",$elemento);
         }
-
         ?>
     </center>
-
-    <script src="../highcharts/code/highcharts.js"></script>
-    <script src="../highcharts/code/modules/exporting.js"></script>
-    <script src="../highcharts/code/modules/export-data.js"></script>
-    <script src="../highcharts/code/modules/accessibility.js"></script>
-
+        </div>
+    </section>
+    
     <section class="graficasHome">
         <h2>HUÉSPEDES</h2>
         <div class="porHabitacion">
@@ -161,19 +181,19 @@ include_once '../database.php';
                 <figure class="highcharts-figure">
                     <div id="pastel1"></div>
                     <p class="highcharts-description">
-                        <?php echo $cambioEstr1; ?>
+                        Huéspedes de hoteles con categoria <?php echo $cambioEstr1; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
                     <div id="pastel2"></div>
                     <p class="highcharts-description">
-                        <?php echo $cambioEstr2; ?>
+                        Huéspedes de hoteles con categoria <?php echo $cambioEstr2; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
                     <div id="pastel3"></div>
                     <p class="highcharts-description">
-                        <?php echo $cambioEstr3; ?>
+                        Huéspedes de hoteles con categoria <?php echo $cambioEstr3; ?>
                     </p>
                 </figure>
             </div>
@@ -186,132 +206,243 @@ include_once '../database.php';
             <h3>Por Habitación</h3>
             <div>
                 <figure class="highcharts-figure">
-                    <div id="5"></div>
+                    <div>
+                    <?php
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+                    }else{
+                       $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+                    }
+                    
+                        $resultTarPro1 = mysqli_query($con,$consTarPro1);
+                        $rowTarPro1 = mysqli_fetch_array($resultTarPro1);
+                        $convTarPro1 =bcdiv($rowTarPro1[0], '1', 2); 
+                        echo "$$convTarPro1";
+                        ?>
+                    </div>
                     <p class="highcharts-description">
-                       <?php echo $cambioEstr1; ?>
+                       Por Habitación de hoteles con categoria <?php echo $cambioEstr1; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
-                    <div id="4"></div>
+                    <div>
+                    <?php
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
+                    }else{
+                       $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+                    }
+                    
+                        $resultTarPro2 = mysqli_query($con,$consTarPro2);
+                        $rowTarPro2 = mysqli_fetch_array($resultTarPro2);
+                        $convTarPro2 =bcdiv($rowTarPro2[0], '1', 2); 
+                        echo "$$convTarPro2";
+                        ?>
+                    </div>
                     <p class="highcharts-description">
-                        <?php echo $cambioEstr2; ?>
+                        Por Habitación de hoteles con categoria <?php echo $cambioEstr2; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
-                    <div id="3"></div>
+                    <div>
+                    <?php
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
+                    }else{
+                       $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+                    }
+                    
+                        $resultTarPro3 = mysqli_query($con,$consTarPro3);
+                        $rowTarPro3 = mysqli_fetch_array($resultTarPro3);
+                        $convTarPro3 =bcdiv($rowTarPro3[0], '1', 2); 
+                        echo "$$convTarPro3";
+                        ?>
+                    </div>
                     <p class="highcharts-description">
-                        <?php echo $cambioEstr3; ?>
+                        Por Habitación de hoteles con categoria <?php echo $cambioEstr3; ?>
                     </p>
                 </figure>
             </div>
         </div>
-        <div class="porPersona">
+        <div class="porHabitacion">
             <h3>Por Persona</h3>
             <div>
                 <figure class="highcharts-figure">
-                    <div id="5"></div>
+                    <div>
+                    <?php
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+                    }else{
+                       $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+                    }
+                    
+                        $resultTarPro4 = mysqli_query($con,$consTarPro4);
+                        $rowTarPro4 = mysqli_fetch_array($resultTarPro4);
+                        $convTarPro4 =bcdiv($rowTarPro4[0], '1', 2); 
+                        echo "$$convTarPro4";
+                        ?>
+                    </div>
                     <p class="highcharts-description">
-                        <?php echo $cambioEstr1; ?>
+                        Por Persona de hoteles con categoria <?php echo $cambioEstr1; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
-                    <div id="4"></div>
+                    <div>
+                    <?php
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
+                    }else{
+                       $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+                    }
+                    
+                        $resultTarPro5 = mysqli_query($con,$consTarPro5);
+                        $rowTarPro5 = mysqli_fetch_array($resultTarPro5);
+                        $convTarPro5 =bcdiv($rowTarPro5[0], '1', 2); 
+                        echo "$$convTarPro5";
+                        ?>
+                    </div>
                     <p class="highcharts-description">
-                        <?php echo $cambioEstr2; ?>
+                        Por Persona de hoteles con categoria <?php echo $cambioEstr2; ?>
                     </p>
                 </figure>
                     <figure class="highcharts-figure">
-                    <div id="3"></div>
+                    <div>
+                    <?php
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
+                    }else{
+                       $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+                    }
+                    
+                        $resultTarPro6 = mysqli_query($con,$consTarPro6);
+                        $rowTarPro6 = mysqli_fetch_array($resultTarPro6);
+                        $convTarPro6 =bcdiv($rowTarPro6[0], '1', 2); 
+                        echo "$$convTarPro6";
+                        ?>
+                    </div>
                     <p class="highcharts-description">
-                        <?php echo $cambioEstr3; ?>
+                        Por Persona de hoteles con categoria <?php echo $cambioEstr3; ?>
                     </p>
                 </figure>
             </div>
         </div>
     </section>
 
-    <section class="graficasHome2">
+    <section class="graficasHome">
         <h2>OCUPACIÓN</h2>
-        <div>
-            <figure class="highcharts-figure">
-                <div id="5"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr1; ?>
-                </p>
-            </figure>
+        <div class="porHabitacion">
+            <div>
                 <figure class="highcharts-figure">
-                <div id="4"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr2; ?>
-                </p>
-            </figure>
-                <figure class="highcharts-figure">
-                <div id="3"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr3; ?>
-                </p>
-            </figure>
-        </div>
-        <div>
-            <figure class="highcharts-figure">
-                <div id="ocupacion"></div>
-                <p class="highcharts-description">
-                    <?php echo "$cambioEstr1, $cambioEstr2 y $cambioEstr3"; ?> 
-                </p>
-            </figure>
+                    <div>
+                        <?php
+                        echo "12";
+                        ?>
+                    </div>
+                    <p class="highcharts-description">
+                        Ocupacion de hoteles con categoria <?php echo $cambioEstr1; ?>
+                    </p>
+                </figure>
+                    <figure class="highcharts-figure">
+                    <div>
+                        <?php
+                        echo "12";
+                        ?>
+                    </div>
+                    <p class="highcharts-description">
+                        Ocupacion de hoteles con categoria <?php echo $cambioEstr2; ?>
+                    </p>
+                </figure>
+                    <figure class="highcharts-figure">
+                    <div>
+                        <?php
+                        echo "12";
+                        ?>
+                    </div>
+                    <p class="highcharts-description">
+                        Ocupacion de hoteles con categoria <?php echo $cambioEstr3; ?>
+                    </p>
+                </figure>
+            </div>
+
+            <div>
+                <figure class="highcharts-figure-big">
+                    <div id="ocupacion"></div>
+                    <p class="highcharts-description">
+                        Vista general de todas las categorias
+                    </p>
+                </figure>
+            </div>
         </div>
     </section>
 
-    <section class="graficasHome2">
+    <section class="graficasHome">
         <h2>REVPAR</h2>
-        <div>
-            <figure class="highcharts-figure">
-                <div id="pastel1"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr1; ?>
-                </p>
-            </figure>
+        <div class="porHabitacion">
+            <div>
                 <figure class="highcharts-figure">
-                <div id="pastel2"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr2; ?>
-                </p>
-            </figure>
-                <figure class="highcharts-figure">
-                <div id="pastel3"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr3; ?>
-                </p>
-            </figure>
+                    <div id="pastel1"></div>
+                    <p class="highcharts-description">
+                        REVPAR de hoteles con categoria <?php echo $cambioEstr1; ?>
+                    </p>
+                </figure>
+                    <figure class="highcharts-figure">
+                    <div id="pastel2"></div>
+                    <p class="highcharts-description">
+                        REVPAR de hoteles con categoria <?php echo $cambioEstr2; ?>
+                    </p>
+                </figure>
+                    <figure class="highcharts-figure">
+                    <div id="pastel3"></div>
+                    <p class="highcharts-description">
+                        REVPAR de hoteles con categoria <?php echo $cambioEstr3; ?>
+                    </p>
+                </figure>
+            </div>
         </div>
     </section>
-    <section class="graficasHome2">
+    <section class="graficasHome">
         <h2>ESTADÍA PROMEDIO</h2>
-        <div>
-            <figure class="highcharts-figure">
-                <div id="pastel1"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr1; ?>
-                </p>
-            </figure>
+        <div class="porHabitacion">
+            <div>
                 <figure class="highcharts-figure">
-                <div id="pastel2"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr2; ?>
-                </p>
-            </figure>
-                <figure class="highcharts-figure">
-                <div id="pastel3"></div>
-                <p class="highcharts-description">
-                    <?php echo $cambioEstr3; ?>
-                </p>
-            </figure>
+                    <div id="pastel1"></div>
+                    <p class="highcharts-description">
+                        Estadía promedio de hoteles con categoria <?php echo $cambioEstr1; ?>
+                    </p>
+                </figure>
+                    <figure class="highcharts-figure">
+                    <div id="pastel2"></div>
+                    <p class="highcharts-description">
+                        Estadía promedio de hoteles con categoria <?php echo $cambioEstr2; ?>
+                    </p>
+                </figure>
+                    <figure class="highcharts-figure">
+                    <div id="pastel3"></div>
+                    <p class="highcharts-description">
+                        Estadía promedio de hoteles con categoria <?php echo $cambioEstr3; ?>
+                    </p>
+                </figure>
+            </div>
         </div>
     </section>
     <!-- Graficos-->
         <?php
-        if ($cambioFecha == "Todos") {
+        if ($splitFecha[0] == "Todos") {
             $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr1'";
+        }elseif ($splitFecha[1]== "Todos") {
+            $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
         }else{
            $consPastel1 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
         }
@@ -370,8 +501,10 @@ include_once '../database.php';
             </script>
             ";?>
         <?php
-        if ($cambioFecha == "Todos") {
+        if ($splitFecha[0] == "Todos") {
             $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr2'";
+        }elseif ($splitFecha[1]== "Todos") {
+            $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] AND categoria = '$cambioEstr2'"; 
         }else{
            $consPastel2 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
         }
@@ -430,8 +563,10 @@ include_once '../database.php';
             "
             ;?>
             <?php
-        if ($cambioFecha == "Todos") {
+        if ($splitFecha[0] == "Todos") {
             $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where  categoria = '$cambioEstr1'";
+        }elseif ($splitFecha[1]== "Todos") {
+            $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] AND categoria = '$cambioEstr1'"; 
         }else{
            $consPastel3 = "SELECT sum(nacionales) as nacionales, sum(extranjeros) as extranjeros from registros where year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
         }
@@ -497,10 +632,12 @@ include_once '../database.php';
         $ocup3estr = "";
         $ocup2estr = "";
         $ocup1estr = "";
-        if ($cambioFecha == "Todos") {
+        if ($splitFecha[0] == "Todos") {
             $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' GROUP by day(fecha) ORDER By 2";
+        }elseif ($splitFecha[1]== "Todos") {
+            $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
         }else{
-        $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+            $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
         }
         $resultOcup5 = mysqli_query($con,$sqlOcup5);
         $ocuTemp5 = mysqli_fetch_array($resultOcup5);
@@ -509,11 +646,13 @@ include_once '../database.php';
         {
             $ocup5estr= sprintf("%s, %s",$ocup5estr, $rowOcup5[0]);
         }
-        echo "$ocup5estr";
 
-        if ($cambioFecha == "Todos") {
+        if ($splitFecha[0] == "Todos") {
             $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' GROUP by day(fecha) ORDER By 2";
-        }else{$sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
+        }elseif ($splitFecha[1]== "Todos") {
+            $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
+        }else{
+            $sqlOcup4 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '4 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
         }
         $resultOcup4 = mysqli_query($con,$sqlOcup4);
         $ocuTemp4 = mysqli_fetch_array($resultOcup4);
@@ -522,10 +661,11 @@ include_once '../database.php';
         {
             $ocup4estr= sprintf("%s, %s",$ocup4estr, $rowOcup4[0]);
         }
-        echo "$ocup4estr";
 
-        if ($cambioFecha == "Todos") {
+        if ($splitFecha[0] == "Todos") {
             $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' GROUP by day(fecha) ORDER By 2";
+        }elseif ($splitFecha[1]== "Todos") {
+            $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
         }else{
             $sqlOcup3 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '3 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
         }
@@ -536,10 +676,11 @@ include_once '../database.php';
         {
             $ocup3estr= sprintf("%s, %s",$ocup3estr, $rowOcup3[0]);
         }
-        echo "$ocup3estr";
 
-        if ($cambioFecha == "Todos") {
+        if ($splitFecha[0] == "Todos") {
             $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' GROUP by day(fecha) ORDER By 2";
+        }elseif ($splitFecha[1]== "Todos") {
+            $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
         }else{
             $sqlOcup2 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '2 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
         }
@@ -550,10 +691,11 @@ include_once '../database.php';
         {
             $ocup2estr= sprintf("%s, %s",$ocup2estr, $rowOcup2[0]);
         }
-        echo "$ocup2estr";
 
-        if ($cambioFecha == "Todos") {
+        if ($splitFecha[0] == "Todos") {
             $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' GROUP by day(fecha) ORDER By 2";
+        }elseif ($splitFecha[1]== "Todos") {
+            $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] GROUP by day(fecha) ORDER By 2";
         }else{
             $sqlOcup1 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '1 Estrella' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] GROUP by day(fecha) ORDER By 2";
         }
@@ -564,8 +706,6 @@ include_once '../database.php';
         {
             $ocup1estr= sprintf("%s, %s",$ocup1estr, $rowOcup1[0]);
         }
-        echo "$ocup1estr";
-
         echo "
         <script type='text/javascript'>
                     Highcharts.chart('ocupacion', {
@@ -575,7 +715,7 @@ include_once '../database.php';
                         },
 
                         subtitle: {
-                            text: ''
+                            text: 'Año:$splitFecha[0] Mes: $splitFecha[1]'
                         },
 
                         yAxis: {
@@ -601,7 +741,7 @@ include_once '../database.php';
                                 label: {
                                     connectorAllowed: false
                                 },
-                                pointStart: 1
+                                pointStart: 1,
                             }
                         },
 
@@ -635,6 +775,10 @@ include_once '../database.php';
                                     }
                                 }
                             }]
+
+                        },
+                        credits: {
+                            enabled: false
                         }
 
                     });
