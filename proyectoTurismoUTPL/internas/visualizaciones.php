@@ -91,6 +91,8 @@ include_once '../database.php';
         <center>
             <H3>Seleccione los siguientes ajustes</H3>
         <?php
+        $sqlForm3 = "SELECT DISTINCT(clasificacion) as clasificacion FROM registros";
+        $resultForm3 = mysqli_query($con, $sqlForm3);
         $sqlForm = "SELECT DISTINCT(year(fecha)) as anio FROM registros ORDER BY 1 DESC";
         $resultForm = mysqli_query($con, $sqlForm);
         $sqlForm2 = "SELECT DISTINCT(year(fecha)) as anio, (month(fecha)) as mes FROM registros ORDER BY 1 DESC,2 DESC";
@@ -106,6 +108,19 @@ include_once '../database.php';
 
         ?>
         <form action="#"  method="POST" enctype="multipart/form-data">
+            <div>Seleccione por clasificación
+            <select name="clasificacion">
+                <option>Todos</option>
+                <?php
+                while($rowForm3 = mysqli_fetch_array($resultForm3)) 
+                {
+                    $rowsForm3[] = $rowForm3;
+                    echo "<option>$rowForm3[0]</option>";
+                }
+                
+                ?>
+            </select>
+            </div>
             <div>Seleccione año y mes
             <select name="anio-mes">
                 <option>Todos-Todos</option>
