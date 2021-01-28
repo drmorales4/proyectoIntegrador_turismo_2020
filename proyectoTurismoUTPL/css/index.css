@@ -148,6 +148,38 @@ section.graficasHome2 div img{
   padding: 0em 3em;
 }
 
+section.infoHoteles, section.infoLugaresTuristicos, section.infoVisualizaciones{
+  width: 100%;
+  padding: 2em;
+  display: block;
+}
+div.tituloInfo h2{
+  padding: 1em;
+  background-color: #2979b1;
+  border-bottom: 5px solid #000000;
+  color: #fff;
+  font-size: 3em;
+}
+section.infoHoteles div.informacion_hoteles{
+  display: flex;
+  justify-content: center;
+}
+section.infoHoteles div.informacion_hoteles div{
+  padding: 1em 2em;
+}
+section.infoVisualizaciones div.imagesRepresentativas{
+  text-align: center;
+  padding: 2em;
+}
+section.infoVisualizaciones div.imagesRepresentativas a{
+  padding: 3em;
+}
+section.infoVisualizaciones div.imagesRepresentativas a img{
+  width: 15%;
+  padding: 2em;
+}
+
+
 footer {
 	background-color:#1A1A1A;
 	height: 50%;
