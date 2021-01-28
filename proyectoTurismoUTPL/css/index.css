@@ -160,11 +160,11 @@ div.tituloInfo h2{
   color: #fff;
   font-size: 3em;
 }
-section.infoHoteles div.informacion_hoteles{
+section.infoHoteles div.informacion_hoteles, section.infoLugaresTuristicos div.infoLugaresT{
   display: flex;
   justify-content: center;
 }
-section.infoHoteles div.informacion_hoteles div{
+section.infoHoteles div.informacion_hoteles div, section.infoLugaresTuristicos div.infoLugaresT div{
   padding: 1em 2em;
 }
 section.infoVisualizaciones div.imagesRepresentativas{
