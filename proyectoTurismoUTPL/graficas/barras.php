@@ -73,7 +73,7 @@ Highcharts.chart('container', {
         type: 'bar'
     },
     title: {
-        text: 'NUMERO DE HABITACIONES POR HOTELES'
+        text: 'OCUPACION'
     },
     subtitle: {
         text: ''
@@ -128,6 +128,5 @@ Highcharts.chart('container', {
     }]
 });
         </script>
-        <center><a href="../administrador.php?q=7" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Volver al Dashboard</a></center>
 	</body>
 </html>
