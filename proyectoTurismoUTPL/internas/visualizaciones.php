@@ -10,7 +10,9 @@ include_once '../database.php';
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Visualizaciones</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/estilos-visualizaciones.css">
     <link rel="stylesheet" href="../css/app.css">
+    
     <!--<script type="text/javascript" src="../js/app.js"></script> -->
     <!-- Hichcharts css -->
     <style type="text/css">
