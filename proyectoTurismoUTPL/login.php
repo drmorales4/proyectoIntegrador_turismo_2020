@@ -116,31 +116,7 @@
 			</div>
 		</section>
 
-		<footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <h6 class="text-muted lead">UTPL todos los derechos reservados @Copyright</h6>
-                    <h6 class="text-muted">
-                        1800 88 75 88<br>
-                        WhatsApp: 0999565400<br>
-                        PBX: 07 370 1444<br>
-                    </h6>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    <div class="pull-right">
-                        <h6 class="text-muted lead">ENCUENTRANOS EN LAS REDES</h6>
-                        <div class="redes-footer">
-                            <a href="https://www.facebook.com/"><img src="images/facebook.png" width="30px"></a>
-                            <a href="https://twitter.com/"><img src="images/twitter.png" width="30px"></a>
-                            <a href="https://www.youtube.com/"><img src="images/youtube.png" width="30px"></a>
-                        </div>
-                    </div>
-                    <div class="row"> <p class="text-muted small text-right">Ubicacion: San Cayetano Alto - Loja<br> Todos los derechos reservados.</p></div>
-                </div>
-            </div>  
-        </div>
-      </footer>
+		
 		<script src="js/jquery.js"></script>
 	</body>
 
