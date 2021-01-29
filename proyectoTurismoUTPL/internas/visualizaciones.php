@@ -295,14 +295,8 @@ include_once '../database.php';
             $resultPastel1 = mysqli_query($con,$consPastel1);
             $rowPastel1 = mysqli_fetch_array($resultPastel1);
             $pastel1Suma = $rowPastel1['nacionales'] + $rowPastel1['extranjeros'];
-            if ($rowPastel1['nacionales'] >= $rowPastel1['extranjeros']) {
-                $pastel1Suma = 0;
-                $pastel1Nac = 0;
-                $pastel1Ext = 0;
-            }else{
-                $pastel1Nac = bcdiv(($rowPastel1['nacionales']/$pastel1Suma)*100, '1', 2);
-                $pastel1Ext = bcdiv(($rowPastel1['extranjeros']/$pastel1Suma)*100, '1', 2); 
-            }
+            $pastel1Nac = bcdiv(($rowPastel1['nacionales']/$pastel1Suma)*100, '1', 2);
+            $pastel1Ext = bcdiv(($rowPastel1['extranjeros']/$pastel1Suma)*100, '1', 2); 
             
         echo "
         <script type='text/javascript'>
@@ -374,14 +368,8 @@ include_once '../database.php';
             $resultPastel2 = mysqli_query($con,$consPastel2);
             $rowPastel2 = mysqli_fetch_array($resultPastel2);
             $pastel2Suma = $rowPastel2['nacionales'] + $rowPastel2['extranjeros'];
-            if ($rowPastel2['nacionales'] >= $rowPastel2['extranjeros']) {
-                $pastel2Suma = 0;
-                $pastel2Nac = 0;
-                $pastel2Ext = 0;
-            }else{
-                $pastel2Nac = bcdiv(($rowPastel2['nacionales']/$pastel2Suma)*100, '1', 2);
-                $pastel2Ext = bcdiv(($rowPastel2['extranjeros']/$pastel2Suma)*100, '1', 2); 
-            } 
+            $pastel2Nac = bcdiv(($rowPastel2['nacionales']/$pastel2Suma)*100, '1', 2);
+            $pastel2Ext = bcdiv(($rowPastel2['extranjeros']/$pastel2Suma)*100, '1', 2);
         echo "
         <script type='text/javascript'>
             Highcharts.chart('pastel2', {
@@ -452,14 +440,8 @@ include_once '../database.php';
             $resultPastel3 = mysqli_query($con,$consPastel3);
             $rowPastel3 = mysqli_fetch_array($resultPastel3);
             $pastel3Suma = $rowPastel3['nacionales'] + $rowPastel3['extranjeros'];
-            if ($rowPastel3['nacionales'] >= $rowPastel3['extranjeros']) {
-                $pastel3Suma = 0;
-                $pastel3Nac = 0;
-                $pastel3Ext = 0;
-            }else{
-                $pastel3Nac = bcdiv(($rowPastel3['nacionales']/$pastel3Suma)*100, '1', 2);
-                $pastel3Ext = bcdiv(($rowPastel3['extranjeros']/$pastel3Suma)*100, '1', 2); 
-            } 
+            $pastel3Nac = bcdiv(($rowPastel3['nacionales']/$pastel3Suma)*100, '1', 2);
+            $pastel3Ext = bcdiv(($rowPastel3['extranjeros']/$pastel3Suma)*100, '1', 2);  
         echo "
         <script type='text/javascript'>
             Highcharts.chart('pastel3', {
