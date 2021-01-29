@@ -159,9 +159,9 @@
                     <div class="pull-right">
                         <h6 class="text-muted lead">ENCUENTRANOS EN LAS REDES</h6>
                         <div class="redes-footer">
-                            <a href="https://www.facebook.com/"><img src="images/facebook.png" width="30px"></a>
-                            <a href="https://twitter.com/"><img src="images/twitter.png" width="30px"></a>
-                            <a href="https://www.youtube.com/"><img src="images/youtube.png" width="30px"></a>
+                            <a href="https://www.facebook.com/"><img src="../images/facebook.png" width="30px"></a>
+                            <a href="https://twitter.com/"><img src="../images/twitter.png" width="30px"></a>
+                            <a href="https://www.youtube.com/"><img src="../images/youtube.png" width="30px"></a>
                         </div>
                     </div>
                     <div class="row"> <p class="text-muted small text-right">Ubicacion: San Cayetano Alto - Loja<br> Todos los derechos reservados.</p></div>
