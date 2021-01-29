@@ -227,47 +227,10 @@ include_once '../database.php';
         <h2>REVPAR</h2>
         <div class="porHabitacion">
             <div>
-                <figure class="highcharts-figure">
-                    <div id="pastel1"></div>
+                <figure class="highcharts-figure-big">
+                    <div id="revpar"></div>
                     <p class="highcharts-description">
-                        REVPAR de hoteles con categoria <?php echo $cambioEstr1; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div id="pastel2"></div>
-                    <p class="highcharts-description">
-                        REVPAR de hoteles con categoria <?php echo $cambioEstr2; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div id="pastel3"></div>
-                    <p class="highcharts-description">
-                        REVPAR de hoteles con categoria <?php echo $cambioEstr3; ?>
-                    </p>
-                </figure>
-            </div>
-        </div>
-    </section>
-    <section class="graficasHome">
-        <h2>ESTADÍA PROMEDIO</h2>
-        <div class="porHabitacion">
-            <div>
-                <figure class="highcharts-figure">
-                    <div id="pastel1"></div>
-                    <p class="highcharts-description">
-                        Estadía promedio de hoteles con categoria <?php echo $cambioEstr1; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div id="pastel2"></div>
-                    <p class="highcharts-description">
-                        Estadía promedio de hoteles con categoria <?php echo $cambioEstr2; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div id="pastel3"></div>
-                    <p class="highcharts-description">
-                        Estadía promedio de hoteles con categoria <?php echo $cambioEstr3; ?>
+                        Vista general de todas las categorias
                     </p>
                 </figure>
             </div>
@@ -1068,8 +1031,215 @@ include_once '../database.php';
                     $convProOcu3 =bcdiv($proOcupTemp3[0], '1', 2); 
                     //echo $convProOcu3;
                 }
+
+                echo "<script type='text/javascript'>
+            Highcharts.chart('ocupacionbar', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Porcentaje promedio de ocupacion'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: ['CATEGORÍAS'],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: '%'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: '$cambioEstr1',
+                    data: [$convProOcu1]
+                }, {
+                    name: '$cambioEstr2',
+                    data: [$convProOcu2]
+                }, {
+                    name: '$cambioEstr3',
+                    data: [$convProOcu3]
+                }]
+            });
+                    </script>";
                 ?>
-                
+               <?php
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlrevpar = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr1'";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlrevpar = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr1' and year(fecha) = $splitFecha[0]";
+                        }else{
+                            $sqlrevpar = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr1' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]";
+                        }
+                    }else{
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlrevpar = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr1'  AND clasificacion = '$cambioClasifi' ";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlrevpar = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr1' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' ";
+                        }else{
+                            $sqlrevpar = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr1' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' ";
+                        }
+                    }
+                     $resultRevPar = mysqli_query($con,$sqlrevpar);
+                    $revparTemp1 = mysqli_fetch_array($resultRevPar);
+                    if ($revparTemp1[0] == 0) {
+                        $convRevpar1 = 0;
+                    }else{
+                    $convRevpar1 =bcdiv($revparTemp1[0], '1', 2); 
+                    //echo $convRevpar;
+                }
+                if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlrevpar2 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr2'";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlrevpar2 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr2' and year(fecha) = $splitFecha[0]";
+                        }else{
+                            $sqlrevpar2 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr2' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]";
+                        }
+                    }else{
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlrevpar2 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr2'  AND clasificacion = '$cambioClasifi' ";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlrevpar2 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr2' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' ";
+                        }else{
+                            $sqlrevpar2 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr2' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' ";
+                        }
+                    }
+                     $resultRevPar2 = mysqli_query($con,$sqlrevpar2);
+                    $revparTemp2 = mysqli_fetch_array($resultRevPar2);
+                    if ($revparTemp2[0] == 0) {
+                        $convRevpar2 = 0;
+                    }else{
+                    $convRevpar2 =bcdiv($revparTemp2[0], '1', 2); 
+                    //echo $convRevpar;
+                }
+                if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlrevpar3 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr3'";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlrevpar3 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr3' and year(fecha) = $splitFecha[0]";
+                        }else{
+                            $sqlrevpar3 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr3' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]";
+                        }
+                    }else{
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlrevpar3 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr3'  AND clasificacion = '$cambioClasifi' ";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlrevpar3 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr3' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' ";
+                        }else{
+                            $sqlrevpar3 = "SELECT avg(revpar) AS revpar  FROM registros WHERE categoria = '$cambioEstr3' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' ";
+                        }
+                    }
+                     $resultRevPar3 = mysqli_query($con,$sqlrevpar3);
+                    $revparTemp3 = mysqli_fetch_array($resultRevPar3);
+                    if ($revparTemp3[0] == 0) {
+                        $convRevpar3 = 0;
+                    }else{
+                    $convRevpar3 =bcdiv($revparTemp3[0], '1', 2); 
+                    //echo $convRevpar;
+                }
+
+
+                echo "<script type='text/javascript'>
+            Highcharts.chart('revpar', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Porcentaje promedio de Revpar'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: ['CATEGORÍAS'],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: '%'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: '$cambioEstr1',
+                    data: [$convRevpar1]
+                }, {
+                    name: '$cambioEstr2',
+                    data: [$convRevpar2]
+                }, {
+                    name: '$cambioEstr3',
+                    data: [$convRevpar3]
+                }]
+            });
+                    </script>";
+                ?>
         
                     
                   
