@@ -13,53 +13,7 @@ include_once '../database.php';
     <link rel="stylesheet" href="../css/estilos-visualizaciones.css">
     <link rel="stylesheet" href="../css/app.css">
     
-    <!--<script type="text/javascript" src="../js/app.js"></script> -->
     <!-- Hichcharts css -->
-    <style type="text/css">
-            .highcharts-figure, .highcharts-data-table table {
-                width:100%; 
-                max-width: 800px;
-                margin: 1em ;
-            }
-            .highcharts-figure-big, .highcharts-data-table table {
-                width:100%; 
-                max-width: 1500px;
-                margin: 1em;
-            }
-
-            #container {
-                height: 450px;
-            }
-
-            .highcharts-data-table table {
-                font-family: Verdana, sans-serif;
-                border-collapse: collapse;
-                border: 1px solid #EBEBEB;
-                margin: 10px auto;
-                text-align: center;
-                width: 100%;
-                max-width: 500px;
-            }
-            .highcharts-data-table caption {
-                padding: 1em 0;
-                font-size: 1.2em;
-                color: #555;
-            }
-            .highcharts-data-table th {
-                font-weight: 600;
-                padding: 0.5em;
-            }
-            .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-                padding: 0.5em;
-            }
-            .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-                background: #f8f8f8;
-            }
-            .highcharts-data-table tr:hover {
-                background: #f1f7ff;
-            }
-
-        </style>
         <script src="../highcharts/code/highcharts.js"></script>
         <script src="../highcharts/code/modules/exporting.js"></script>
         <script src="../highcharts/code/modules/export-data.js"></script>
@@ -91,7 +45,7 @@ include_once '../database.php';
     <section class="graficasHome">
         <h2>VISUALIZACIONES POR CATEGORÍA</h2>
         <center>
-            <H3>Seleccione los siguientes ajustes</H3>
+            <H3>Ajustes</H3>
         <?php
         $sqlForm3 = "SELECT DISTINCT(clasificacion) as clasificacion FROM registros";
         $resultForm3 = mysqli_query($con, $sqlForm3);
@@ -223,199 +177,23 @@ include_once '../database.php';
         <h2>TARIFA PROMEDIO</h2>
         <div class="porHabitacion">
             <h3>Por Habitación</h3>
-            <?php
-            echo $cambioClasifi;?>
             <div>
-                <figure class="highcharts-figure">
-                    <div>
-                    <?php
-                    if ($cambioClasifi == "Todos") {
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
-                        }else{
-                           $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
-                        }
-                    }else{
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'AND clasificacion = '$cambioClasifi'";
-                        }else{
-                           $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'"; 
-                        }
-                    }
-
-                        $resultTarPro1 = mysqli_query($con,$consTarPro1);
-                        $rowTarPro1 = mysqli_fetch_array($resultTarPro1);
-                        $convTarPro1 =bcdiv($rowTarPro1[0], '1', 2); 
-                        echo "$$convTarPro1";
-                        ?>
-                    </div>
+                <figure class="highcharts-figure-big">
+                    <div id="porHabitacion"></div>
                     <p class="highcharts-description">
-                       Por Habitación de hoteles con categoria <?php echo $cambioEstr1; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div>
-                    <?php
-                    if ($cambioClasifi == "Todos") {
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
-                        }else{
-                           $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
-                        }
-                    }
-                    else{
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
-                        }else{
-                           $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'"; 
-                        }
-
-                    }
-                    
-                        $resultTarPro2 = mysqli_query($con,$consTarPro2);
-                        $rowTarPro2 = mysqli_fetch_array($resultTarPro2);
-                        $convTarPro2 =bcdiv($rowTarPro2[0], '1', 2); 
-                        echo "$$convTarPro2";
-                        ?>
-                    </div>
-                    <p class="highcharts-description">
-                        Por Habitación de hoteles con categoria <?php echo $cambioEstr2; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div>
-                    <?php
-                    if ($cambioClasifi == "Todos") {
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
-                        }else{
-                           $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
-                        }
-                    }else{
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
-                        }else{
-                           $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'"; 
-                        }
-                    }
-                    
-                        $resultTarPro3 = mysqli_query($con,$consTarPro3);
-                        $rowTarPro3 = mysqli_fetch_array($resultTarPro3);
-                        $convTarPro3 =bcdiv($rowTarPro3[0], '1', 2); 
-                        echo "$$convTarPro3";
-                        ?>
-                    </div>
-                    <p class="highcharts-description">
-                        Por Habitación de hoteles con categoria <?php echo $cambioEstr3; ?>
+                        descr
                     </p>
                 </figure>
             </div>
         </div>
         <div class="porHabitacion">
             <h3>Por Persona</h3>
+                
             <div>
-                <figure class="highcharts-figure">
-                    <div>
-                    <?php
-                    if ($cambioClasifi == "Todos") {
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
-                        }else{
-                           $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
-                        }
-                    }else{
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
-                        }else{
-                           $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'"; 
-                        }
-                    }
-                    
-                        $resultTarPro4 = mysqli_query($con,$consTarPro4);
-                        $rowTarPro4 = mysqli_fetch_array($resultTarPro4);
-                        $convTarPro4 =bcdiv($rowTarPro4[0], '1', 2); 
-                        echo "$$convTarPro4";
-                        ?>
-                    </div>
+                <figure class="highcharts-figure-big">
+                    <div id="porPersona"></div>
                     <p class="highcharts-description">
-                        Por Persona de hoteles con categoria <?php echo $cambioEstr1; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div>
-                    <?php
-                    if ($cambioClasifi == "Todos") {
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
-                        }else{
-                           $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
-                        }
-                    }else{
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
-                        }else{
-                           $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'"; 
-                        }
-                    }
-                    
-                        $resultTarPro5 = mysqli_query($con,$consTarPro5);
-                        $rowTarPro5 = mysqli_fetch_array($resultTarPro5);
-                        $convTarPro5 =bcdiv($rowTarPro5[0], '1', 2); 
-                        echo "$$convTarPro5";
-                        ?>
-                    </div>
-                    <p class="highcharts-description">
-                        Por Persona de hoteles con categoria <?php echo $cambioEstr2; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div>
-                    <?php
-                    if ($cambioClasifi == "Todos") {
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
-                        }else{
-                           $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
-                        }
-                    }else{
-                        if ($splitFecha[0] == "Todos") {
-                            $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
-                        }elseif ($splitFecha[1] == "Todos") {
-                            $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
-                        }else{
-                           $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'"; 
-                        }
-                    }
-                        $resultTarPro6 = mysqli_query($con,$consTarPro6);
-                        $rowTarPro6 = mysqli_fetch_array($resultTarPro6);
-                        $convTarPro6 =bcdiv($rowTarPro6[0], '1', 2); 
-                        echo "$$convTarPro6";
-                        ?>
-                    </div>
-                    <p class="highcharts-description">
-                        Por Persona de hoteles con categoria <?php echo $cambioEstr3; ?>
+                        descr
                     </p>
                 </figure>
             </div>
@@ -945,84 +723,165 @@ include_once '../database.php';
 
                     });
                     </script>";
-        ?>
+        ?>       
+                <?php
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+                        }else{
+                           $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+                        }
+                    }else{
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro1 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'"; 
+                        }
+                    }
 
-    <script type="text/javascript">
-            Highcharts.chart('grafic3x', {
-                chart: {
-                    type: 'area'
-                },
-                accessibility: {
-                    description: 'Image description: .'
-                },
-                title: {
-                    text: 'NUMERO DE PLAZAS POR HOTELES'
-                },
-                subtitle: {
-                    text: ''
-                },
-                xAxis: {
-                    allowDecimals: false,
-                    labels: {
-                        formatter: function () {
-                            return this.value; // clean, unformatted number for year
-                        }
-                    },
-                    accessibility: {
-                        rangeDescription: 'Range: 1940 to 2017.'
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: 'Nuclear weapon states'
-                    },
-                    labels: {
-                        formatter: function () {
-                            return this.value / 1000 + 'k';
+                        $resultTarPro1 = mysqli_query($con,$consTarPro1);
+                        $rowTarPro1 = mysqli_fetch_array($resultTarPro1);
+                        $convTarPro1 =bcdiv($rowTarPro1[0], '1', 2); 
+                        echo "$$convTarPro1";
+                        ?>
+                    <?php
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
+                        }else{
+                           $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
                         }
                     }
-                },
-                tooltip: {
-                    pointFormat: '{series.name} had stockpiled <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
-                },
-                plotOptions: {
-                    area: {
-                        pointStart: 1,
-                        marker: {
-                            enabled: false,
-                            symbol: 'circle',
-                            radius: 2,
-                            states: {
-                                hover: {
-                                    enabled: true
-                                }
-                            }
+                    else{
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro2 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'"; 
+                        }
+
+                    }
+                    
+                        $resultTarPro2 = mysqli_query($con,$consTarPro2);
+                        $rowTarPro2 = mysqli_fetch_array($resultTarPro2);
+                        $convTarPro2 =bcdiv($rowTarPro2[0], '1', 2); 
+                        echo "$$convTarPro2";
+                        ?>
+                    <?php
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
+                        }else{
+                           $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+                        }
+                    }else{
+                        if ($splitFecha[0] == "Todos") {
+                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+                        }elseif ($splitFecha[1] == "Todos") {
+                            $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+                        }else{
+                           $consTarPro3 = "SELECT sum(ventas_netas)/sum(habitaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'"; 
                         }
                     }
-                },
-                series: [{
-                    name: 'SONESTA HOTEL LOJA',
-                    data: [117, 111,3,4,5,6,7]
-                }, {
-                    name: 'GRAND VICTORIA BOUTIQUE',
-                    data: [58, 155,114,512,123,521]
-                }]
-            });
-        </script>
-        
-        <script type="text/javascript">
-            Highcharts.chart('grafic3', {
+                    
+                        $resultTarPro3 = mysqli_query($con,$consTarPro3);
+                        $rowTarPro3 = mysqli_fetch_array($resultTarPro3);
+                        $convTarPro3 =bcdiv($rowTarPro3[0], '1', 2); 
+                        echo "$$convTarPro3";
+                        ?>
+                <?php
+                if ($cambioClasifi == "Todos") {
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1'";
+                    }else{
+                       $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1'"; 
+                    }
+                }else{
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'";
+                    }else{
+                       $consTarPro4 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr1' AND clasificacion = '$cambioClasifi'"; 
+                    }
+                }
+                
+                    $resultTarPro4 = mysqli_query($con,$consTarPro4);
+                    $rowTarPro4 = mysqli_fetch_array($resultTarPro4);
+                    $convTarPro4 =bcdiv($rowTarPro4[0], '1', 2); 
+                    echo "$$convTarPro4";
+                ?>
+                <?php
+                if ($cambioClasifi == "Todos") {
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2'";
+                    }else{
+                       $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2'"; 
+                    }
+                }else{
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'";
+                    }else{
+                       $consTarPro5 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr2' AND clasificacion = '$cambioClasifi'"; 
+                    }
+                }
+                
+                    $resultTarPro5 = mysqli_query($con,$consTarPro5);
+                    $rowTarPro5 = mysqli_fetch_array($resultTarPro5);
+                    $convTarPro5 =bcdiv($rowTarPro5[0], '1', 2); 
+                    echo "$$convTarPro5";
+                ?>
+                <?php
+                if ($cambioClasifi == "Todos") {
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3'";
+                    }else{
+                       $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3'"; 
+                    }
+                }else{
+                    if ($splitFecha[0] == "Todos") {
+                        $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+                    }elseif ($splitFecha[1] == "Todos") {
+                        $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0]  AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'";
+                    }else{
+                       $consTarPro6 = "SELECT sum(ventas_netas)/sum(pernoctaciones) as porHabitacion FROM registros WHERE year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1] AND categoria = '$cambioEstr3' AND clasificacion = '$cambioClasifi'"; 
+                    }
+                }
+                    $resultTarPro6 = mysqli_query($con,$consTarPro6);
+                    $rowTarPro6 = mysqli_fetch_array($resultTarPro6);
+                    $convTarPro6 =bcdiv($rowTarPro6[0], '1', 2); 
+                    echo "$$convTarPro6";
+
+                    echo "<script type='text/javascript'>
+            Highcharts.chart('porHabitacion', {
                 chart: {
                     type: 'bar'
                 },
                 title: {
-                    text: 'NUMERO DE HABITACIONES POR HOTELES'
+                    text: 'Promedio de dinero por habitaciones'
                 },
                 subtitle: {
                     text: ''
                 },
                 xAxis: {
-                    categories: ['HOTELES'],
+                    categories: ['CATEGORÍAS'],
                     title: {
                         text: null
                     }
@@ -1030,15 +889,16 @@ include_once '../database.php';
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Habitaciones (Unidades)',
+                        text: 'dinero (dolar)',
                         align: 'high'
                     },
                     labels: {
                         overflow: 'justify'
                     }
+                    
                 },
                 tooltip: {
-                    valueSuffix: ' Habitaciones'
+                    valueSuffix: '$'
                 },
                 plotOptions: {
                     bar: {
@@ -1063,83 +923,88 @@ include_once '../database.php';
                     enabled: false
                 },
                 series: [{
-                    name: 'SONESTA HOTEL LOJA',
-                    data: [73]
+                    name: '$cambioEstr1',
+                    data: [$convTarPro1]
                 }, {
-                    name: 'GRAND VICTORIA BOUTIQUE',
-                    data: [38]
+                    name: '$cambioEstr2',
+                    data: [$convTarPro2]
+                }, {
+                    name: '$cambioEstr3',
+                    data: [$convTarPro3]
                 }]
             });
                     </script>
-                    
-        <script type="text/javascript">
-            Highcharts.chart('grafic4', {
+
+
+
+                    <script type='text/javascript'>
+            Highcharts.chart('porPersona', {
                 chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    type: 'pie'
+                    type: 'bar'
                 },
                 title: {
-                    text: '...'
+                    text: 'Promedio de dinero por persona'
                 },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                subtitle: {
+                    text: ''
                 },
-                accessibility: {
-                    point: {
-                        valueSuffix: '%'
+                xAxis: {
+                    categories: ['CATEGORÍAS'],
+                    title: {
+                        text: null
                     }
                 },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'dinero (dolar)',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: '$'
+                },
                 plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
+                    bar: {
                         dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            enabled: true
                         }
                     }
                 },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
                 series: [{
-                    name: 'Brands',
-                    colorByPoint: true,
-                    data: [{
-                        name: 'Chrome',
-                        y: 61.41,
-                        sliced: true,
-                        selected: true
-                    }, {
-                        name: 'Internet Explorer',
-                        y: 11.84
-                    }, {
-                        name: 'Firefox',
-                        y: 10.85
-                    }, {
-                        name: 'Edge',
-                        y: 4.67
-                    }, {
-                        name: 'Safari',
-                        y: 4.18
-                    }, {
-                        name: 'Sogou Explorer',
-                        y: 1.64
-                    }, {
-                        name: 'Opera',
-                        y: 1.6
-                    }, {
-                        name: 'QQ',
-                        y: 1.2
-                    }, {
-                        name: 'Other',
-                        y: 2.61
-                    }]
+                    name: '$cambioEstr1',
+                    data: [$convTarPro4]
+                }, {
+                    name: '$cambioEstr2',
+                    data: [$convTarPro5]
+                }, {
+                    name: '$cambioEstr3',
+                    data: [$convTarPro6]
                 }]
             });
-        </script>
-         
+                    </script>";
+                ?>
         
                     
+                  
     <footer>
         <div class="container">
             <div class="row">
