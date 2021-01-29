@@ -204,34 +204,10 @@ include_once '../database.php';
         <h2>OCUPACIÓN</h2>
         <div class="porHabitacion">
             <div>
-                <figure class="highcharts-figure">
-                    <div>
-                        <?php
-                        echo "12";
-                        ?>
-                    </div>
+                <figure class="highcharts-figure-big">
+                    <div id="ocupacionbar"></div>
                     <p class="highcharts-description">
-                        Ocupacion de hoteles con categoria <?php echo $cambioEstr1; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div>
-                        <?php
-                        echo "12";
-                        ?>
-                    </div>
-                    <p class="highcharts-description">
-                        Ocupacion de hoteles con categoria <?php echo $cambioEstr2; ?>
-                    </p>
-                </figure>
-                    <figure class="highcharts-figure">
-                    <div>
-                        <?php
-                        echo "12";
-                        ?>
-                    </div>
-                    <p class="highcharts-description">
-                        Ocupacion de hoteles con categoria <?php echo $cambioEstr3; ?>
+                        Vista general de todas las categorias
                     </p>
                 </figure>
             </div>
@@ -319,8 +295,15 @@ include_once '../database.php';
             $resultPastel1 = mysqli_query($con,$consPastel1);
             $rowPastel1 = mysqli_fetch_array($resultPastel1);
             $pastel1Suma = $rowPastel1['nacionales'] + $rowPastel1['extranjeros'];
-            $pastel1Nac = bcdiv(($rowPastel1['nacionales']/$pastel1Suma)*100, '1', 2);
-            $pastel1Ext = bcdiv(($rowPastel1['extranjeros']/$pastel1Suma)*100, '1', 2); 
+            if ($rowPastel1['nacionales'] >= $rowPastel1['extranjeros']) {
+                $pastel1Suma = 0;
+                $pastel1Nac = 0;
+                $pastel1Ext = 0;
+            }else{
+                $pastel1Nac = bcdiv(($rowPastel1['nacionales']/$pastel1Suma)*100, '1', 2);
+                $pastel1Ext = bcdiv(($rowPastel1['extranjeros']/$pastel1Suma)*100, '1', 2); 
+            }
+            
         echo "
         <script type='text/javascript'>
             Highcharts.chart('pastel1', {
@@ -391,8 +374,14 @@ include_once '../database.php';
             $resultPastel2 = mysqli_query($con,$consPastel2);
             $rowPastel2 = mysqli_fetch_array($resultPastel2);
             $pastel2Suma = $rowPastel2['nacionales'] + $rowPastel2['extranjeros'];
-            $pastel2Nac = bcdiv(($rowPastel2['nacionales']/$pastel2Suma)*100, '1', 2);
-            $pastel2Ext = bcdiv(($rowPastel2['extranjeros']/$pastel2Suma)*100, '1', 2); 
+            if ($rowPastel2['nacionales'] >= $rowPastel2['extranjeros']) {
+                $pastel2Suma = 0;
+                $pastel2Nac = 0;
+                $pastel2Ext = 0;
+            }else{
+                $pastel2Nac = bcdiv(($rowPastel2['nacionales']/$pastel2Suma)*100, '1', 2);
+                $pastel2Ext = bcdiv(($rowPastel2['extranjeros']/$pastel2Suma)*100, '1', 2); 
+            } 
         echo "
         <script type='text/javascript'>
             Highcharts.chart('pastel2', {
@@ -463,8 +452,14 @@ include_once '../database.php';
             $resultPastel3 = mysqli_query($con,$consPastel3);
             $rowPastel3 = mysqli_fetch_array($resultPastel3);
             $pastel3Suma = $rowPastel3['nacionales'] + $rowPastel3['extranjeros'];
-            $pastel3Nac = bcdiv(($rowPastel3['nacionales']/$pastel3Suma)*100, '1', 2);
-            $pastel3Ext = bcdiv(($rowPastel3['extranjeros']/$pastel3Suma)*100, '1', 2); 
+            if ($rowPastel3['nacionales'] >= $rowPastel3['extranjeros']) {
+                $pastel3Suma = 0;
+                $pastel3Nac = 0;
+                $pastel3Ext = 0;
+            }else{
+                $pastel3Nac = bcdiv(($rowPastel3['nacionales']/$pastel3Suma)*100, '1', 2);
+                $pastel3Ext = bcdiv(($rowPastel3['extranjeros']/$pastel3Suma)*100, '1', 2); 
+            } 
         echo "
         <script type='text/javascript'>
             Highcharts.chart('pastel3', {
@@ -532,7 +527,7 @@ include_once '../database.php';
         }else{
             if ($splitFecha[0] == "Todos") {
                 $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
-            }elseif ($splitFecha[1]== "Todos") {
+            }elseif ($splitFecha[1] == "Todos") {
                 $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
             }else{
                 $sqlOcup5 = "SELECT (sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion, day(fecha) FROM registros WHERE categoria = '5 Estrellas' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' GROUP by day(fecha) ORDER By 2";
@@ -540,6 +535,9 @@ include_once '../database.php';
         }
         $resultOcup5 = mysqli_query($con,$sqlOcup5);
         $ocuTemp5 = mysqli_fetch_array($resultOcup5);
+        if ($ocuTemp5 == "") {
+            $ocuTemp5[0] = 0;
+        }
         $ocup5estr = sprintf("%s",$ocuTemp5[0]);
         while($rowOcup5 = mysqli_fetch_array($resultOcup5)) 
         {
@@ -564,6 +562,9 @@ include_once '../database.php';
         }
         $resultOcup4 = mysqli_query($con,$sqlOcup4);
         $ocuTemp4 = mysqli_fetch_array($resultOcup4);
+        if ($ocuTemp4 == "") {
+            $ocuTemp4[0] = 0;
+        }
         $ocup4estr = sprintf("%s",$ocuTemp4[0]);
         while($rowOcup4 = mysqli_fetch_array($resultOcup4)) 
         {
@@ -589,6 +590,9 @@ include_once '../database.php';
         }
         $resultOcup3 = mysqli_query($con,$sqlOcup3);
         $ocuTemp3 = mysqli_fetch_array($resultOcup3);
+        if ($ocuTemp3 == "") {
+            $ocuTemp3[0] = 0;
+        }
         $ocup3estr = sprintf("%s",$ocuTemp3[0]);
         while($rowOcup3 = mysqli_fetch_array($resultOcup3)) 
         {
@@ -613,6 +617,9 @@ include_once '../database.php';
         }
         $resultOcup2 = mysqli_query($con,$sqlOcup2);
         $ocuTemp2 = mysqli_fetch_array($resultOcup2);
+        if ($ocuTemp2 == "") {
+            $ocuTemp2[0] = 0;
+        }
         $ocup2estr = sprintf("%s",$ocuTemp2[0]);
         while($rowOcup2 = mysqli_fetch_array($resultOcup2)) 
         {
@@ -638,6 +645,9 @@ include_once '../database.php';
         }
         $resultOcup1 = mysqli_query($con,$sqlOcup1);
         $ocuTemp1 = mysqli_fetch_array($resultOcup1);
+        if ($ocuTemp1 == "") {
+            $ocuTemp1[0] = 0;
+        }
         $ocup1estr = sprintf("%s",$ocuTemp1[0]);
         while($rowOcup1 = mysqli_fetch_array($resultOcup1)) 
         {
@@ -746,7 +756,6 @@ include_once '../database.php';
                         $resultTarPro1 = mysqli_query($con,$consTarPro1);
                         $rowTarPro1 = mysqli_fetch_array($resultTarPro1);
                         $convTarPro1 =bcdiv($rowTarPro1[0], '1', 2); 
-                        echo "$$convTarPro1";
                         ?>
                     <?php
                     if ($cambioClasifi == "Todos") {
@@ -772,7 +781,6 @@ include_once '../database.php';
                         $resultTarPro2 = mysqli_query($con,$consTarPro2);
                         $rowTarPro2 = mysqli_fetch_array($resultTarPro2);
                         $convTarPro2 =bcdiv($rowTarPro2[0], '1', 2); 
-                        echo "$$convTarPro2";
                         ?>
                     <?php
                     if ($cambioClasifi == "Todos") {
@@ -796,7 +804,6 @@ include_once '../database.php';
                         $resultTarPro3 = mysqli_query($con,$consTarPro3);
                         $rowTarPro3 = mysqli_fetch_array($resultTarPro3);
                         $convTarPro3 =bcdiv($rowTarPro3[0], '1', 2); 
-                        echo "$$convTarPro3";
                         ?>
                 <?php
                 if ($cambioClasifi == "Todos") {
@@ -820,7 +827,6 @@ include_once '../database.php';
                     $resultTarPro4 = mysqli_query($con,$consTarPro4);
                     $rowTarPro4 = mysqli_fetch_array($resultTarPro4);
                     $convTarPro4 =bcdiv($rowTarPro4[0], '1', 2); 
-                    echo "$$convTarPro4";
                 ?>
                 <?php
                 if ($cambioClasifi == "Todos") {
@@ -844,7 +850,6 @@ include_once '../database.php';
                     $resultTarPro5 = mysqli_query($con,$consTarPro5);
                     $rowTarPro5 = mysqli_fetch_array($resultTarPro5);
                     $convTarPro5 =bcdiv($rowTarPro5[0], '1', 2); 
-                    echo "$$convTarPro5";
                 ?>
                 <?php
                 if ($cambioClasifi == "Todos") {
@@ -867,7 +872,6 @@ include_once '../database.php';
                     $resultTarPro6 = mysqli_query($con,$consTarPro6);
                     $rowTarPro6 = mysqli_fetch_array($resultTarPro6);
                     $convTarPro6 =bcdiv($rowTarPro6[0], '1', 2); 
-                    echo "$$convTarPro6";
 
                     echo "<script type='text/javascript'>
             Highcharts.chart('porHabitacion', {
@@ -895,7 +899,7 @@ include_once '../database.php';
                     labels: {
                         overflow: 'justify'
                     }
-                    
+
                 },
                 tooltip: {
                     valueSuffix: '$'
@@ -1002,6 +1006,88 @@ include_once '../database.php';
             });
                     </script>";
                 ?>
+
+                <?php
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlProOcup1 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr1'";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlProOcup1 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr1' and year(fecha) = $splitFecha[0]";
+                        }else{
+                            $sqlProOcup1 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr1' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]";
+                        }
+                    }else{
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlProOcup1 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr1'  AND clasificacion = '$cambioClasifi' ";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlProOcup1 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr1' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' ";
+                        }else{
+                            $sqlProOcup1 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr1' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' ";
+                        }
+                    }
+                    $resultProOcup1 = mysqli_query($con,$sqlProOcup1);
+                    $proOcupTemp1 = mysqli_fetch_array($resultProOcup1);
+                    if ($proOcupTemp1 == "") {
+                        $proOcupTemp1[0] = 0;
+                    }
+                    $convProOcu1 =bcdiv($proOcupTemp1[0], '1', 2); 
+                    //echo $convProOcu1;
+                ?>
+                <?php
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlProOcup2 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr2'";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlProOcup2 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr2' and year(fecha) = $splitFecha[0]";
+                        }else{
+                            $sqlProOcup2 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr2' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]";
+                        }
+                    }else{
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlProOcup2 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr2'  AND clasificacion = '$cambioClasifi' ";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlProOcup2 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr2' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' ";
+                        }else{
+                            $sqlProOcup2 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr2' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' ";
+                        }
+                    }
+                     $resultProOcup2 = mysqli_query($con,$sqlProOcup2);
+                    $proOcupTemp2 = mysqli_fetch_array($resultProOcup2);
+                    if ($proOcupTemp2[0] == 0) {
+                        $convProOcu2 = 0;
+                    }else{
+                    $convProOcu2 =bcdiv($proOcupTemp2[0], '1', 2); 
+                    //echo $convProOcu2;
+                }
+                ?>
+                <?php
+                    if ($cambioClasifi == "Todos") {
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlProOcup3 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr3'";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlProOcup3 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr3' and year(fecha) = $splitFecha[0]";
+                        }else{
+                            $sqlProOcup3 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr3' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]";
+                        }
+                    }else{
+                        if ($splitFecha[0] == "Todos") {
+                            $sqlProOcup3 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr3'  AND clasificacion = '$cambioClasifi' ";
+                        }elseif ($splitFecha[1]== "Todos") {
+                            $sqlProOcup3 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr3' and year(fecha) = $splitFecha[0]  AND clasificacion = '$cambioClasifi' ";
+                        }else{
+                            $sqlProOcup3 = "SELECT (avg(habitaciones_ocupadas)/(avg(habitaciones_disponibles)))*100 AS ocupacion FROM registros WHERE categoria = '$cambioEstr3' and year(fecha) = $splitFecha[0] and month(fecha) = $splitFecha[1]  AND clasificacion = '$cambioClasifi' ";
+                        }
+                    }
+                     $resultProOcup3 = mysqli_query($con,$sqlProOcup3);
+                    $proOcupTemp3 = mysqli_fetch_array($resultProOcup3);
+                    if ($proOcupTemp3[0] == 0) {
+                        $convProOcu3 = 0;
+                    }else{
+                    $convProOcu3 =bcdiv($proOcupTemp3[0], '1', 2); 
+                    //echo $convProOcu3;
+                }
+                ?>
+                
         
                     
                   
