@@ -75,9 +75,9 @@ include_once '../database.php';
                 </div>
                 <div class="enlaces" id="enlaces">
                     <a href="../index.html" id="enlace-inicio" class="btn-header">Inicio</a>
-                    <a href="hoteles.html" id="enlace-hoteles" class="btn-header">Hoteles</a>
+                    <a href="hoteles.php" id="enlace-hoteles" class="btn-header">Hoteles</a>
                     <a href="visualizaciones.php" id="enlace-visualizaciones" class="btn-header">Visualizaciones</a>
-                    <a href="lugaresTuristicos.html" id="enlace-lugaresTuristicos" class="btn-header">Lugares
+                    <a href="lugaresTuristicos.php" id="enlace-lugaresTuristicos" class="btn-header">Lugares
                         Turisticos</a>
                     <a href="../login.php" id="enlace-login" class="btn-header">Ingreso</a>
                 </div>

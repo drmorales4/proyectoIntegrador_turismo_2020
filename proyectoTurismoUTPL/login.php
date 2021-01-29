@@ -37,7 +37,7 @@
 				$_SESSION['email']=$extraido[3];
 				$_SESSION['password']=$extraido[4];
 				$_SESSION['rol']=$extraido[5];
-				header('location: dashboard.php?q=1');
+				header('location: dashboard.php?q=0');
 			}elseif($extraido['rol']=='Admin'){
 				$_SESSION['logged']=$email;
 				$_SESSION['id']=$extraido[0];
@@ -46,7 +46,7 @@
 				$_SESSION['email']=$extraido[3];
 				$_SESSION['password']=$extraido[4];
 				$_SESSION['rol']=$extraido[5];
-				header('location: administrador.php?q=1');
+				header('location: administrador.php?q=0');
 			}
 		}
 	}

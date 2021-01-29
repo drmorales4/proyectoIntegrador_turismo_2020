@@ -1,29 +1,3 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Procesando el archivo enviado</title>
-<style type="text/css">
-*{ font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif}
-.main{ margin:auto; border:1px solid #D5D5D5; width:50%; text-align:left; padding:30px; background:##898989}
-input[type=submit]{ background:#6ca16e; width:100%;
-    padding:5px 15px; 
-    background:#ccc; 
-    cursor:pointer;
-	font-size:16px;
-   
-}
-table td{ padding:5px;}
-</style>
-</head>
-
-<body bgcolor="#E1E1E1">
-<div class="main">
-<h1>Subir archivo con PHP:</h1>
-<div style="border:1px solid #000000; text-transform:uppercase">  
-<h3 align="center"><div align="center"><a href="administrador.php?q=4">Volver </a></div></h3></div>
-</div>
-
 <?php
     require_once "exelLibreria/vendor/autoload.php";
     extract($_POST);
@@ -39,8 +13,6 @@ table td{ padding:5px;}
     $fechaActual = date("YmdHi-");
     $nombre = $fechaActual.$_FILES['subir_archivo']['name'];
     $subir_archivo = $directorio.$nombre;
-    echo "<div>";
-    
     if (move_uploaded_file($_FILES['subir_archivo']['tmp_name'], $subir_archivo)) {
         echo "El archivo es válido y se cargó correctamente.<br><br>";
         
@@ -169,8 +141,7 @@ table td{ padding:5px;}
     } else {
         echo "La subida ha fallado, Archivo sobrepasa el tamaño máximo ";
         }
-        
-    echo "</div>";
+
     echo "<script>location.href='administrador.php?q=4'</script>";
 ?>
 

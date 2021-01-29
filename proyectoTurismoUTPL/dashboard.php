@@ -81,14 +81,26 @@
                         <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
                         <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
                         <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        </svg> Crear Metricas</a>
+                        </svg> Añadir hotel</a>
                     </li>
 
-                    <li <?php if(@$_GET['q']==4) echo'class="nav-link"'; ?>><a href="dashboard.php?q=4" style="font-family: 'Roboto', sans-serif; font-size: 20px;"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <li <?php if(@$_GET['q']==4) echo'class="nav-link"'; ?>><a href="dashboard.php?q=4" style="font-family: 'Roboto', sans-serif; font-size: 20px;"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+                        <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+                        </svg> Revisión Hotel</a>
+                    </li>
+                    <li <?php if(@$_GET['q']==5) echo'class="nav-link"'; ?>><a href="dashboard.php?q=5" style="font-family: 'Roboto', sans-serif; font-size: 20px;"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
                         <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
                         <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        </svg> Crear Visualizaciones</a>
+                        </svg> Añadir Lugar</a>
+                    </li>
+
+                    <li <?php if(@$_GET['q']==6) echo'class="nav-link"'; ?>><a href="dashboard.php?q=6" style="font-family: 'Roboto', sans-serif; font-size: 20px;"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+                        <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+                        </svg> Revisión Lugar</a>
+                    </li>
                     </li>
 
                     </ul>
@@ -98,7 +110,8 @@
                 <div class="col-md-12">
                 <?php
                 if(@$_GET['q']==0){
-                    echo '<h1 style="color: #FD7E14;">Bienvenido '.$name.' '.$apellidos.'</h1';
+                    echo '<h1 style="color: #FD7E14;">Bienvenido '.$name.' '.$apellidos.'</h1>
+                    <h2>Este es el panel de control, en el lado izquierdo tienes algunas opciones.</h2>';
                 }
                 ?>
                 <?php
@@ -181,107 +194,258 @@
                             
                         }
                     ?>
+                    
                     <?php
                         if(@$_GET['q']==3){
                             echo '
 
                             <div class="row">
                             <div class="col-md-3"></div><div class="col-md-6" style="margin-top:10px;">
-                            <center><h4 style="font-family: Poppins;  margin-bottom: 20px;">CONFIGURACION DE METRICAS</h4></center><br> ';
+                            <center><h4 style="font-family: Poppins;  margin-bottom: 20px;">CREAR HOTEL</h4></center><br>   
+                            <form class="form-horizontal title1" name="form" action="#"  method="POST" enctype="multipart/form-data">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <labe style="font-family: Poppins;">Nombre de establecimiento:</label>
+                                        <input type="text" name="nombre" class="form-control" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <labe style="font-family: Poppins;">Descripción:</label>
+                                        <input type="text" name="descripcion" class="form-control" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <labe style="font-family: Poppins;">Seleccione una imagen:</label>
+                                            <input type="hidden" name="idUser" value= "'.$idUser.'" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="5480800" />
+                                            <input name="subir_archivo" type="file" accept=".png, .jpg, .jpen" required/></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for=""></label>
+                                        <div class="col-md-12" style="margin-top:10px;"> 
+                                            <input  type="submit" name="submit" style="margin-left:37%; font-family:Poppins; width:150px;" class="btn btn-primary" value="Crear" class="btn btn-primary"/>
+                                        </div>
+                                    </div>
+                                    
+                                </fieldset>
+                            </form></div>
+                            <script>
+                                function RadioCheck(isYes){
+                                    document.getElementById("insertclase")
+                                    if(isYes){
+                                        document.getElementById("insertclase").style.display = "block";
+                                    }else{
+                                        document.getElementById("insertclase").style.display = "none";
+                                    }
+                                }
+                            </script>
+                            ';                    
+                        
+                            if(isset($_POST['submit'])){
+                                $nombreEst = $_POST['nombre'];
+                                $nombreEst = stripslashes($nombreEst);
+                                $nombreEst = addslashes($nombreEst);
 
-                            echo '
-                                <form class="form-horizontal title1" name="form" action="#"  method="POST" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                    <label for="exampleInputEmail1">Nombre Metrica</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                    <label for="exampleInputPassword1">Descripcion Metrica</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                    <label for="exampleInputPassword1">Formula</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                    <label for="seleccionarGrafica"></label>
-                                        <select class="form-control" id="seleccionarGrafica" name="seleccionarGrafica" action="#"  method="POST" enctype="multipart/form-data">
-                                            <option>Seleccionar una opcion</option>
-                                        </select>
-                                    </div>
-                                    <button type="" name="generarGrafica" class="btn btn-primary">Crear</button>
-                                </form>
-                            
-                            ';
+                                $descripcionEst = $_POST['descripcion'];
+                                $descripcionEst = stripslashes($descripcionEst);
+                                $descripcionEst = addslashes($descripcionEst);
+
+                                $idUserEst = $_POST['idUser'];
+                                $idUserEst = stripslashes($idUserEst);
+                                $idUserEst = addslashes($idUserEst);
+
+                                $directorio = 'internas/hotelImages/';
+                                $nombreFileEst = $_FILES['subir_archivo']['name'];
+                                $subir_archivo = $directorio.$nombreFileEst;
+                                if (move_uploaded_file($_FILES['subir_archivo']['tmp_name'], $subir_archivo)) {
+                                    echo "El archivo es válido y se cargó correctamente.<br><br>";
+                                    $strEst="insert into hoteles set id='',nombre='$nombreEst',descripcion='$descripcionEst',idUser='$idUser',archivo='$nombreFileEst'";
+                                    if((mysqli_query($con,$strEst))){   
+                                    echo '<center><div class="alert alert-success alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <strong> ¡Hotel registrado correctamente!</strong>
+                                      </div></center>';
+                                        }
+                                }else {
+                                    echo "La subida ha fallado, Archivo sobrepasa el tamaño máximo ";
+                                }
+                            }
                         }
                     ?>
                     <?php
                         if(@$_GET['q']==4){
+                            $miconexionEst = new clase_mysqli7;
+                            $miconexionEst->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
+                            $miconexionEst->consulta("select * from hoteles where idUser = '$idUser'");
+                            $consultaUserEst = new clase_mysqli7;
+                            $consultaUserEst->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
+
+                            echo '<center><h3 style="color: #FD7E14; font-size: 35px;">Lista de hoteles</h3>
+                            <nav class="navbar navbar-light bg-light">
+                                
+                            </nav>
+                                    </center>
+
+                            <div class="panel">
+                                    <table class="table">
+                                    <thead class="thead">
+                                    <tr style="background: #FFFFFF">
+                                        <th><b>NOMBRE DE HOTEL</b></th>
+                                        <th><b>DESCRIPCION</b></th>
+                                        <th><b>SUBIDO POR</b></th>
+                                        <th><b>ELIMINAR</b></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>';
+                            
+                            while($row = $miconexionEst->consulta_lista())  
+                            {
+                                $nameEst = $row[1];
+                                $descripcionEst = $row[2];
+                                $archivoEst = $row[4];
+                                $consultaUserEst->consulta("select concat(nombres, ' ',apellidos) from user where idUser =$row[3]");
+                                $usernamesEst = $consultaUserEst->consulta_lista();
+                                echo '
+                                    <tr style="background: #FFFFFF">
+                                        <th>'.$nameEst.'</th>
+                                        <th>'.$descripcionEst.'</th>
+                                        <th> '.$usernamesEst[0].' </th>
+                                        <th><a title="Delete Archivo" href="funciones.php?action=deletearchivoEst&archivo='.$archivoEst.'"><b><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>Eliminar</b></a>
+                                        </th>
+                                    </tr>';
+                            }
+                            
+                            echo '</tbody>
+                            </table>
+                            </div>
+                            </div>';
+                        }
+                    ?>
+                    <?php
+                        if(@$_GET['q']==5){
                             echo '
 
                             <div class="row">
                             <div class="col-md-3"></div><div class="col-md-6" style="margin-top:10px;">
-                            <center><h4 style="font-family: Poppins;  margin-bottom: 20px;">CREAR GRAFICAS ESTADISTICAS</h4></center><br> ';
-
-                            echo '
-                                <form class="form-horizontal title1" name="form" action="#"  method="POST" enctype="multipart/form-data">
+                            <center><h4 style="font-family: Poppins;  margin-bottom: 20px;">CREAR LUGAR TURÍSTICO</h4></center><br>   
+                            <form class="form-horizontal title1" name="form" action="#"  method="POST" enctype="multipart/form-data">
+                                <fieldset>
                                     <div class="form-group">
-                                    <label for="exampleInputEmail1">Nombre de la Grafica</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                                        <labe style="font-family: Poppins;">Nombre de establecimiento:</label>
+                                        <input type="text" name="nombre" class="form-control" required />
                                     </div>
                                     <div class="form-group">
-                                    <label for="exampleInputPassword1">Descripcion de la Grafica</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="">
+                                        <labe style="font-family: Poppins;">Descripción:</label>
+                                        <input type="text" name="descripcion" class="form-control" required />
                                     </div>
                                     <div class="form-group">
-                                    <label for="seleccionarGrafica">Tipo de Grafica</label>
-                                        <select class="form-control" id="seleccionarGrafica" name="seleccionarGrafica" action="#"  method="POST" enctype="multipart/form-data">
-                                            <option>Seleccione una opcion</option>
-                                            <option value="barras" id="barras" name="barras">Barras</option>
-                                            <option value="area" id="area" name="area">Area</option>
-                                            <option value="columnas" id="columnas" name="columnas">Columnas</option>
-                                            <option value="linea" id="linea" name="linea">Linea</option>
-                                            <option value="pastel" id="pastel" name="pastel">Pastel</option>
-                                        </select>
+                                        <labe style="font-family: Poppins;">Seleccione una imagen:</label>
+                                            <input type="hidden" name="idUser" value= "'.$idUser.'" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="5480800" />
+                                            <input name="subir_archivo" type="file" accept=".png, .jpg, .jpen" required/></p>
                                     </div>
-                                    <button type="" name="generarGrafica" class="btn btn-primary">Crear</button>
-                                </form>
-                            
-                            ';
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label" for=""></label>
+                                        <div class="col-md-12" style="margin-top:10px;"> 
+                                            <input  type="submit" name="submit" style="margin-left:37%; font-family:Poppins; width:150px;" class="btn btn-primary" value="Crear" class="btn btn-primary"/>
+                                        </div>
+                                    </div>
+                                    
+                                </fieldset>
+                            </form></div>
+                            <script>
+                                function RadioCheck(isYes){
+                                    document.getElementById("insertclase")
+                                    if(isYes){
+                                        document.getElementById("insertclase").style.display = "block";
+                                    }else{
+                                        document.getElementById("insertclase").style.display = "none";
+                                    }
+                                }
+                            </script>
+                            ';                    
+                        
+                            if(isset($_POST['submit'])){
+                                $nombreLug = $_POST['nombre'];
+                                $nombreLug = stripslashes($nombreLug);
+                                $nombreLug = addslashes($nombreLug);
 
-                            $seleccionarGrafica = @$_POST['seleccionarGrafica'];
+                                $descripcionLug = $_POST['descripcion'];
+                                $descripcionLug = stripslashes($descripcionLug);
+                                $descripcionLug = addslashes($descripcionLug);
 
-                            if(isset($_POST['generarGrafica'])){
-                                if($seleccionarGrafica=="barras"){
-                                    echo '
-                                        <a href="graficas/barras.php"target="_blank">Ver Grafica</a> 
-                                    ';
+                                $idUserLug = $_POST['idUser'];
+                                $idUserLug = stripslashes($idUserLug);
+                                $idUserLug = addslashes($idUserLug);
+
+                                $directorioLug = 'internas/lugaresImages/';
+                                $nombreFileLug = $_FILES['subir_archivo']['name'];
+                                $subir_archivo = $directorioLug.$nombreFileLug;
+                                if (move_uploaded_file($_FILES['subir_archivo']['tmp_name'], $subir_archivo)) {
+                                    echo "El archivo es válido y se cargó correctamente.<br><br>";
+                                    $strLug="insert into lugares set id='',nombre='$nombreLug',descripcion='$descripcionLug',idUser='$idUserLug',archivo='$nombreFileLug'";
+                                    if((mysqli_query($con,$strLug))){   
+                                    echo '<center><div class="alert alert-success alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <strong> ¡Hotel registrado correctamente!</strong>
+                                      </div></center>';
+                                        }
+                                }else {
+                                    echo "La subida ha fallado, Archivo sobrepasa el tamaño máximo ";
                                 }
-                                if($seleccionarGrafica=="area"){
-                                    echo '
-                                        <a href="graficas/area.php"target="_blank">Ver Grafica</a>
-                                    ';
-                                }
-                                if($seleccionarGrafica=="columnas"){
-                                    echo '
-                                        <a href="graficas/columnas.php"target="_blank">Ver Grafica</a>
-                                    ';
-                                }
-                                if($seleccionarGrafica=="linea"){
-                                    echo '
-                                        <a href="graficas/lineas.php"target="_blank">Ver Grafica</a>
-                                    ';
-                                }
-                                if($seleccionarGrafica=="pastel"){
-                                    echo '
-                                        <a href="graficas/pastel.php"target="_blank">Ver Grafica</a>
-                                    ';
-                                }
-                                
                             }
+                        }
+                    ?>
+                    <?php
+                        if(@$_GET['q']==6){
+                            $miconexionLug = new clase_mysqli7;
+                            $miconexionLug->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
+                            $miconexionLug->consulta("select * from lugares where idUser = '$idUser'");
+                            $consultaUserLug = new clase_mysqli7;
+                            $consultaUserLug->conectar(DBHOST, DBUSER, DBPASS, DBNAME);
 
+                            echo '<center><h3 style="color: #FD7E14; font-size: 35px;">Lista de lugares turísticos</h3>
+                                    <nav class="navbar navbar-light bg-light">
+                                    </nav>
+                                    </center>
 
-
+                                    <div class="panel">
+                                            <table class="table">
+                                            <thead class="thead">
+                                            <tr style="background: #FFFFFF">
+                                                <th><b>NOMBRE DE LUGAR</b></th>
+                                                <th><b>DESCRIPCION</b></th>
+                                                <th><b>SUBIDO POR</b></th>
+                                                <th><b>ELIMINAR</b></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>';
+                            
+                            while($row = $miconexionLug->consulta_lista())  
+                            {
+                                $nameLug = $row[1];
+                                $descripcionLug = $row[2];
+                                $archivoLug = $row[4];
+                                $consultaUserLug->consulta("select concat(nombres, ' ',apellidos) from user where idUser =$row[3]");
+                                $usernamesLug = $consultaUserLug->consulta_lista();
+                                echo '
+                                    <tr style="background: #FFFFFF">
+                                        <th>'.$nameLug.'</th>
+                                        <th>'.$descripcionLug.'</th>
+                                        <th> '.$usernamesLug[0].' </th>
+                                        <th><a title="Delete Archivo" href="funciones.php?action=deletearchivoLug&archivo='.$archivoLug.'"><b><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>Eliminar</b></a>
+                                        </th>
+                                    </tr>';
+                            }
+                            
+                            echo '</tbody>
+                            </table>
+                            </div>
+                            </div>';
                         }
                     ?>
                 
