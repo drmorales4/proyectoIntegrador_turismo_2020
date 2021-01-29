@@ -52,6 +52,7 @@
                     $vecesDiv++;
                 }
         }
+        // hola
         $recorrer = 0;
         for ($i=0; $i <= $vecesDiv +1 ; $i++) {
             echo "<div>";
