@@ -150,10 +150,6 @@ a img:hover {
 }
 
 @media screen and (max-height: 820px){
-  header{
-    width: 100%;
-    height: 750px;       
-  } 
 }
 
 @media screen and (max-width: 720px){
