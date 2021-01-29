@@ -33,7 +33,7 @@ include_once '../database.php';
                     <a href="visualizaciones.php" id="enlace-visualizaciones" class="btn-header">Visualizaciones</a>
                     <a href="lugaresTuristicos.php" id="enlace-lugaresTuristicos" class="btn-header">Lugares
                         Turisticos</a>
-                    <a href="../login.php" id="enlace-login" class="btn-header">Ingreso</a>
+                    <a href="../login.php" id="enlace-login" class="btn-header">Ingresar</a>
                 </div>
                 <div class="icono" id="open">
                     <span>&#9776;</span>
@@ -1005,34 +1005,31 @@ include_once '../database.php';
         
                     
                   
-    <footer>
+        <footer>
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-6">
-                    <h6 class="text-muted lead">CONTACTO:</h6>
+                    <h6 class="text-muted lead">UTPL todos los derechos reservados @Copyright</h6>
                     <h6 class="text-muted">
-                        Carrera 8h No. 166-71 Local 2<br>
-                        Santa Cruz de la Ronda.<br>
-                        Teléfonos: 3115988953 – 3112641818.<br>
+                        1800 88 75 88<br>
+                        WhatsApp: 0999565400<br>
+                        PBX: 07 370 1444<br>
                     </h6>
                 </div>
                 <div class="col-xs-12 col-md-6">
                     <div class="pull-right">
                         <h6 class="text-muted lead">ENCUENTRANOS EN LAS REDES</h6>
                         <div class="redes-footer">
-                            <a href="https://www.facebook.com/"><img src="../images/facebook-2.png"></a>
-                            <a href="https://twitter.com/"><img src="../images/twitter-2.png"></a>
-                            <a href="https://www.youtube.com/"><img src="../images/youtube.svg"></a>
+                            <a href="https://www.facebook.com/"><img src="images/facebook.png" width="30px"></a>
+                            <a href="https://twitter.com/"><img src="images/twitter.png" width="30px"></a>
+                            <a href="https://www.youtube.com/"><img src="images/youtube.png" width="30px"></a>
                         </div>
                     </div>
-                    <div class="row">
-                        <p class="text-muted small text-right">José Miguel, arte y belleza @2016.<br> Todos los derechos
-                            reservados.</p>
-                    </div>
+                    <div class="row"> <p class="text-muted small text-right">Ubicacion: San Cayetano Alto - Loja<br> Todos los derechos reservados.</p></div>
                 </div>
-            </div>
+            </div>  
         </div>
-    </footer>
+      </footer>
 </body>
 
 </html>
