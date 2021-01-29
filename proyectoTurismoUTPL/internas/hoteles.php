@@ -53,9 +53,12 @@
                 }
         }
         $recorrer = 0;
-        for ($i=0; $i <= $vecesDiv + 1 ; $i++) {
+        for ($i=0; $i <= $vecesDiv +1 ; $i++) {
             echo "<div>";
             for ($j=0; $j <= 2 ; $j++) {
+                if ($j == $contar) {
+                    break;
+                }
                 echo "<article><img src='../internas/hotelImages/";
                 echo $matrizHotel[$recorrer][4];
                 echo "'><h3>";
@@ -65,6 +68,7 @@
                 echo $matrizHotel[$recorrer][2];
                 echo "</p>
             </article>";
+            
                $recorrer++;
                 if ($recorrer == $contar) {
                     break;

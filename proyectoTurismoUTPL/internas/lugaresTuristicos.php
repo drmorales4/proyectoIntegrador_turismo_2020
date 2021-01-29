@@ -52,10 +52,13 @@
                 }
         }
         $recorrer = 0;
-        for ($i=0; $i <= $vecesDiv ; $i++) {
+        for ($i=0; $i <= $vecesDiv +1 ; $i++) {
             echo "<section class='infoLugaresTuristicos'>
             <div class='card-group'>";
             for ($j=0; $j <= 2 ; $j++) {
+                if ($j == $contar) {
+                    break;
+                }
                 echo "<div class='card'>
                 <img src='lugaresImages/";
                 echo $matrizLugar[$recorrer][4];
@@ -70,6 +73,7 @@
                 <p class='card-text'><small class='text-muted'>...</small></p>
                     </div>
                 </div>";
+                
                 $recorrer++;
                 if ($recorrer == $contar) {
                     break;
