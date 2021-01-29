@@ -32,9 +32,56 @@
         </nav>
 
     </header>
-
+    <h2>Lugares Turisticos</h2>
+    <?php
+        include_once '../database.php';
+        $sqlLugar = "SELECT * FROM lugares";
+        $resultLugar = mysqli_query($con, $sqlLugar);
+        $contar = 0;
+        $matrizLugar;
+        $repTres = 1;
+        $vecesDiv = 0;
+        while($rowLugar = mysqli_fetch_array($resultLugar)) 
+            {
+                $matrizLugar[$contar] = $rowLugar;
+                $contar++;
+                $repTres++;
+                if ($repTres == 3) {
+                    $vecesDiv++;
+                }
+        }
+        $recorrer = 0;
+        for ($i=0; $i <= $vecesDiv ; $i++) {
+            echo "<section class='infoLugaresTuristicos'>
+            <div class='card-group'>";
+            for ($j=0; $j <= 2 ; $j++) {
+                echo "<div class='card'>
+                <img src='lugaresImages/";
+                echo $matrizLugar[$recorrer][4];
+                echo "' class='card-img-top' alt='...'>
+                        <div class='card-body'>
+                        <h5 class='card-title'>";
+                echo $matrizLugar[$recorrer][1];
+                echo "</h5>
+                        <p class='card-text'>";
+                echo $matrizLugar[$recorrer][2];
+                echo "</p>
+                <p class='card-text'><small class='text-muted'>...</small></p>
+                    </div>
+                </div>";
+                $recorrer++;
+                if ($recorrer == $contar) {
+                    break;
+                }
+            }
+            echo "</div>
+            </section>";
+        }
+        
+        ?>
+        <!--
     <section class="infoLugaresTuristicos">
-        <h2>Lugares Turisticos</h2>
+        
         <div class="card-group">
             <div class="card">
                 <img src="../images/parqueNacionalPodocarpus.jpg" class="card-img-top" alt="...">
@@ -91,8 +138,7 @@
             </div>
         </div>
     </section>
-        
-
+    -->
     <footer>
         <div class="container">
           <div class="row">

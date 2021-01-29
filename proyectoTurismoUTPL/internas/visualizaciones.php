@@ -876,16 +876,20 @@ include_once '../database.php';
                         subtitle: {
                             text: 'Año:$splitFecha[0] Mes: $splitFecha[1]'
                         },
-
                         yAxis: {
+                            labels: {
+                                format: '{value}%'
+                            },
                             title: {
-                                text: 'Ocupaciones'
+                                text: 'Porcentaje de Ocupaciones %'
                             }
                         },
 
                         xAxis: {
-                            accessibility: {
-                                rangeDescription: 'Dia'
+                            categories: ['0', 'Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5', 'Día 6', 'Día 7', 'Día 8', 'Día 9', 'Día 10', 'Día 11', 'Día 12', 'Día 13', 'Día 14', 'Día 15', 'Día 16', 'Día 17', 'Día 18', 'Día 19', 'Día 20', 'Día 21', 'Día 22', 'Día 23', 'Día 24', 'Día 25', 'Día 26', 'Día 27', 'Día 28', 'Día 29', 'Día 30', 'Día 31', ''],
+                            tickmarkPlacement: 'on',
+                            title: {
+                                enabled: false
                             }
                         },
 
@@ -894,7 +898,9 @@ include_once '../database.php';
                             align: 'right',
                             verticalAlign: 'middle'
                         },
-
+                        tooltip: {
+                            pointFormat: '{series.name} tiene un <b>{point.y:,.1f}%'
+                        },
                         plotOptions: {
                             series: {
                                 label: {
@@ -903,7 +909,6 @@ include_once '../database.php';
                                 pointStart: 1,
                             }
                         },
-
                         series: [{
                             name: '5 Estrellas',
                             data: [$ocup5estr]
@@ -920,7 +925,6 @@ include_once '../database.php';
                             name: '1 Estrella',
                             data: [$ocup1estr]
                         }],
-
                         responsive: {
                             rules: [{
                                 condition: {
@@ -934,7 +938,6 @@ include_once '../database.php';
                                     }
                                 }
                             }]
-
                         },
                         credits: {
                             enabled: false
@@ -942,8 +945,6 @@ include_once '../database.php';
 
                     });
                     </script>";
-
-
         ?>
 
     <script type="text/javascript">
