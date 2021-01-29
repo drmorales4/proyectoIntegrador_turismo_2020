@@ -68,13 +68,16 @@ include_once '../database.php';
             <div>Seleccione por clasificación
             <select name="clasificacion">
                 <option>Todos</option>
+                <option>Hotel</option>
+
                 <?php
+                /*
                 while($rowForm3 = mysqli_fetch_array($resultForm3)) 
                 {
                     $rowsForm3[] = $rowForm3;
                     echo "<option>$rowForm3[0]</option>";
                 }
-                
+                */
                 ?>
             </select>
             </div>
