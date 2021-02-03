@@ -116,7 +116,7 @@
                             //$listaDupli = 0;
                             //if ($listaDupli >= 1) {
                             if ($listaDupli[0] >= 1) {
-                                echo "$in5 $indiceFila $hojaActualNombre[$indiceHoja] <br>";
+                                //echo "$in5 $indiceFila $hojaActualNombre[$indiceHoja] <br>";
                                 $datosDuplicados ++;
                                 // duplicado
                             }else{
