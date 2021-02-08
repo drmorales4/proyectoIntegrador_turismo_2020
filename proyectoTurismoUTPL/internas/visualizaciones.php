@@ -46,7 +46,13 @@ include_once '../database.php';
     <section class="graficasHome">
         <h2>GENERADOR DE GRÁFICAS</h2>
         <?php
-        $visualizacion = "";
+        $tipoGrafica = "Lineas";
+        $anio = "Todos";
+        $mes = "Todos";
+        $establecimiento = "Todos";
+        
+        $opcionGrafica = "(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100";
+        $visualizacion = hacerVisEsta($con ,$tipoGrafica, $anio, $mes, $establecimiento, $opcionGrafica,"establecimiento");
         ?>
         <form action="#"  method="POST" enctype="multipart/form-data">
             <div>
@@ -64,6 +70,7 @@ include_once '../database.php';
                 </select>
             </div>
             <div class="form-group" id="graficaLineas" style="display:block;">
+                <label>Tema: </label>
                 <select name="lineasOpcion">
                     <option value="(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100">Ocupación por día/mes</option>
                     <option value="sum(ventas_netas)/sum(pernoctaciones)">Tarifa por persona por día</option>
