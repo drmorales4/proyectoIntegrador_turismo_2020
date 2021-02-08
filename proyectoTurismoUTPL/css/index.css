@@ -113,7 +113,7 @@ section.infoHoteles, section.infoLugaresTuristicos, section.infoVisualizaciones{
 }
 div.tituloInfo h2{
   padding: 1em;
-  background-color: #2979b1;
+  background-color: #1FA4E7;
   border-bottom: 5px solid #000000;
   color: #fff;
   font-size: 3em;
@@ -140,9 +140,13 @@ section.infoVisualizaciones div.imagesRepresentativas a img{
   width: 15%;
   padding: 2em;
 }
-
-
-
+.card-title{
+  color: rgb(151, 25, 25);
+  font-weight: bold;
+}
+.card-text{
+  text-align: justify;
+}
 footer {
 	background-color:#1A1A1A;
 	height: 50%;

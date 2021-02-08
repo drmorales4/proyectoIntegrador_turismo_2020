@@ -5,12 +5,20 @@ section.infoLugaresTuristicos{
 } 
 section.infoLugaresTuristicos h2{ 
   padding: 12px;  
-  background-color: #2979b1;  
+  background-color: #1FA4E7;  
   border-bottom: 5px solid #000000; 
   color: #fff;  
   font-size: 2em; 
 } 
-
+.card-title{
+  font-size: 1.5;
+  color: rgb(151, 25, 25);
+  font-weight: bold;
+}
+.card-text{
+  font-size: 1.2em;
+  text-align: justify;
+}
 @media screen and (max-height: 820px){
   header{
     width: 100%;

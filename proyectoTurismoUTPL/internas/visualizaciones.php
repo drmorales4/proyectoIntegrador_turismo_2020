@@ -44,7 +44,7 @@ include_once '../database.php';
 
     </header>
     <section class="graficasHome">
-        <h2>GENERADOR DE GRÁFICAS</h2>
+        <h2>GRÁFICAS ESTADISTICAS</h2>
         <?php
         $tipoGrafica = "Lineas";
         $anio = "Todos";
@@ -55,7 +55,7 @@ include_once '../database.php';
         $visualizacion = hacerVisEsta($con ,$tipoGrafica, $anio, $mes, $establecimiento, $opcionGrafica,"establecimiento");
         ?>
         <form action="#"  method="POST" enctype="multipart/form-data">
-            <div>
+            <div class="form-group">
                 <label>Graficar por: </label>
 
                 <select name="graficaPor" id="selectBoxGraficaPor" onchange="changeGraficaPor();">

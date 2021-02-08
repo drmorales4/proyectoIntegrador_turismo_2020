@@ -5,11 +5,32 @@ section.graficasHome{
   }	
   section.graficasHome h2{	
     padding: 12px;	
-    background-color: #2979b1;	
+    background-color: #1FA4E7;	
     border-bottom: 5px solid #000000;	
     color: #fff;	
     font-size: 2em;	
   }	
+  section.graficasHome form{
+    padding: 2em;
+    border: rgb(0, 0, 0) 2px solid;
+    background-color: #DBD8DA;
+  }
+  section.graficasHome form div.form-group label{
+    padding: 0em 1em;
+    font-size: 1.5em;
+  }
+  section.graficasHome form div.form-group select{
+    border-radius: 5px;
+    font-size: 1.3em;
+    font-style: italic;
+  }
+  section.graficasHome form input{
+    color: white;
+    border-color: #17a2b8;
+    background-color: #17a2b8;
+    font-size: 1.4em;
+    padding: 0em 1em;
+  }
   section.graficasHome div.porHabitacion, div.porPersona{	
     display: block;	
   }	
