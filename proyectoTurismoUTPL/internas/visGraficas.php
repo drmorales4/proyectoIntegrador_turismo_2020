@@ -333,7 +333,7 @@ function graficaPastel($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $graficaP
         $nombreEst = "Todos: $graficaPor";
     }
     if ($filtro == "5") {
-        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' $gropBy";
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf'";
         $nombreEst = "$temaGraf";
     }
     if ($filtro == "6") {

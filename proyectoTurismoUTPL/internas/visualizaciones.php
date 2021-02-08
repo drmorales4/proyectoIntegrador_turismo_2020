@@ -44,7 +44,7 @@ include_once '../database.php';
 
     </header>
     <section class="graficasHome">
-        <h2>GENERADOR DE GRÁFICAS</h2>
+        <h2>GRÁFICAS ESTADÍSTICAS</h2>
         <?php
         $tipoGrafica = "Lineas";
         $visualizacion = "";
