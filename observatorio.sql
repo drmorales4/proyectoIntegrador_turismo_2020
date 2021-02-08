@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-02-2021 a las 19:19:33
+-- Tiempo de generación: 08-02-2021 a las 05:44:58
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.1
 
@@ -4620,7 +4620,6 @@ INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habit
 ('GRAND VICTORIA BOUTIQUE', 'Hotel', '5 Estrellas', 38, 58, '2020-02-27', 3, 0, 5, 3, 2, 4, 33, 'Por habitación', 49.27, 39.41, 197.08, 12.12, 5.19, 0, 'validado', 'Revocar', 'FEB', '202101270149-Gran Victoria.xlsx', 28),
 ('GRAND VICTORIA BOUTIQUE', 'Hotel', '5 Estrellas', 38, 58, '2020-02-28', 3, 0, 9, 7, 2, 7, 30, 'Por habitación', 71.71, 55.77, 501.97, 23.33, 13.21, 0, 'validado', 'Revocar', 'FEB', '202101270149-Gran Victoria.xlsx', 28),
 ('GRAND VICTORIA BOUTIQUE', 'Hotel', '5 Estrellas', 38, 58, '2020-02-29', 1, 6, 3, 1, 2, 2, 34, 'Por habitación', 76.18, 50.78, 152.36, 5.88, 4.01, 0, 'validado', 'Revocar', 'FEB', '202101270149-Gran Victoria.xlsx', 28),
-('GRAND VICTORIA BOUTIQUE', 'Hotel', '5 Estrellas', 38, 58, '0000-00-00', 2, 0, 26, 2, 1, 19, 38, 'Por habitación', 54.68, 39.95, 1038.92, 50, 27.34, 0, 'validado', 'Revocar', 'FEB', '202101270149-Gran Victoria.xlsx', 28),
 ('GRAND VICTORIA BOUTIQUE', 'Hotel', '5 Estrellas', 38, 58, '2020-03-01', 4, 26, 4, 4, 0, 4, 37, 'Por habitación', 56.4, 56.4, 225.6, 10.81, 7.11, 1, 'validado', 'Revocar', 'MAR', '202101270149-Gran Victoria.xlsx', 28),
 ('GRAND VICTORIA BOUTIQUE', 'Hotel', '5 Estrellas', 38, 58, '2020-03-02', 2, 3, 4, 2, 0, 4, 37, 'Por habitación', 67.5, 67.5, 270, 10.81, 7.11, 1, 'validado', 'Revocar', 'MAR', '202101270149-Gran Victoria.xlsx', 28),
 ('GRAND VICTORIA BOUTIQUE', 'Hotel', '5 Estrellas', 38, 58, '2020-03-03', 19, 0, 23, 19, 0, 19, 37, 'Por habitación', 73.5, 60.71, 1396.5, 51.35, 36.75, 1, 'validado', 'Revocar', 'MAR', '202101270149-Gran Victoria.xlsx', 28),
@@ -4775,9 +4774,9 @@ INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habit
 ('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-20', 12, 6, 12, 12, 0, 11, 49, 'Por habitación', 44, 40.33, 484, 22.44, 9.49, 8, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28),
 ('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-21', 14, 3, 14, 11, 3, 13, 49, 'Por habitación', 44.7, 41.5, 581.1, 26.53, 11.32, 10, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28),
 ('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-22', 20, 9, 20, 20, 0, 19, 48, 'Por habitación', 44.1, 41.89, 837.9, 39.58, 16.43, 10, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28),
-('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-23', 16, 9, 16, 15, 1, 15, 47, 'Por habitación', 44.4, 41.62, 666, 31.91, 13.06, 10, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28);
+('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-23', 16, 9, 16, 15, 1, 15, 47, 'Por habitación', 44.4, 41.62, 666, 31.91, 13.06, 10, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28),
+('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-24', 29, 17, 29, 21, 8, 18, 47, 'Por habitación', 46.05, 28.58, 828.9, 38.29, 16.25, 10, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28);
 INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habitaciones`, `plazas`, `fecha`, `checkins`, `checkouts`, `pernoctaciones`, `nacionales`, `extranjeros`, `habitaciones_ocupadas`, `habitaciones_disponibles`, `tipo_tarifa`, `tarifa_promedio`, `tarifa_por_persona`, `ventas_netas`, `porcentaje_ocupacion`, `revpar`, `empleados_temporales`, `estado`, `opciones`, `hoja`, `archivo`, `idUser`) VALUES
-('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-24', 29, 17, 29, 21, 8, 18, 47, 'Por habitación', 46.05, 28.58, 828.9, 38.29, 16.25, 10, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28),
 ('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-25', 9, 18, 9, 9, 0, 4, 47, 'Por habitación', 69.25, 30.77, 277, 8.51, 5.43, 8, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28),
 ('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-26', 8, 7, 8, 8, 0, 5, 47, 'Por habitación', 54.4, 34, 272, 10.63, 5.33, 8, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28),
 ('LIBERTADOR', 'Hotel', '4 Estrellas', 51, 82, '2020-01-27', 14, 2, 14, 14, 0, 10, 48, 'Por habitación', 47.2, 33.71, 472, 20.83, 9.25, 10, 'validado', 'Revocar', 'ENERO', '202101270150-LIBERTADOR2020.xlsx', 28),
@@ -5019,9 +5018,9 @@ INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habit
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-01-27', 28, 14, 28, 28, 0, 19, 50, 'Por habitación', 16, 10.85, 304, 38, 6.08, 0, 'validado', 'Revocar', 'ENERO', '202101270150-PODOCARPUS.xlsx', 28),
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-01-28', 22, 10, 22, 22, 0, 16, 50, 'Por habitación', 16, 11.63, 256, 32, 5.12, 0, 'validado', 'Revocar', 'ENERO', '202101270150-PODOCARPUS.xlsx', 28),
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-01-29', 20, 10, 20, 20, 0, 17, 50, 'Por habitación', 16, 13.6, 272, 34, 5.44, 0, 'validado', 'Revocar', 'ENERO', '202101270150-PODOCARPUS.xlsx', 28),
-('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-01-30', 25, 10, 25, 24, 1, 18, 50, 'Por habitación', 16, 11.52, 288, 36, 5.76, 0, 'validado', 'Revocar', 'ENERO', '202101270150-PODOCARPUS.xlsx', 28);
+('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-01-30', 25, 10, 25, 24, 1, 18, 50, 'Por habitación', 16, 11.52, 288, 36, 5.76, 0, 'validado', 'Revocar', 'ENERO', '202101270150-PODOCARPUS.xlsx', 28),
+('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-01-31', 16, 10, 16, 16, 0, 12, 50, 'Por habitación', 16, 12, 192, 24, 3.84, 0, 'validado', 'Revocar', 'ENERO', '202101270150-PODOCARPUS.xlsx', 28);
 INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habitaciones`, `plazas`, `fecha`, `checkins`, `checkouts`, `pernoctaciones`, `nacionales`, `extranjeros`, `habitaciones_ocupadas`, `habitaciones_disponibles`, `tipo_tarifa`, `tarifa_promedio`, `tarifa_por_persona`, `ventas_netas`, `porcentaje_ocupacion`, `revpar`, `empleados_temporales`, `estado`, `opciones`, `hoja`, `archivo`, `idUser`) VALUES
-('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-01-31', 16, 10, 16, 16, 0, 12, 50, 'Por habitación', 16, 12, 192, 24, 3.84, 0, 'validado', 'Revocar', 'ENERO', '202101270150-PODOCARPUS.xlsx', 28),
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-02-01', 10, 6, 10, 10, 0, 7, 50, 'Por habitación', 16, 11.2, 112, 14, 2.24, 0, 'validado', 'Revocar', 'FEBRERO', '202101270150-PODOCARPUS.xlsx', 28),
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-02-02', 5, 2, 5, 5, 0, 3, 50, 'Por habitación', 16, 9.6, 48, 6, 0.96, 0, 'validado', 'Revocar', 'FEBRERO', '202101270150-PODOCARPUS.xlsx', 28),
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-02-03', 23, 6, 23, 23, 0, 16, 50, 'Por habitación', 16, 11.13, 256, 32, 5.12, 0, 'validado', 'Revocar', 'FEBRERO', '202101270150-PODOCARPUS.xlsx', 28),
@@ -5269,9 +5268,9 @@ INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habit
 ('QUO VADIS', 'Hotel', '4 Estrellas', 31, 40, '2020-02-13', 4, 0, 4, 4, 0, 4, 29, 'Por habitación', 44.55, 44.55, 178.2, 13.79, 5.75, 0, 'sin_validar', 'Validar', 'FEB', '202101270150-QUO VADIS.xlsx', 28),
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-09-03', 2, 0, 7, 2, 0, 7, 50, 'Por habitación', 16, 16, 112, 14, 0, 0, 'validado', 'Revocar', 'SEPTIEMBRE', '202101270150-PODOCARPUS.xlsx', 28),
 ('QUO VADIS', 'Hotel', '4 Estrellas', 31, 40, '2020-02-14', 9, 3, 10, 9, 0, 5, 29, 'Por habitación', 44.55, 22.27, 222.75, 17.24, 7.19, 0, 'sin_validar', 'Validar', 'FEB', '202101270150-QUO VADIS.xlsx', 28),
-('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-09-04', 5, 2, 10, 5, 0, 9, 50, 'Por habitación', 16, 14.4, 144, 18, 0, 0, 'validado', 'Revocar', 'SEPTIEMBRE', '202101270150-PODOCARPUS.xlsx', 28);
+('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-09-04', 5, 2, 10, 5, 0, 9, 50, 'Por habitación', 16, 14.4, 144, 18, 0, 0, 'validado', 'Revocar', 'SEPTIEMBRE', '202101270150-PODOCARPUS.xlsx', 28),
+('QUO VADIS', 'Hotel', '4 Estrellas', 31, 40, '2020-02-15', 6, 7, 6, 6, 0, 3, 29, 'Por habitación', 44.55, 22.27, 133.65, 10.34, 4.31, 0, 'sin_validar', 'Validar', 'FEB', '202101270150-QUO VADIS.xlsx', 28);
 INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habitaciones`, `plazas`, `fecha`, `checkins`, `checkouts`, `pernoctaciones`, `nacionales`, `extranjeros`, `habitaciones_ocupadas`, `habitaciones_disponibles`, `tipo_tarifa`, `tarifa_promedio`, `tarifa_por_persona`, `ventas_netas`, `porcentaje_ocupacion`, `revpar`, `empleados_temporales`, `estado`, `opciones`, `hoja`, `archivo`, `idUser`) VALUES
-('QUO VADIS', 'Hotel', '4 Estrellas', 31, 40, '2020-02-15', 6, 7, 6, 6, 0, 3, 29, 'Por habitación', 44.55, 22.27, 133.65, 10.34, 4.31, 0, 'sin_validar', 'Validar', 'FEB', '202101270150-QUO VADIS.xlsx', 28),
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-09-05', 1, 9, 2, 1, 0, 2, 50, 'Por habitación', 16, 16, 32, 4, 0, 0, 'validado', 'Revocar', 'SEPTIEMBRE', '202101270150-PODOCARPUS.xlsx', 28),
 ('QUO VADIS', 'Hotel', '4 Estrellas', 31, 40, '2020-02-16', 3, 5, 3, 3, 0, 2, 29, 'Por habitación', 44.55, 29.7, 89.1, 6.89, 2.87, 0, 'sin_validar', 'Validar', 'FEB', '202101270150-QUO VADIS.xlsx', 28),
 ('PODOCARPUS', 'Hotel', '3 Estrellas', 50, 80, '2020-09-06', 5, 2, 5, 5, 0, 2, 50, 'Por habitación', 16, 6.4, 32, 4, 0, 0, 'validado', 'Revocar', 'SEPTIEMBRE', '202101270150-PODOCARPUS.xlsx', 28),
@@ -5524,9 +5523,9 @@ INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habit
 ('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-09', 42, 16, 59, 34, 8, 44, 73, 'Por habitación', 73.39, 54.73, 3229.16, 60.27, 44.24, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28),
 ('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-10', 26, 31, 54, 20, 6, 39, 73, 'Por habitación', 70.88, 51.19, 2764.32, 53.42, 37.87, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28),
 ('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-11', 35, 29, 60, 34, 1, 29, 49, 'Por habitación', 63, 30.45, 1827, 59.18, 25.03, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28),
-('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-12', 21, 48, 33, 17, 4, 30, 72, 'Por habitación', 68.27, 62.06, 2048.1, 41.66, 28.06, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28);
+('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-12', 21, 48, 33, 17, 4, 30, 72, 'Por habitación', 68.27, 62.06, 2048.1, 41.66, 28.06, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28),
+('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-13', 23, 16, 40, 23, 0, 36, 72, 'Por habitación', 69.11, 62.19, 2487.96, 50, 34.08, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28);
 INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habitaciones`, `plazas`, `fecha`, `checkins`, `checkouts`, `pernoctaciones`, `nacionales`, `extranjeros`, `habitaciones_ocupadas`, `habitaciones_disponibles`, `tipo_tarifa`, `tarifa_promedio`, `tarifa_por_persona`, `ventas_netas`, `porcentaje_ocupacion`, `revpar`, `empleados_temporales`, `estado`, `opciones`, `hoja`, `archivo`, `idUser`) VALUES
-('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-13', 23, 16, 40, 23, 0, 36, 72, 'Por habitación', 69.11, 62.19, 2487.96, 50, 34.08, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28),
 ('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-14', 42, 17, 65, 30, 12, 58, 70, 'Por habitación', 65.51, 58.45, 3799.58, 82.85, 52.05, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28),
 ('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-15', 40, 35, 70, 31, 9, 61, 70, 'Por habitación', 68.4, 59.6, 4172.4, 87.14, 57.16, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28),
 ('SONESTA HOTEL LOJA', 'Hotel', '5 Estrellas', 73, 117, '2020-01-16', 21, 21, 70, 17, 4, 61, 70, 'Por habitación', 67.57, 58.88, 4121.77, 87.14, 56.46, 0, 'validado', 'Revocar', 'ENERO', '202101270151-Sonesta.xlsx', 28),
@@ -5772,9 +5771,9 @@ INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habit
 ('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-15', 23, 1, 23, 22, 1, 22, 29, 'Por habitación', 39.68, 37.95, 872.96, 75.86, 30.1, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28),
 ('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-16', 20, 5, 20, 20, 0, 20, 29, 'Por habitación', 39.3, 39.3, 786, 68.96, 27.1, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28),
 ('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-17', 8, 12, 8, 8, 0, 8, 29, 'Por habitación', 37.25, 37.25, 298, 27.58, 10.28, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28),
-('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-18', 2, 6, 2, 1, 1, 2, 29, 'Por habitación', 38.5, 38.5, 77, 6.89, 2.66, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28);
+('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-18', 2, 6, 2, 1, 1, 2, 29, 'Por habitación', 38.5, 38.5, 77, 6.89, 2.66, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28),
+('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-19', 2, 1, 2, 1, 1, 2, 29, 'Por habitación', 56, 56, 112, 6.89, 3.86, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28);
 INSERT INTO `registros` (`establecimiento`, `clasificacion`, `categoria`, `habitaciones`, `plazas`, `fecha`, `checkins`, `checkouts`, `pernoctaciones`, `nacionales`, `extranjeros`, `habitaciones_ocupadas`, `habitaciones_disponibles`, `tipo_tarifa`, `tarifa_promedio`, `tarifa_por_persona`, `ventas_netas`, `porcentaje_ocupacion`, `revpar`, `empleados_temporales`, `estado`, `opciones`, `hoja`, `archivo`, `idUser`) VALUES
-('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-19', 2, 1, 2, 1, 1, 2, 29, 'Por habitación', 56, 56, 112, 6.89, 3.86, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28),
 ('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-20', 8, 1, 8, 8, 0, 8, 29, 'Por habitación', 36.38, 36.38, 291.04, 27.58, 10.04, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28),
 ('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-21', 25, 3, 25, 25, 0, 16, 29, 'Por habitación', 47.77, 30.57, 764.32, 55.17, 26.36, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28),
 ('ZAMORANO REAL', 'Hotel', '3 Estrellas', 29, 58, '2020-01-22', 22, 11, 22, 21, 1, 21, 29, 'Por habitación', 42.4, 40.47, 890.4, 72.41, 30.7, 0, 'validado', 'Revocar', 'ENERO', '202101270151-ZAMORANO.xlsx', 28),

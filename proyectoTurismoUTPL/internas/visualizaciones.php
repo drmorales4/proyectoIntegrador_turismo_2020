@@ -44,10 +44,17 @@ include_once '../database.php';
 
     </header>
     <section class="graficasHome">
-        <h2>VISUALIZACIONES DE GRÁFICOS</h2>
-        <center>
+        <h2>GENERADOR DE GRÁFICAS</h2>
         <?php
+        $tipoGrafica = "Lineas";
         $visualizacion = "";
+        $graficarPor = "Establecimientos";
+        $establecimiento = "Todos";
+        $categoria = "Todos";
+        $opcionGrafica = "(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion";
+        $anio = "Todos";
+        $mes = "Todos";
+        $visualizacion = hacerVisEsta($con ,$tipoGrafica, $anio, $mes, $establecimiento, $opcionGrafica,"establecimiento");
         ?>
         <form action="#"  method="POST" enctype="multipart/form-data">
             <div>
@@ -65,6 +72,7 @@ include_once '../database.php';
                 </select>
             </div>
             <div class="form-group" id="graficaLineas" style="display:block;">
+                <label>Tema: </label>
                 <select name="lineasOpcion">
                     <option value="(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion">Ocupación por día/mes</option>
                     <option value="sum(nacionales)">Tarifa por persona por día</option>
@@ -74,6 +82,7 @@ include_once '../database.php';
                 </select>
             </div>
             <div class="form-group" id="graficaBarras" style="display:none;">
+                <label>Tema: </label>
                 <select name="barrasOpcion">
                     <option value="(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion">Ocupación por día/mes</option>
                     <option value="2">Tarifa por persona por día</option>
@@ -84,9 +93,9 @@ include_once '../database.php';
             </div>
             
             <div class="form-group" id="graficaPastel" style="display:none;">
+                <label>Tema: </label>
                 <select name="pastelOpcion">
-                    <option value="1">Porcentaje Huesped Estranjero y Nacional</option>
-                    <option value="2">Porcentaje Ocupacion</option>
+                    <option value="sum(nacionales) as nacionales, sum(extranjeros) as extranjeros">Porcentaje Huesped Estranjero y Nacional</option>
                 </select>
             </div>
             <div class="form-group" id="insertEstablecimietos" style="display:block;">
@@ -121,8 +130,42 @@ include_once '../database.php';
                     <option>Diciembre</option>
                 </select>
             </div>
+
+
             <div class="form-group" id="insertCategoria" style="display:none;">
+                <label>Categorias: </label>
+                <select name="categoria">
+                    <option>Todos</option>
+                    <?php
+                    consulta_opction($con, "DISTINCT(categoria)", "Order by 1");
+                    ?>
+                </select>
+                <label>Año: </label>
+                <select name="anio">
+                    <option>Todos</option>
+                    <?php 
+                    consulta_opction($con, "DISTINCT(YEAR(fecha))", "Order by 1");
+                    ?>
+                </select>
+                <label>Mes: </label>
+                <select name="mes">
+                    <option>Todos</option>
+                    <option>Enero</option>
+                    <option>Febrero</option>
+                    <option>Marzo</option>
+                    <option>Abril</option>
+                    <option>Mayo</option>
+                    <option>Junio</option>
+                    <option>Julio</option>
+                    <option>Agosto</option>
+                    <option>Septiembre</option>
+                    <option>Octubre</option>
+                    <option>Noviembre</option>
+                    <option>Diciembre</option>
+                </select>
             </div>
+
+
             <input  type="submit" name="submit"  value="Cambiar"/>
         </form>
         <script>
@@ -167,30 +210,55 @@ include_once '../database.php';
             $tipoGrafica = $_POST['tipoGrafica'];
             $anio = $_POST['anio'];
             $mes = $_POST['mes'];
+
             if ($graficarPor == "Establecimientos") {
                 $establecimiento = $_POST['establecimiento'];
-                if ($tipoGrafica == "Lineas") {
-                    $opcionGrafica = $_POST['lineasOpcion'];
+                if (verificarDatosEst($con, $establecimiento, $anio, $mes,"establecimiento") == 0) {
+                    $visualizacion = "<div><h3>¡Atención! !No hay datos de establecimiento '$establecimiento', año '$anio', mes '$mes'</h3>
+                    </div>";
                 }
-                if ($tipoGrafica == "Barras") {
-                    $opcionGrafica = $_POST['barrasOpcion'];
+                else{
+
+                    if ($tipoGrafica == "Lineas") {
+                        $opcionGrafica = $_POST['lineasOpcion'];
+                    }
+                    elseif ($tipoGrafica == "Barras") {
+                        $opcionGrafica = $_POST['barrasOpcion'];
+                    }
+                    elseif ($tipoGrafica == "Pastel") {
+                        $opcionGrafica = $_POST['pastelOpcion'];
+                    }
+                    $visualizacion = hacerVisEsta($con ,$tipoGrafica, $anio, $mes, $establecimiento, $opcionGrafica,"establecimiento");
                 }
-                if ($tipoGrafica == "Pastel") {
-                    $opcionGrafica = $_POST['pastelOpcion'];
-                }
-                $visualizacion = hacerVisEsta($con ,$tipoGrafica, $anio, $mes, $establecimiento, $opcionGrafica);
             }
+
             if ($graficarPor == "Categoria") {
-                $visualizacion = hacerVisCat($con ,$tipoGrafica, $anio,$mes, $categoria, $opcionGrafica);
+                $categoria = $_POST['categoria'];
+                if (verificarDatosEst($con, $categoria, $anio, $mes,"categoria") == 0) {
+                    $visualizacion = "<div><h3>¡Atención! !No hay datos de la categoria '$categoria', año '$anio', mes '$mes'</h3></div>";
+                }
+                else{
+                    if ($tipoGrafica == "Lineas") {
+                        $opcionGrafica = $_POST['lineasOpcion'];
+                    }
+                    if ($tipoGrafica == "Barras") {
+                        $opcionGrafica = $_POST['barrasOpcion'];
+                    }
+                    if ($tipoGrafica == "Pastel") {
+                        $opcionGrafica = $_POST['pastelOpcion'];
+                    }
+                    $visualizacion = hacerVisEsta($con ,$tipoGrafica, $anio, $mes, $categoria, $opcionGrafica,"categoria");
+                }
             }
         }
         ?>
-    </center>
         </div>
     </section>
+    <center>
     <?php
     echo $visualizacion;
     ?>
+    </center>
                     
                   
         <footer>

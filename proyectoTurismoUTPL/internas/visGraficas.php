@@ -14,34 +14,43 @@ function consulta_opction($con, $consultar, $orderby){
     }
 }
 
-function graficaLineas($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $gropBy){
+function graficaLineas($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $gropBy, $graficaPor){
     $sqlStr = "";
     $resultX = "";
+    $nombreEst = "";
 
     
     if ($filtro == "1") {
         $sqlStr = "SELECT $sqlSel as fecha from registros $gropBy";
+        $nombreEst = "Todos: $graficaPor";
     }
     if ($filtro == "2") {
         $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE month(fecha) = $mes $gropBy";
+        $nombreEst = "Todos: $graficaPor";
     }
     if ($filtro == "3") {
         $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE year(fecha) = $anio $gropBy";
+        $nombreEst = "Todos: $graficaPor";
     }
     if ($filtro =="4") {
         $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE year(fecha) = $anio AND month(fecha) = $mes $gropBy";
+        $nombreEst = "Todos: $graficaPor";
     }
     if ($filtro == "5") {
-        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE establecimiento = '$temaGraf' $gropBy";
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' $gropBy";
+        $nombreEst = "$temaGraf";
     }
     if ($filtro == "6") {
-        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE establecimiento = '$temaGraf' AND month(fecha) = $mes $gropBy";
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND month(fecha) = $mes $gropBy";
+        $nombreEst = "$temaGraf";
     }
     if ($filtro == "7") {
-        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE establecimiento = '$temaGraf' AND year(fecha) = $anio $gropBy";
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND year(fecha) = $anio $gropBy";
+        $nombreEst = "$temaGraf";
     }
     if ($filtro == "8") {
-        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE establecimiento = '$temaGraf' AND year(fecha) = $anio AND month(fecha) = $mes $gropBy";
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND year(fecha) = $anio AND month(fecha) = $mes $gropBy";
+        $nombreEst = "$temaGraf";
     }
     #$resultX = $sqlStr;
     $result = mysqli_query($con,$sqlStr);
@@ -68,7 +77,7 @@ function graficaLineas($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $gropBy){
     }else{
         $mes = obtenerMesNum($mes);
     }
-    
+
     $primerY = $matriz[0][0];
     $primerX = $matriz[0][1];
     
@@ -94,7 +103,7 @@ function graficaLineas($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $gropBy){
         Highcharts.chart('ocupacion', {
 
             title: {
-                text: 'Todas las categorías'
+                text: 'Por $graficaPor'
             },
 
             subtitle: {
@@ -134,7 +143,7 @@ function graficaLineas($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $gropBy){
                 }
             },
             series: [{
-                name: '5 Estrellas',
+                name: ' $temaGraf ',
                 data: [$grafY]
             }],
             responsive: {
@@ -160,8 +169,285 @@ function graficaLineas($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $gropBy){
         
 return $resultX;
 }
+function graficaBarras($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $gropBy, $graficaPor){
+    $sqlStr = "";
+    $resultX = "";
+    $nombreEst = "";
 
-function hacerVisEsta($con,$tipoGrafica,$anio,$mes,$temaGraf,$opcionGrafica){
+    
+    if ($filtro == "1") {
+        $sqlStr = "SELECT $sqlSel as fecha from registros $gropBy";
+        $nombreEst = "Todos: $graficaPor";
+    }
+    if ($filtro == "2") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE month(fecha) = $mes $gropBy";
+        $nombreEst = "Todos: $graficaPor";
+    }
+    if ($filtro == "3") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE year(fecha) = $anio $gropBy";
+        $nombreEst = "Todos: $graficaPor";
+    }
+    if ($filtro =="4") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE year(fecha) = $anio AND month(fecha) = $mes $gropBy";
+        $nombreEst = "Todos: $graficaPor";
+    }
+    if ($filtro == "5") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' $gropBy";
+        $nombreEst = "$temaGraf";
+    }
+    if ($filtro == "6") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND month(fecha) = $mes $gropBy";
+        $nombreEst = "$temaGraf";
+    }
+    if ($filtro == "7") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND year(fecha) = $anio $gropBy";
+        $nombreEst = "$temaGraf";
+    }
+    if ($filtro == "8") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND year(fecha) = $anio AND month(fecha) = $mes $gropBy";
+        $nombreEst = "$temaGraf";
+    }
+    #$resultX = $sqlStr;
+    $result = mysqli_query($con,$sqlStr);
+    $i= 0;
+    while($row = mysqli_fetch_array($result))
+    {
+        $diaOMes = "" ;
+        if ($gropBy == "GROUP BY day(fecha) ORDER BY 2") {
+            $diaOMes = obtenerDiaNum($row[1]);
+        }else{
+            $diaOMes = obtenerMesNum($row[1]);
+        }
+        $resultX= sprintf("%s%s, %s\n",$resultX,$row[0], $diaOMes);
+        $matriz[$i][0] = $row[0];
+        $matriz[$i][1] = $diaOMes;
+        $i++;
+    }
+
+    if ($anio == "") {
+        $anio = "Todos";
+    }
+    if ($mes == "") {
+        $mes = "Todos";
+    }else{
+        $mes = obtenerMesNum($mes);
+    }
+
+    $primerY = $matriz[0][0];
+    $primerX = $matriz[0][1];
+    
+    $concatValues = sprintf("{ name: '%s', data: [%.2f] }", $primerX, $primerY);
+
+    for ($j=1; $j <= $i -1 ; $j++) { 
+        $concatValues = sprintf("%s, { name: '%s', data: [%.2f] }\n",$concatValues, $matriz[$j][1], $matriz[$j][0]);
+    }
+    #$resultX = $concatValues;
+    $resultX = "
+    <div>
+        <figure class='highcharts-figure-big'>
+            <div id='grafica'></div>
+            <p class='highcharts-description'>
+                
+            </p>
+        </figure>
+    </div>
+    <script type='text/javascript'>
+            Highcharts.chart('grafica', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '$graficaPor: $temaGraf'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: ['$graficaPor'],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [$concatValues]
+            })</script>";
+
+        
+return $resultX;
+}
+function graficaPastel($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $graficaPor){
+    $sqlStr = "";
+    $resultX = "";
+    $nombreEst = "";
+
+    
+    if ($filtro == "1") {
+        $sqlStr = "SELECT $sqlSel as fecha from registros";
+        $nombreEst = "Todos: $graficaPor";
+    }
+    if ($filtro == "2") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE month(fecha) = $mes";
+        $nombreEst = "Todos: $graficaPor";
+    }
+    if ($filtro == "3") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE year(fecha) = $anio";
+        $nombreEst = "Todos: $graficaPor";
+    }
+    if ($filtro =="4") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE year(fecha) = $anio AND month(fecha) = $mes";
+        $nombreEst = "Todos: $graficaPor";
+    }
+    if ($filtro == "5") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' $gropBy";
+        $nombreEst = "$temaGraf";
+    }
+    if ($filtro == "6") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND month(fecha) = $mes";
+        $nombreEst = "$temaGraf";
+    }
+    if ($filtro == "7") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND year(fecha) = $anio";
+        $nombreEst = "$temaGraf";
+    }
+    if ($filtro == "8") {
+        $sqlStr = "SELECT  $sqlSel as fecha from registros WHERE $graficaPor = '$temaGraf' AND year(fecha) = $anio AND month(fecha) = $mes";
+        $nombreEst = "$temaGraf";
+    }
+    #$resultX = $sqlStr;
+    $result = mysqli_query($con,$sqlStr);
+    $row = mysqli_fetch_array($result);
+    $res1 = sprintf("%.2f",$row[0]);
+    $res2 = sprintf("%.2f",$row[1]);
+    echo "
+    <div>
+        <figure class='highcharts-figure-big'>
+            <div id='pastel'></div>
+            <p class='highcharts-description'>
+                
+            </p>
+        </figure>
+    </div>
+        <script type='text/javascript'>
+            Highcharts.chart('pastel', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: '$temaGraf'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Nacionales',
+                        y: $res1
+                    }, {
+                        name: 'Extranjeros',
+                        y: $res2
+                    }]
+                }],
+            credits: {
+                enabled: false
+            }
+            });
+            </script>
+            "
+        ;
+    /*
+    $i= 0;
+    while($row = mysqli_fetch_array($result))
+    {
+        $diaOMes = "" ;
+        if ($gropBy == "GROUP BY day(fecha) ORDER BY 2") {
+            $diaOMes = obtenerDiaNum($row[1]);
+        }else{
+            $diaOMes = obtenerMesNum($row[1]);
+        }
+        $resultX= sprintf("%s%s, %s\n",$resultX,$row[0], $diaOMes);
+        $matriz[$i][0] = $row[0];
+        $matriz[$i][1] = $diaOMes;
+        $i++;
+    }
+
+    if ($anio == "") {
+        $anio = "Todos";
+    }
+    if ($mes == "") {
+        $mes = "Todos";
+    }else{
+        $mes = obtenerMesNum($mes);
+    }
+
+    $primerY = $matriz[0][0];
+    $primerX = $matriz[0][1];
+    
+    $concatValues = sprintf("{ name: '%s', data: [%.2f] }", $primerX, $primerY);
+
+    for ($j=1; $j <= $i -1 ; $j++) { 
+        $concatValues = sprintf("%s, { name: '%s', data: [%.2f] }\n",$concatValues, $matriz[$j][1], $matriz[$j][0]);
+    }
+    #$resultX = $concatValues;
+    */
+return $resultX;
+}
+
+function hacerVisEsta($con,$tipoGrafica,$anio,$mes,$temaGraf,$opcionGrafica,$graficaPor){
     $mesNum = obtenerNumMes($mes);
     $xDiaMes = "day(fecha)";
 
@@ -171,22 +457,22 @@ function hacerVisEsta($con,$tipoGrafica,$anio,$mes,$temaGraf,$opcionGrafica){
                 if ($mes == "Todos") {
                     #graficaLineas("conexion, "filtro", "tipoGrafic", "estableci", "anio", "mes", "groupby mes y order by 2")
                     $xDiaMes = "month(fecha)";
-                    $resultado = graficaLineas($con, "1", "$opcionGrafica, $xDiaMes", "", "", "", "GROUP BY $xDiaMes ORDER BY 2");
+                    $resultado = graficaLineas($con, "1", "$opcionGrafica, $xDiaMes", "", "", "", "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
                 }else{
                     #$mes
                     $xDiaMes = "day(fecha)";
-                    $resultado = graficaLineas($con, "2", "$opcionGrafica, $xDiaMes", "", "", $mesNum, "GROUP BY $xDiaMes ORDER BY 2");
+                    $resultado = graficaLineas($con, "2", "$opcionGrafica, $xDiaMes", "", "", $mesNum, "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
                 }
             }else{
                 if ($mes == "Todos") {
                     #$anio
                     $xDiaMes = "month(fecha)";
-                    $resultado = graficaLineas($con, "3", "$opcionGrafica, $xDiaMes", "", $anio, "", "GROUP BY $xDiaMes ORDER BY 2");
+                    $resultado = graficaLineas($con, "3", "$opcionGrafica, $xDiaMes", "", $anio, "", "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
                 }else{
                     #$anio
                     #$mes
                     $xDiaMes = "day(fecha)";
-                    $resultado = graficaLineas($con, "4", "$opcionGrafica, $xDiaMes", "", $anio, $mesNum, "GROUP BY $xDiaMes ORDER BY 2");
+                    $resultado = graficaLineas($con, "4", "$opcionGrafica, $xDiaMes", "", $anio, $mesNum, "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
                 }
             }
         }
@@ -195,25 +481,25 @@ function hacerVisEsta($con,$tipoGrafica,$anio,$mes,$temaGraf,$opcionGrafica){
                 if ($mes == "Todos") {
                     #$temaGraf
                     $xDiaMes = "month(fecha)";
-                    $resultado = graficaLineas($con, "5", "$opcionGrafica, $xDiaMes", $temaGraf, "", "", "GROUP BY $xDiaMes ORDER BY 2");
+                    $resultado = graficaLineas($con, "5", "$opcionGrafica, $xDiaMes", $temaGraf, "", "", "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
                 }else{
                     #$mes
                     #$temaGraf
                     $xDiaMes = "day(fecha)";
-                    $resultado = graficaLineas($con, "6", "$opcionGrafica, $xDiaMes", $temaGraf, "", $mesNum, "GROUP BY $xDiaMes ORDER BY 2");
+                    $resultado = graficaLineas($con, "6", "$opcionGrafica, $xDiaMes", $temaGraf, "", $mesNum, "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
                 }
             }else{
                 if ($mes == "Todos") {
                     #$anio
                     #$temaGraf
                     $xDiaMes = "month(fecha)";
-                    $resultado = graficaLineas($con, "7", "$opcionGrafica, $xDiaMes", $temaGraf, $anio, "", "GROUP BY $xDiaMes ORDER BY 2");
+                    $resultado = graficaLineas($con, "7", "$opcionGrafica, $xDiaMes", $temaGraf, $anio, "", "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
                 }else{
                     #$temaGraf
                     #$anio
                     #$mes
                     $xDiaMes = "day(fecha)";
-                    $resultado = graficaLineas($con, "8", "$opcionGrafica, $xDiaMes", $temaGraf, $anio, $mesNum, "GROUP BY $xDiaMes ORDER BY 2");
+                    $resultado = graficaLineas($con, "8", "$opcionGrafica, $xDiaMes", $temaGraf, $anio, $mesNum, "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
                 }
 
 
@@ -221,18 +507,116 @@ function hacerVisEsta($con,$tipoGrafica,$anio,$mes,$temaGraf,$opcionGrafica){
         }
     }
     if ($tipoGrafica == "Barras") {
-        # code...
+        if ($temaGraf == "Todos") {
+            if ($anio == "Todos") {
+                if ($mes == "Todos") {
+                    #graficaLineas("conexion, "filtro", "tipoGrafic", "estableci", "anio", "mes", "groupby mes y order by 2")
+                    $xDiaMes = "month(fecha)";
+                    $resultado = graficaBarras($con, "1", "$opcionGrafica, $xDiaMes", "", "", "", "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
+                }else{
+                    #$mes
+                    $xDiaMes = "day(fecha)";
+                    $resultado = graficaBarras($con, "2", "$opcionGrafica, $xDiaMes", "", "", $mesNum, "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
+                }
+            }else{
+                if ($mes == "Todos") {
+                    #$anio
+                    $xDiaMes = "month(fecha)";
+                    $resultado = graficaBarras($con, "3", "$opcionGrafica, $xDiaMes", "", $anio, "", "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
+                }else{
+                    #$anio
+                    #$mes
+                    $xDiaMes = "day(fecha)";
+                    $resultado = graficaBarras($con, "4", "$opcionGrafica, $xDiaMes", "", $anio, $mesNum, "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
+                }
+            }
+        }
+        else{
+            if ($anio == "Todos") {
+                if ($mes == "Todos") {
+                    #$temaGraf
+                    $xDiaMes = "month(fecha)";
+                    $resultado = graficaBarras($con, "5", "$opcionGrafica, $xDiaMes", $temaGraf, "", "", "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
+                }else{
+                    #$mes
+                    #$temaGraf
+                    $xDiaMes = "day(fecha)";
+                    $resultado = graficaBarras($con, "6", "$opcionGrafica, $xDiaMes", $temaGraf, "", $mesNum, "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
+                }
+            }else{
+                if ($mes == "Todos") {
+                    #$anio
+                    #$temaGraf
+                    $xDiaMes = "month(fecha)";
+                    $resultado = graficaBarras($con, "7", "$opcionGrafica, $xDiaMes", $temaGraf, $anio, "", "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
+                }else{
+                    #$temaGraf
+                    #$anio
+                    #$mes
+                    $xDiaMes = "day(fecha)";
+                    $resultado = graficaBarras($con, "8", "$opcionGrafica, $xDiaMes", $temaGraf, $anio, $mesNum, "GROUP BY $xDiaMes ORDER BY 2",$graficaPor);
+                }
+
+
+            }
+        }
     }
     if ($tipoGrafica == "Pastel") {
-        # code...
+        if ($temaGraf == "Todos") {
+            if ($anio == "Todos") {
+                if ($mes == "Todos") {
+                    #graficaLineas("conexion, "filtro", "tipoGrafic", "estableci", "anio", "mes", "groupby mes y order by 2")
+                    $xDiaMes = "month(fecha)";
+                    $resultado = graficaPastel($con, "1", "$opcionGrafica, $xDiaMes", "", "", "",$graficaPor);
+                }else{
+                    #$mes
+                    $xDiaMes = "day(fecha)";
+                    $resultado = graficaPastel($con, "2", "$opcionGrafica, $xDiaMes", "", "", $mesNum,$graficaPor);
+                }
+            }else{
+                if ($mes == "Todos") {
+                    #$anio
+                    $xDiaMes = "month(fecha)";
+                    $resultado = graficaPastel($con, "3", "$opcionGrafica, $xDiaMes", "", $anio, "",$graficaPor);
+                }else{
+                    #$anio
+                    #$mes
+                    $xDiaMes = "day(fecha)";
+                    $resultado = graficaPastel($con, "4", "$opcionGrafica, $xDiaMes", "", $anio, $mesNum,$graficaPor);
+                }
+            }
+        }
+        else{
+            if ($anio == "Todos") {
+                if ($mes == "Todos") {
+                    #$temaGraf
+                    $xDiaMes = "month(fecha)";
+                    $resultado = graficaPastel($con, "5", "$opcionGrafica, $xDiaMes", $temaGraf, "", "",$graficaPor);
+                }else{
+                    #$mes
+                    #$temaGraf
+                    $xDiaMes = "day(fecha)";
+                    $resultado = graficaPastel($con, "6", "$opcionGrafica, $xDiaMes", $temaGraf, "", $mesNum,$graficaPor);
+                }
+            }else{
+                if ($mes == "Todos") {
+                    #$anio
+                    #$temaGraf
+                    $xDiaMes = "month(fecha)";
+                    $resultado = graficaPastel($con, "7", "$opcionGrafica, $xDiaMes", $temaGraf, $anio,$graficaPor);
+                }else{
+                    #$temaGraf
+                    #$anio
+                    #$mes
+                    $xDiaMes = "day(fecha)";
+                    $resultado = graficaPastel($con, "8", "$opcionGrafica, $xDiaMes", $temaGraf, $anio, $mesNum,$graficaPor);
+                }
+            }
+        }
     }
     return $resultado;
 }
-function hacerVishacerVisCat($con,$tipoGrafica,$anio,$mes,$categoria,$opcionGrafica){
-    $mesNum = obtenerNumMes($mes);
-    $resultado = ",$tipoGrafica,$anio,$mesNum,$establecimiento,$opcionGrafica";
-    return $resultado;
-}
+
 
 
 function obtenerNumMes($mes){
@@ -316,7 +700,7 @@ function obtenerMesNum($mes){
     return $result;
 }
 function obtenerDiaNum($mes){
-    $result = "Enero";
+    $result = "Día x";
     if ($mes == '1') {
         $result = "Día 1";
     }
@@ -411,6 +795,46 @@ function obtenerDiaNum($mes){
         $result = "Día 31";
     }
 
+    return $result;
+}
+function verificarDatosEst($con, $valorGraficaPor, $anio, $mesStr, $graficaPor){
+    $mes = obtenerNumMes($mesStr);
+    if ($valorGraficaPor == "Todos") {
+        if ($anio == "Todos") {
+            if ($mes == 0) {
+                $sqlVer = "SELECT count(fecha) FROM `registros`";
+            }else{
+                $sqlVer = "SELECT count(fecha) FROM `registros` WHERE MONTH(fecha) = $mes";
+            }
+        }else{
+            if ($mes == 0) {
+                $sqlVer = "SELECT count(fecha) FROM `registros` WHERE  YEAR(fecha) = $anio";
+            }else{
+                $sqlVer = "SELECT count(fecha) FROM `registros` WHERE YEAR(fecha) = $anio AND MONTH(fecha) = $mes";
+            }
+        }
+    }else{
+        if ($anio == "Todos") {
+            if ($mes == 0) {
+                $sqlVer = "SELECT count(fecha) FROM `registros` WHERE $graficaPor = '$valorGraficaPor'";
+            }else{
+                $sqlVer = "SELECT count(fecha) FROM `registros` WHERE $graficaPor = '$valorGraficaPor' AND MONTH(fecha) = $mes";
+            }
+        }else{
+            if ($mes == 0) {
+                $sqlVer = "SELECT count(fecha) FROM `registros` WHERE $graficaPor = '$valorGraficaPor' AND YEAR(fecha) = $anio";
+            }else{
+                $sqlVer = "SELECT count(fecha) FROM `registros` WHERE $graficaPor = '$valorGraficaPor' AND YEAR(fecha) = $anio AND MONTH(fecha) = $mes";
+            }
+        }
+
+    }
+    $consult = mysqli_query($con, $sqlVer);
+    $row = mysqli_fetch_array($consult);
+    $result = $row[0];
+    if ($result == 1 or $result == 2 ) {
+        $result = 0;
+    }
     return $result;
 }
 
