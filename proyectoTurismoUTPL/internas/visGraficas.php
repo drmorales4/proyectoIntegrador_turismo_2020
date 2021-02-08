@@ -409,48 +409,12 @@ function graficaPastel($con, $filtro, $sqlSel ,$temaGraf, $anio, $mes, $graficaP
             </script>
             "
         ;
-    /*
-    $i= 0;
-    while($row = mysqli_fetch_array($result))
-    {
-        $diaOMes = "" ;
-        if ($gropBy == "GROUP BY day(fecha) ORDER BY 2") {
-            $diaOMes = obtenerDiaNum($row[1]);
-        }else{
-            $diaOMes = obtenerMesNum($row[1]);
-        }
-        $resultX= sprintf("%s%s, %s\n",$resultX,$row[0], $diaOMes);
-        $matriz[$i][0] = $row[0];
-        $matriz[$i][1] = $diaOMes;
-        $i++;
-    }
-
-    if ($anio == "") {
-        $anio = "Todos";
-    }
-    if ($mes == "") {
-        $mes = "Todos";
-    }else{
-        $mes = obtenerMesNum($mes);
-    }
-
-    $primerY = $matriz[0][0];
-    $primerX = $matriz[0][1];
-    
-    $concatValues = sprintf("{ name: '%s', data: [%.2f] }", $primerX, $primerY);
-
-    for ($j=1; $j <= $i -1 ; $j++) { 
-        $concatValues = sprintf("%s, { name: '%s', data: [%.2f] }\n",$concatValues, $matriz[$j][1], $matriz[$j][0]);
-    }
-    #$resultX = $concatValues;
-    */
 return $resultX;
 }
 
 function hacerVisEsta($con,$tipoGrafica,$anio,$mes,$temaGraf,$opcionGrafica,$graficaPor){
     $mesNum = obtenerNumMes($mes);
     $xDiaMes = "day(fecha)";
-
     if ($tipoGrafica == "Lineas") {
         if ($temaGraf == "Todos") {
             if ($anio == "Todos") {

@@ -44,17 +44,9 @@ include_once '../database.php';
 
     </header>
     <section class="graficasHome">
-        <h2>GRÁFICAS ESTADÍSTICAS</h2>
+        <h2>GENERADOR DE GRÁFICAS</h2>
         <?php
-        $tipoGrafica = "Lineas";
         $visualizacion = "";
-        $graficarPor = "Establecimientos";
-        $establecimiento = "Todos";
-        $categoria = "Todos";
-        $opcionGrafica = "(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion";
-        $anio = "Todos";
-        $mes = "Todos";
-        $visualizacion = hacerVisEsta($con ,$tipoGrafica, $anio, $mes, $establecimiento, $opcionGrafica,"establecimiento");
         ?>
         <form action="#"  method="POST" enctype="multipart/form-data">
             <div>
@@ -72,34 +64,31 @@ include_once '../database.php';
                 </select>
             </div>
             <div class="form-group" id="graficaLineas" style="display:block;">
-                <label>Tema: </label>
                 <select name="lineasOpcion">
-                    <option value="(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion">Ocupación por día/mes</option>
-                    <option value="sum(nacionales)">Tarifa por persona por día</option>
-                    <option value="3">Tarifa por habitación por día</option>
-                    <option value="4">Porcentaje Revpar por día</option>
-                    <option value="5">Porcentaje Huesped Estranjero y Nacional</option>
+                    <option value="(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100">Ocupación por día/mes</option>
+                    <option value="sum(ventas_netas)/sum(pernoctaciones)">Tarifa por persona por día</option>
+                    <option value="sum(ventas_netas)/sum(habitaciones)">Tarifa por habitación por día</option>
+                    <option value="avg(revpar)">Porcentaje Revpar por día</option>
+                    <option value="(sum(nacionales) + sum(extranjeros))">Porcentaje Huesped Estranjero y Nacional</option>
                 </select>
             </div>
             <div class="form-group" id="graficaBarras" style="display:none;">
-                <label>Tema: </label>
                 <select name="barrasOpcion">
                     <option value="(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100 AS ocupacion">Ocupación por día/mes</option>
-                    <option value="2">Tarifa por persona por día</option>
-                    <option value="3">Tarifa por habitación por día</option>
-                    <option value="4">Porcentaje Revpar por día</option>
-                    <option value="5">Porcentaje Huesped Estranjero y Nacional</option>
+                    <option value="(sum(habitaciones_ocupadas)/sum(habitaciones_disponibles))*100">Tarifa por persona por día</option>
+                    <option value="sum(ventas_netas)/sum(habitaciones)">Tarifa por habitación por día</option>
+                    <option value="avg(revpar)">Porcentaje Revpar por día</option>
+                    <option value="(sum(nacionales) + sum(extranjeros))">Porcentaje Huesped Estranjero y Nacional</option>
                 </select>
             </div>
             
             <div class="form-group" id="graficaPastel" style="display:none;">
-                <label>Tema: </label>
                 <select name="pastelOpcion">
-                    <option value="sum(nacionales) as nacionales, sum(extranjeros) as extranjeros">Porcentaje Huesped Estranjero y Nacional</option>
+                    <option value="sum(nacionales) as nacionales, sum(extranjeros)">Porcentaje Huesped Estranjero y Nacional</option>
                 </select>
             </div>
             <div class="form-group" id="insertEstablecimietos" style="display:block;">
-                <label>Establecimiento: </label>
+                <label>Establecimientos: </label>
                 <select name="establecimiento">
                     <option>Todos</option>
                     <?php
@@ -107,14 +96,14 @@ include_once '../database.php';
                     ?>
                 </select>
                 <label>Año: </label>
-                <select name="anio">
+                <select name="anioE">
                     <option>Todos</option>
                     <?php 
                     consulta_opction($con, "DISTINCT(YEAR(fecha))", "Order by 1");
                     ?>
                 </select>
                 <label>Mes: </label>
-                <select name="mes">
+                <select name="mesE">
                     <option>Todos</option>
                     <option>Enero</option>
                     <option>Febrero</option>
@@ -131,7 +120,6 @@ include_once '../database.php';
                 </select>
             </div>
 
-
             <div class="form-group" id="insertCategoria" style="display:none;">
                 <label>Categorias: </label>
                 <select name="categoria">
@@ -141,14 +129,14 @@ include_once '../database.php';
                     ?>
                 </select>
                 <label>Año: </label>
-                <select name="anio">
+                <select name="anioC">
                     <option>Todos</option>
                     <?php 
                     consulta_opction($con, "DISTINCT(YEAR(fecha))", "Order by 1");
                     ?>
                 </select>
                 <label>Mes: </label>
-                <select name="mes">
+                <select name="mesC">
                     <option>Todos</option>
                     <option>Enero</option>
                     <option>Febrero</option>
@@ -208,8 +196,14 @@ include_once '../database.php';
         if(isset($_POST['submit'])){
             $graficarPor = $_POST['graficaPor'];
             $tipoGrafica = $_POST['tipoGrafica'];
-            $anio = $_POST['anio'];
-            $mes = $_POST['mes'];
+            if ($graficarPor == "Establecimientos") {
+                $anio = $_POST['anioE'];
+                $mes = $_POST['mesE'];
+            }
+            if ($graficarPor == "Categoria") {
+                $anio = $_POST['anioC'];
+                $mes = $_POST['mesC'];
+            }
 
             if ($graficarPor == "Establecimientos") {
                 $establecimiento = $_POST['establecimiento'];

@@ -55,6 +55,7 @@
         }
         // hola
         $recorrer = 0;
+        $salir = 0;
         for ($i=0; $i <= $vecesDiv +1 ; $i++) {
             echo "<section class='infoLugaresTuristicos'>
             <div class='card-group'>";
@@ -78,11 +79,15 @@
                 
                 $recorrer++;
                 if ($recorrer == $contar) {
+                    $salir = 1;
                     break;
                 }
             }
             echo "</div>
             </section>";
+            if ($salir == 1) {
+                break;
+            }
         }
         
         ?>

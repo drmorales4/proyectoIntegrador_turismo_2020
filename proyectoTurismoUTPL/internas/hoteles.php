@@ -54,9 +54,12 @@
         }
         // hola
         $recorrer = 0;
+        $salir = 0;
         for ($i=0; $i <= $vecesDiv +1 ; $i++) {
             echo "<div>";
+
             for ($j=0; $j <= 2 ; $j++) {
+
                 if ($j == $contar) {
                     break;
                 }
@@ -72,11 +75,15 @@
             
                $recorrer++;
                 if ($recorrer == $contar) {
+                    $salir = 1;
                     break;
                 }
                 
             }
             echo "</div>";
+            if ($salir == 1) {
+                break;
+            }
         }
         
         ?>
