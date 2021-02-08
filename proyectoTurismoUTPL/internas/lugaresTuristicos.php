@@ -33,7 +33,9 @@
         </nav>
 
     </header>
-    <h2>Lugares Turisticos</h2>
+    <section class="infoLugaresTuristicos">
+        <h2>Lugares Turisticos</h2>
+    </section>
     <?php
         include_once '../database.php';
         $sqlLugar = "SELECT * FROM lugares";

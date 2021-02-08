@@ -3,6 +3,13 @@ section.infoHoteles{
     display: block;
 
 }
+section.infoHoteles h2{
+    padding: 12px;	
+    background-color: #2979b1;	
+    border-bottom: 5px solid #000000;	
+    color: #fff;	
+    font-size: 2em;	
+}
 section.infoHoteles div{
     display: flex;
     justify-content: center;
@@ -29,4 +36,3 @@ section.infoHoteles div article p{
     color: rgb(0, 0, 0);
     font-size: 20px;
 }
-

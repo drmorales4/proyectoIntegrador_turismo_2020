@@ -1,11 +1,15 @@
-.infoLugaresTuristicos{
-  width: 100%;
-
-}
-.infoLugaresTuristicos div{
-  width: 30%;
-  display: inline-block;
-}
+section.infoLugaresTuristicos{	
+  width: 100%;	
+  padding: 2em;	
+  display: block;	
+}	
+section.infoLugaresTuristicos h2{	
+  padding: 12px;	
+  background-color: #2979b1;	
+  border-bottom: 5px solid #000000;	
+  color: #fff;	
+  font-size: 2em;	
+}	
 
 @media screen and (max-height: 820px){
   header{
