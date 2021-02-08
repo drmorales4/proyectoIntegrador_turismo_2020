@@ -71,7 +71,6 @@
                         <p class='card-text'>";
                 echo $matrizLugar[$recorrer][2];
                 echo "</p>
-                <p class='card-text'><small class='text-muted'>...</small></p>
                     </div>
                 </div>";
                 

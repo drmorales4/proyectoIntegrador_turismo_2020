@@ -125,6 +125,10 @@ section.infoHoteles div.informacion_hoteles, section.infoLugaresTuristicos div.i
 section.infoHoteles div.informacion_hoteles div, section.infoLugaresTuristicos div.infoLugaresT div{
   padding: 1em 2em;
 }
+
+section.infoVisualizaciones div.infoVisualizaciones2{
+  display: flex;
+}
 section.infoVisualizaciones div.imagesRepresentativas{
   text-align: center;
   padding: 2em;
