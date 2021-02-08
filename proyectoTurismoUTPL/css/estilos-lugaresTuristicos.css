@@ -1,36 +1,11 @@
-
-section.infoHoteles{
-    width: 100%;
-    display: block;
+.infoLugaresTuristicos{
+  width: 100%;
 
 }
-section.infoHoteles div{
-    display: flex;
-    justify-content: center;
-
+.infoLugaresTuristicos div{
+  width: 30%;
+  display: inline-block;
 }
-section.infoHoteles div article{
-    padding: 1em 2em;
-    width: 30%;
-    display: inline-block;
-    justify-content: center;
-    
-}
-section.infoHoteles div article img{
-    width: 100%;
-    padding: 1em;
-}
-section.infoHoteles div article h3{
-    text-align: center;
-    color: rgb(151, 25, 25);
-    font-weight: bold;
-}
-section.infoHoteles div article p{
-    text-align: justify;
-    color: rgb(0, 0, 0);
-    font-size: 20px;
-}
-
 
 @media screen and (max-height: 820px){
   header{

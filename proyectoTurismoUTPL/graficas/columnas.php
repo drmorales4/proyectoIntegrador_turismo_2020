@@ -58,71 +58,70 @@
         <script src="../highcharts/code/modules/export-data.js"></script>
         <script src="../highcharts/code/modules/accessibility.js"></script>
 
-<figure class="highcharts-figure">
-    <div id="container"></div>
-    <p class="highcharts-description">
-        
-    </p>
-</figure>
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description">
+            
+        </p>
+    </figure>
 
 
 
-		<script type="text/javascript">
-Highcharts.chart('container', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'NUMERO DE HABITACIONES OCUPADAS POR MESES'
-    },
-    subtitle: {
-        text: ''
-    },
-    xAxis: {
-        categories: [
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
+            <script type="text/javascript">
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
         title: {
-            text: 'Numero   '
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'SONESTA HOTEL LOJA',
-        data: [144, 176, 135, 148, 216, 194, 95, 54]
+            text: 'NUMERO DE HABITACIONES OCUPADAS POR MESES'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Numero   '
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'SONESTA HOTEL LOJA',
+            data: [144, 176, 135, 148, 216, 194, 95, 54]
 
-    }, {
-        name: 'GRAND VICTORIA BOUTIQUE',
-        data: [106, 84, 105, 104, 91, 83, 106, 92]
+        }, {
+            name: 'GRAND VICTORIA BOUTIQUE',
+            data: [106, 84, 105, 104, 91, 83, 106, 92]
 
-    }]
-});
-        </script>
-        <center><a href="../administrador.php?q=7" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Volver al Dashboard</a></center>
+        }]
+    });
+            </script>
         
 	</body>
 </html>
